@@ -294,33 +294,29 @@ body.filmp .sequence,body.filmp .static-title,body.filmp .when,body.filmp .why,b
 /* Ouverture du rideau au défilement (kit TEAC V2) : calques décor, logo, rideau, personnages, slogan */
 :root{--nav-h:65px;--scene-h:720px;--run:684px}
 .sequence{height:calc(var(--scene-h) + var(--run));position:relative;background:#fff}
-.pinned{position:sticky;top:var(--nav-h);height:var(--scene-h);overflow:hidden;display:flex;flex-direction:column;align-items:center;justify-content:center;background:#fff;padding:0 12px}
-.art{position:relative;isolation:isolate;aspect-ratio:1659/948;width:min(100%,calc((var(--scene-h) - var(--hint-h,52px) - 8px)*1.75));flex:none;container-type:inline-size}
+.pinned{position:sticky;top:var(--nav-h);height:var(--scene-h);overflow:hidden;display:flex;flex-direction:column;align-items:center;justify-content:center;background:var(--salle,#fefefe)}
+.art{position:relative;isolation:isolate;aspect-ratio:1659/948;width:min(100%,calc(var(--scene-h)*1.75));flex:none;container-type:inline-size}
 .decor,.curtain,.foreground{position:absolute;inset:0;width:100%;height:100%;object-fit:fill;display:block;pointer-events:none}
 .decor{z-index:1;filter:brightness(.62) saturate(.88)}
 .logo-h1{position:absolute;z-index:2;left:33%;top:9%;width:34%;height:32%;margin:0}
 .logo{width:100%;height:100%;object-fit:contain;transform:scale(.72);transform-origin:50% 50%;opacity:0;display:block}
 .curtain{z-index:3;filter:brightness(.55)}
 .foreground{z-index:4;visibility:hidden;filter:brightness(.62) saturate(.88)}
-.slogan{position:absolute;z-index:5;left:29%;top:17%;width:43%;text-align:center;color:#fff;font-size:clamp(14px,2.8cqw,46px);line-height:1.12;font-weight:800;margin:0;text-wrap:balance;pointer-events:none}
-.slogan span{display:block}.slogan span+span{margin-top:.2em}
-.hint{display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:6px 14px;min-height:52px;font-size:13px;color:#4a5675;padding:4px 8px;text-align:center}
-.progress{height:4px;width:90px;background:#eee6f0;overflow:hidden;border-radius:4px}.progress i{height:100%;display:block;background:#bf1a83;width:0}
-.hbtn{min-height:40px;display:inline-flex;align-items:center;border:2px solid #c9d1e6;background:#fff;color:#1e3d83;border-radius:999px;padding:4px 14px;font:600 14px Outfit,sans-serif;cursor:pointer;text-decoration:none}
-.hbtn:hover{border-color:#1e3d83}
-.static-title{display:none}
+.slogan{position:absolute;z-index:5;left:29%;top:17%;width:43%;text-align:center;color:#fff;font-size:clamp(14px,2.7cqw,44px);line-height:1.1;margin:0;text-wrap:balance;pointer-events:none}
+.slogan span,.static-title span{display:block;font-weight:500}.slogan b,.static-title b{display:block;font-weight:800}
+.static-title{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;margin:0}
 .when:focus{outline:none}
 :root[data-scene=static] .sequence{height:auto}
-:root[data-scene=static] .pinned{position:relative;top:auto;height:auto;padding-block:12px}
+:root[data-scene=static] .pinned{position:relative;top:auto;height:auto;--salle:#fefefe}
 :root[data-scene=static] .art{width:min(100%,1400px)}
-:root[data-scene=static] .slogan,:root[data-scene=static] .progress,:root[data-scene=static] #step{display:none}
+:root[data-scene=static] .slogan{display:none}
+.skip-scene{position:absolute;z-index:6;left:50%;bottom:12px;transform:translate(-50%,200%);background:#fff;color:#1e3d83;font:700 15px Outfit,sans-serif;padding:10px 18px;border-radius:999px;border:2px solid #1e3d83;text-decoration:none}
+.skip-scene:focus{transform:translate(-50%,0)}
 :root[data-scene=static] .decor,:root[data-scene=static] .foreground,:root[data-scene=static] .curtain{filter:none}
 :root[data-scene=static] .logo{opacity:1;transform:scale(1.4)}
 @media(max-width:650px){
- .static-title{display:block;text-align:center;font-weight:800;color:#1e3d83;font-size:18px;line-height:1.3;margin:0;padding:14px 16px 4px;background:#fff}
- .when .sticker{display:none}
+ .static-title{position:static;width:auto;height:auto;overflow:visible;clip:auto;white-space:normal;text-align:center;color:#1e3d83;font-size:19px;line-height:1.2;margin:0;padding:14px 16px 10px;background:#fff;text-wrap:balance}
  .slogan{font-size:3cqw}
- .hint{font-size:12px}.progress{width:55px}
 }
 </style>
 </head>
@@ -343,14 +339,14 @@ body.filmp .sequence,body.filmp .static-title,body.filmp .when,body.filmp .why,b
         <label class="opt"><input type="radio" name="size" value="100"> Normale</label>
         <label class="opt"><input type="radio" name="size" value="125"> 125 %</label>
         <label class="opt"><input type="radio" name="size" value="150"> 150 %</label></div></fieldset>
-      <fieldset><legend>Animations</legend><button type="button" class="sw" id="motion" aria-pressed="false"><span>Réduire les animations<small>Carte et défilement sans mouvement</small></span><i aria-hidden="true"></i></button></fieldset>
+      <fieldset><legend>Animations</legend><button type="button" class="sw" id="motion" aria-pressed="false"><span>Réduire les animations<small>Rideau ouvert d’emblée, carte et défilement sans mouvement</small></span><i aria-hidden="true"></i></button></fieldset>
     </div></div>
     <a class="btn" href="/seances">Trouver ma séance</a>
   </nav>
 </div></header>
 
 <main id="main">
-<p class="static-title" id="sloganMobile">Avec ou sans handicap,<br>le cinéma, c’est pour tout le monde !</p>
+<p class="static-title" id="sloganMobile"><span>Avec ou sans handicap,</span> <b>le cinéma, c’est pour tout le monde !</b></p>
 <section class="sequence" id="sequence" aria-label="Ouverture du rideau">
   <div class="pinned" id="pinned">
     <div class="art" id="art">
@@ -358,19 +354,13 @@ body.filmp .sequence,body.filmp .static-title,body.filmp .when,body.filmp .why,b
       <h1 class="logo-h1"><img class="logo" id="logo" src="/assets/scene/logo-teac.svg" alt="Tous Ensemble au Cinéma avec Culture Relax"></h1>
       <img class="curtain" id="curtain" src="/assets/scene/rideau-00-ferme.webp" width="1659" height="948" alt="" aria-hidden="true">
       <canvas class="foreground" id="foreground" aria-hidden="true"></canvas>
-      <div class="slogan" id="slogan" aria-hidden="true"><span>Avec ou sans handicap,</span><span>le cinéma, c’est pour<br>tout le monde !</span></div>
+      <div class="slogan" id="slogan" aria-hidden="true"><span>Avec ou sans handicap,</span> <b>le cinéma, c’est pour tout le monde !</b></div>
     </div>
-    <div class="hint">
-      <span id="step" aria-hidden="true">Faites défiler : le rideau s’ouvre ↓</span>
-      <span class="progress" aria-hidden="true"><i id="meter"></i></span>
-      <button type="button" class="hbtn" id="noAnim">Version sans animation</button>
-      <a class="hbtn" href="#apres-rideau" id="skipAnim">Passer l’animation ↓</a>
-    </div>
+    <a class="skip-scene" href="#apres-rideau" id="skipAnim">Passer l’animation</a>
   </div>
 </section>
 
 <section class="when" id="apres-rideau" tabindex="-1" aria-labelledby="dates">
-  <p class="sticker"><span>Avec ou sans handicap,</span> <b>le cinéma, c'est pour tout le monde !</b></p>
   <div class="wrap">
     <div class="datebox" id="dates"><b>Samedi 9 <small>et</small><br>dimanche 10</b><span>janvier 2027</span></div>
     <div class="ticket" aria-label="Tarif unique : 5 euros la séance"><b>5 €</b><span>LA SÉANCE*</span></div>
@@ -666,7 +656,7 @@ update(false);
  const files=['rideau-00-ferme','rideau-01','rideau-02','rideau-03','rideau-04','rideau-05','rideau-06-ouvert'].map(n=>'/assets/scene/'+n+'.webp');
  const light=[.62,.67,.73,.80,.87,.94,1],curtainLight=[.55,.62,.70,.78,.86,.94,1];
  const g=id=>document.getElementById(id);
- const el={seq:g('sequence'),art:g('art'),decor:g('decor'),logo:g('logo'),curtain:g('curtain'),fg:g('foreground'),slogan:g('slogan'),step:g('step'),meter:g('meter'),noAnim:g('noAnim'),skip:g('skipAnim'),after:g('apres-rideau')};
+ const el={seq:g('sequence'),art:g('art'),decor:g('decor'),logo:g('logo'),curtain:g('curtain'),fg:g('foreground'),slogan:g('slogan'),skip:g('skipAnim'),after:g('apres-rideau')};
  const header=document.querySelector('header');
  const sysReduce=matchMedia('(prefers-reduced-motion: reduce)');
  let ready=false,failed=false,last=-1,queued=false,run=600,audience=null;
@@ -674,11 +664,12 @@ update(false);
  const isStatic=()=>failed||sysReduce.matches||R0.dataset.motion==='reduce';
  function layout(){
   const nav=header.getBoundingClientRect().height;
-  const width=Math.min(el.seq.clientWidth-24,1600);
-  const hintH=document.querySelector('.hint').offsetHeight;
-  R0.style.setProperty('--hint-h',hintH+'px');
-  const scene=Math.max(180,Math.min(innerHeight-nav,width/1.75+hintH+8));
-  run=Math.max(280,scene*.95);
+  
+  // la scène occupe toute la fenêtre sous le menu : pas de zone blanche pendant l’ouverture
+  const scene=Math.max(180,innerHeight-nav);
+  // durée de l’ouverture calée sur la hauteur du dessin : courte sur mobile
+  const artH=Math.min(el.seq.clientWidth,scene*1.75)/1.75;
+  run=Math.max(280,artH*.95);
   R0.style.setProperty('--nav-h',nav+'px');R0.style.setProperty('--scene-h',scene+'px');R0.style.setProperty('--run',run+'px');
   render();
  }
@@ -695,10 +686,7 @@ update(false);
   el.logo.style.opacity=st||index>0?'1':'0';
   const growth=st?1:Math.floor(clamp((p-.64)/.24)*6)/6;
   el.logo.style.transform=`scale(${.72+.68*growth})`; // grandit jusqu’à déborder du cadre de l’écran, comme sur l’affiche
-  el.meter.style.width=(p*100)+'%';
-  el.step.textContent=p<.12?'Faites défiler : le rideau s’ouvre ↓':p<.64?'La salle s’éclaire…':p<.88?'Tous ensemble au cinéma !':'Continuez vers les séances ↓';
-  el.noAnim.textContent=st?(sysReduce.matches?'Animations réduites (réglage de l’appareil)':'Rejouer l’animation'):'Version sans animation';
-  el.noAnim.disabled=sysReduce.matches||failed;
+  el.seq.style.setProperty('--salle',st?'#fefefe':`rgb(${Math.round(254*light[index])},${Math.round(254*light[index])},${Math.round(254*light[index])})`);
   if(audience){audience.setEnabled(!st);audience.setSceneVisible(!st);audience.setReveal(st?1:index/6)}
  }
  const req=()=>{if(!queued){queued=true;requestAnimationFrame(render)}};
@@ -706,8 +694,6 @@ update(false);
  new ResizeObserver(layout).observe(header);
  sysReduce.addEventListener('change',layout);
  new MutationObserver(layout).observe(R0,{attributes:true,attributeFilter:['data-motion','data-size']});
- // « Version sans animation » = même réglage que « Réduire les animations » du panneau Affichage
- el.noAnim.addEventListener('click',()=>{const m=document.getElementById('motion');if(m)m.click()});
  el.skip.addEventListener('click',ev=>{ev.preventDefault();el.after.scrollIntoView({block:'start'});el.after.focus({preventScroll:true})});
  Promise.all(files.map(src=>{const i=new Image();i.src=src;return i.decode()})).then(()=>{ready=true;render()}).catch(()=>{failed=true;layout()});
  el.decor.decode().then(async()=>{
