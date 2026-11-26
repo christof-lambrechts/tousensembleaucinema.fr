@@ -256,6 +256,19 @@ body.full .list{grid-template-columns:repeat(auto-fill,minmax(min(100%,420px),1f
 .lnk.sm{display:flex;font-size:15px;margin-top:6px}
 @media(max-width:480px){.bcard{grid-template-columns:96px minmax(0,1fr);gap:12px;padding:12px}.bc h3{font-size:19px}}
 :root[data-aff=contraste] .bcard{border:2px solid #000;box-shadow:none}
+
+/* Bloc de recherche toujours accessible pendant le défilement (sous l'en-tête) */
+@media(min-width:761px){
+ .filters{position:sticky;top:65px;z-index:15;box-shadow:0 2px 0 var(--line),0 10px 24px #1e3d8314}
+ .card,.bcard{scroll-margin-top:250px}
+}
+@media(max-width:760px){
+ .filters{position:sticky;top:65px;z-index:15;box-shadow:0 8px 20px #1e3d8318}
+ .filters{gap:8px;padding:10px}.filters label{font-size:13px;margin-bottom:2px}
+ .filters input,.filters select{min-height:46px}
+ .filters .chips{flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none}.filters .chips>*{flex:none}
+ .card,.bcard{scroll-margin-top:230px}
+}
 </style>
 </head>
 <body>
