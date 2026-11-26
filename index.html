@@ -34,12 +34,12 @@ header.ombre{box-shadow:0 6px 18px -10px rgba(14,30,70,.35)}
 .hd{display:flex;align-items:center;gap:16px;min-height:64px;flex-wrap:wrap}
 /* menu : logo calé à gauche, boutons à droite, sur toute la largeur de la page */
 header .wrap.hd{max-width:none;padding:0 clamp(16px,2.2vw,32px)}
-.hd img{height:38px;width:auto}
+.hd .home img{height:56px;width:auto;display:block}.hd{min-height:72px}
 .hd nav{display:flex;gap:4px 18px;margin-left:auto;flex-wrap:wrap;align-items:center}
 .hd nav a{text-decoration:none;font-weight:600;color:var(--brand);padding:8px 2px}
 .falc{min-height:40px;border:2px solid var(--navy);background:var(--surf);border-radius:999px;padding:4px 14px;font:600 15px Outfit,sans-serif;color:var(--brand);cursor:pointer}
 .falc[aria-pressed=true]{background:var(--navy);color:#fff}
-@media(max-width:520px){.hd nav a.btn{display:none!important}}
+@media(max-width:520px){.hd .home img{height:46px}}
 @media(max-width:760px){.hd nav a{display:none}.hd nav a.btn{display:inline-flex;min-height:40px;padding:6px 14px;font-size:15px}}
 /* hero */
 .sticker{position:relative;max-width:820px;margin:0 auto;text-align:center;color:var(--brand);font-size:clamp(22px,3.3vw,42px);line-height:1.1;padding:.55em 1.3em .95em;text-wrap:balance}
@@ -179,7 +179,9 @@ summary::after{color:#1e3d83}
 .sw i::after{content:"";position:absolute;top:3px;left:3px;width:22px;height:22px;border-radius:50%;background:#fff;transition:left .15s}
 .sw[aria-pressed=true] i{background:var(--brand)}.sw[aria-pressed=true] i::after{left:21px}
 .affclose{position:absolute;top:10px;right:10px;width:40px;height:40px;border:0;border-radius:50%;background:var(--soft);color:var(--brand);font-size:22px;cursor:pointer}
-@media(max-width:760px){.affbtn span{display:none}.affbtn{padding:6px 12px}}
+/* en dessous de 1180 px : « Affichage et FALC » devient une icône (le nom reste lu par les lecteurs d’écran) */
+@media(max-width:1180px){.affbtn span{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}.affbtn{padding:6px 12px}}
+@media(max-width:420px){.hd{gap:10px}.hd nav{gap:4px 10px}}
 /* thème sombre */
 :root[data-aff=sombre]{color-scheme:dark;--bg:#0d1630;--surf:#16234a;--surf2:#16234a;--hdr:rgba(13,22,48,.96);--ink:#f2f5fc;--mut:#c2cbe3;--brand:#bcd0ff;--magtx:#ff8fd0;--cream:#111d3d;--cream2:#18285a;--line:#2b3c6e;--field:#7d8bb5;--rg:#24365f;--rgh:#31487c;--rgd:#1b2a4f;--pin:#fece00;--band:#10285e;--soft:#22336a}
 :root[data-aff=sombre] :root[data-aff=sombre] .pin.sel circle{fill:#ff8fd0}
@@ -218,7 +220,10 @@ body{max-width:var(--page-max);margin:0 auto;position:relative;isolation:isolate
 }
 
 .when .sticker{margin:0 auto clamp(18px,3vw,34px);width:min(860px,calc(100% - 32px));max-width:none}
-.hd nav a.btn{padding:10px 26px}
+/* bouton principal : plus gros, c'est la raison de la visite */
+.hd nav a.btn.cta{min-height:54px;padding:10px 28px;font-size:19px;gap:8px;box-shadow:0 4px 0 #1e3d83}
+@media(max-width:1180px){.cta-plus{display:none}}
+@media(max-width:760px){.hd nav a.btn.cta{min-height:46px;padding:6px 16px;font-size:16px}}
 .affbtn{padding:8px 18px}
 
 /* Champs et listes déroulantes : flèche dessinée, même contour et même focus partout */
@@ -368,7 +373,7 @@ body.filmp .sequence,body.filmp .static-title,body.filmp .when,body.filmp .why,b
 <body>
 <a class="skip" href="#seances">Aller directement à la recherche de séances</a>
 <header><div class="wrap hd">
-  <a href="https://culture-relax.org" aria-label="Culture Relax, site de l'association"><img src="/assets/logo-culture-relax.png" alt="Culture Relax" width="89" height="38"></a>
+  <a class="home" href="/"><img src="/assets/scene/logo-teac.svg" alt="Tous Ensemble au Cinéma avec Culture Relax, accueil" width="72" height="56"></a>
   <nav aria-label="Navigation principale">
     <a href="/#principe">Le principe</a><a href="/#films">Les films</a><a href="/#partenaires">Partenaires</a><a href="/#faq">Questions</a>
     <div class="affw"><button type="button" class="affbtn" id="affBtn" aria-expanded="false" aria-controls="affP"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 3v18" /><path d="M12 3a9 9 0 0 1 0 18z" fill="currentColor"/></svg><span>Affichage et FALC</span></button>
@@ -386,7 +391,7 @@ body.filmp .sequence,body.filmp .static-title,body.filmp .when,body.filmp .why,b
         <label class="opt"><input type="radio" name="size" value="150"> 150 %</label></div></fieldset>
       <fieldset><legend>Animations</legend><button type="button" class="sw" id="motion" aria-pressed="false"><span>Réduire les animations<small>Rideau ouvert d’emblée, carte et défilement sans mouvement</small></span><i aria-hidden="true"></i></button></fieldset>
     </div></div>
-    <a class="btn" href="/seances">Trouver ma séance</a>
+    <a class="btn cta" href="/seances"><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="M12 22s7-6.2 7-12a7 7 0 1 0-14 0c0 5.8 7 12 7 12z" fill="currentColor"/><circle cx="12" cy="10" r="2.6" fill="#fece00"/></svg><span>Trouver un cinéma<span class="cta-plus"> près de chez moi</span></span></a>
   </nav>
 </div></header>
 
