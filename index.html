@@ -1,0 +1,1403 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Tous Ensemble au Cinéma</title>
+<meta name="description" content="Tous Ensemble au Cinéma avec Culture Relax, 2e édition : samedi 9 et dimanche 10 janvier 2027, 5 € la séance, partout en France. Avec ou sans handicap, le cinéma, c'est pour tout le monde.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+/* VOICE: festive, warm, welcoming, the poster brought to life
+   IDEA: the campaign poster unfolded into a page, ticket stub and all
+   PICTURE: Marie Charlemagne's cinema hall illustration, then a hand-drawn map of France dotted with screenings
+   COLOUR and TYPE: campaign blue, sun yellow, magenta, cream; Anton for lettering with yellow offset, Outfit for text
+   LAYOUT: blue band, sticker headline, illustration, date box + ticket, finder (map + list), principle, films, FAQ, partners */
+:root{color-scheme:light;--blue:#1b4797;--navy:#1e3d83;--yel:#fece00;--mag:#bf1a83;--teal:#028bab;--cream:#fff5da;--cream2:#fee8af;--ink:#16244a;--mut:#4a5675;--line:#e6dcc0;--r:18px}
+*{box-sizing:border-box;min-width:0}
+html{scroll-behavior:smooth;scroll-padding-top:76px}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{animation:none!important;transition:none!important}}
+body{margin:0;background:#fff;color:var(--ink);font:17px/1.55 Outfit,system-ui,sans-serif;overflow-x:clip}
+a{color:inherit}
+img{max-width:100%;display:block}
+.wrap{max-width:1240px;margin:0 auto;padding:0 max(4vw,16px)}
+.skip{position:absolute;left:-999px;top:8px;background:var(--yel);padding:10px 14px;border-radius:10px;z-index:99}.skip:focus{left:8px}
+:focus-visible{outline:3px solid var(--mag);outline-offset:3px;border-radius:6px}
+h2{font:400 clamp(34px,5vw,52px)/1.02 Anton,Impact,sans-serif;text-transform:uppercase;color:var(--navy);text-shadow:3px 3px 0 var(--yel);margin:0 0 .4em;letter-spacing:.01em;text-wrap:balance}
+.btn{display:inline-flex;align-items:center;gap:10px;min-height:48px;padding:10px 22px;border-radius:999px;border:0;background:var(--yel);color:var(--navy);font:700 17px Outfit,sans-serif;text-decoration:none;cursor:pointer;box-shadow:0 3px 0 var(--navy)}
+.btn:hover{transform:translateY(-1px)}.btn.mag{background:var(--mag);color:#fff;box-shadow:0 3px 0 #7d0f55}
+/* header */
+header{position:sticky;top:0;z-index:20;background:rgba(255,255,255,.96);backdrop-filter:blur(6px);border-bottom:1px solid #eef}
+.hd{display:flex;align-items:center;gap:16px;min-height:64px;flex-wrap:wrap}
+.hd img{height:38px;width:auto}
+.hd nav{display:flex;gap:4px 18px;margin-left:auto;flex-wrap:wrap;align-items:center}
+.hd nav a{text-decoration:none;font-weight:600;color:var(--navy);padding:8px 2px}
+.falc{min-height:40px;border:2px solid var(--navy);background:#fff;border-radius:999px;padding:4px 14px;font:600 15px Outfit,sans-serif;color:var(--navy);cursor:pointer}
+.falc[aria-pressed=true]{background:var(--navy);color:#fff}
+@media(max-width:520px){.hd nav a.btn{display:none!important}}
+@media(max-width:760px){.hd nav a{display:none}.hd nav a.btn{display:inline-flex;min-height:40px;padding:6px 14px;font-size:15px}}
+/* hero */
+.top{background:var(--blue);clip-path:polygon(0 0,100% 0,100% 72%,0 100%);padding:clamp(26px,4vw,48px) 16px clamp(70px,9vw,120px)}
+.sticker{position:relative;max-width:820px;margin:0 auto;text-align:center;color:var(--navy);font-size:clamp(22px,3.3vw,42px);line-height:1.1;padding:.55em 1.3em .95em;text-wrap:balance}
+.sticker::before{content:"";position:absolute;inset:0;background:url(assets/pinceau-jaune.png) center/100% 100% no-repeat;z-index:-1}
+.sticker{isolation:isolate}.sticker b{font-weight:800;display:block}
+.sticker span{font-weight:500}
+.hall{max-width:1080px;margin:clamp(-8px,-1vw,0px) auto 0;position:relative}
+.hall img{width:100%;height:auto;aspect-ratio:1080/690}
+h1.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+/* date band */
+.when{background:var(--cream);padding:clamp(28px,4vw,56px) 0 clamp(36px,5vw,64px);position:relative}
+.when .wrap{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,.8fr) minmax(0,1fr);gap:clamp(18px,3vw,40px);align-items:center}
+.datebox{border:5px solid var(--mag);border-radius:28px 34px 26px 38px;padding:18px 26px;color:var(--mag);text-align:center;transform:rotate(-1deg);background:#fff9e8}
+.datebox b{display:block;font-weight:800;font-size:clamp(30px,4vw,48px);line-height:1.05}
+.datebox b small{font-size:.6em;font-weight:500}
+.datebox span{font-size:clamp(24px,3vw,36px);font-weight:500}
+.ticket{background:var(--yel);color:var(--navy);text-align:center;padding:16px 10px 14px;transform:rotate(-6deg);border:4px solid var(--mag);border-radius:10px;position:relative;
+ -webkit-mask:radial-gradient(circle 13px at 0 50%,#0000 98%,#000) left/51% 100% no-repeat,radial-gradient(circle 13px at 100% 50%,#0000 98%,#000) right/51% 100% no-repeat;mask:radial-gradient(circle 13px at 0 50%,#0000 98%,#000) left/51% 100% no-repeat,radial-gradient(circle 13px at 100% 50%,#0000 98%,#000) right/51% 100% no-repeat}
+.ticket b{display:block;font-size:clamp(52px,7vw,84px);font-weight:800;line-height:1}
+.ticket span{font-weight:800;font-size:clamp(17px,2vw,22px);letter-spacing:.02em}
+.ctas{display:flex;flex-wrap:wrap;gap:10px 18px;align-items:center}.lnk{font-weight:700;color:var(--navy);text-underline-offset:3px;min-height:44px;display:inline-flex;align-items:center}
+.intro p{margin:0 0 14px;font-size:clamp(18px,1.6vw,20px)}
+.intro .kpi{display:flex;gap:18px;flex-wrap:wrap;margin:6px 0 18px}
+.kpi div{font-size:14px;color:var(--mut);line-height:1.2}.kpi strong{display:block;font-size:30px;color:var(--navy);font-weight:800}
+@media(max-width:900px){.when .wrap{grid-template-columns:minmax(0,1fr) minmax(0,.7fr)}.intro{grid-column:1/-1}}
+@media(max-width:520px){.when .wrap{grid-template-columns:minmax(0,1fr)}.ticket{max-width:220px;margin:6px auto}}
+/* finder */
+.find{background:linear-gradient(var(--cream2),var(--cream) 220px);padding:clamp(36px,5vw,64px) 0}
+.find h2 small{display:block;font:600 clamp(17px,1.8vw,20px)/1.3 Outfit,sans-serif;text-transform:none;text-shadow:none;color:var(--ink);margin-top:10px;letter-spacing:0}
+.filters{display:grid;grid-template-columns:minmax(0,2fr) minmax(0,1.2fr) minmax(0,1.2fr);gap:12px;background:#fff;padding:14px;border-radius:var(--r);box-shadow:0 2px 0 var(--line);margin-bottom:16px}
+.filters label{display:block;font-size:14px;font-weight:600;color:var(--mut);margin:0 0 4px 4px}
+.filters input,.filters select{width:100%;min-height:50px;font:16px Outfit,sans-serif;border:2px solid #d9d2bd;border-radius:14px;padding:10px 14px;background:#fff;color:var(--ink)}
+.filters input:focus,.filters select:focus{border-color:var(--navy);outline:none;box-shadow:0 0 0 3px #fece0088}
+.chips{grid-column:1/-1;display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.chip{min-height:44px;border:2px solid var(--navy);border-radius:999px;background:#fff;color:var(--navy);padding:6px 16px;font:600 15px Outfit,sans-serif;cursor:pointer}
+.chip[aria-pressed=true]{background:var(--navy);color:#fff}
+.chips .sep{width:1px;height:26px;background:#d9d2bd;margin:0 4px}
+.reset{margin-left:auto;border:0;background:none;color:var(--mag);font:600 15px Outfit,sans-serif;text-decoration:underline;cursor:pointer;min-height:44px}
+@media(max-width:760px){.filters{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}.filters .q{grid-column:1/-1}.reset{margin-left:0}}
+.split{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);gap:16px;align-items:start}
+@media(max-width:900px){.split{grid-template-columns:minmax(0,1fr)}}
+.mapbox{position:sticky;top:80px;background:#fff;border-radius:var(--r);box-shadow:0 2px 0 var(--line);padding:10px}
+.fig{position:relative;aspect-ratio:1/1;max-height:calc(100vh - 120px);margin:0 auto}
+.fig svg{position:absolute;inset:0;width:100%;height:100%}
+@media(max-width:900px){.mapbox{position:relative;top:0}.fig{max-height:none}}
+.rg{fill:#fdf0c8;stroke:#fff;stroke-width:1.6;cursor:pointer;transition:fill .2s}
+.rg:hover{fill:#fbe39a}.rg.on{fill:#ffd94d}.rg.dim{fill:#f6efdc}
+.pin{cursor:pointer}.pin circle{fill:var(--blue);stroke:#fff}.pin.sel circle{fill:var(--mag)}.pin:hover circle{fill:var(--teal)}
+.maptools{position:absolute;top:8px;left:8px;right:8px;display:flex;justify-content:space-between;gap:8px;pointer-events:none}
+.maptools>*{pointer-events:auto}
+.tag{background:var(--navy);color:#fff;border-radius:999px;padding:6px 14px;font-weight:600;font-size:14px}
+.zoomout{min-height:40px;border:0;border-radius:999px;background:var(--yel);color:var(--navy);font:700 14px Outfit,sans-serif;padding:6px 14px;cursor:pointer}
+.maphint{font-size:14px;color:var(--mut);text-align:center;margin:6px 0 2px}
+.count{font-weight:700;color:var(--navy);margin:0 0 10px 4px}
+.list{display:grid;gap:12px}
+.card{background:#fff;border-radius:var(--r);padding:16px 18px;box-shadow:0 2px 0 var(--line);border:3px solid transparent}
+.card.sel{border-color:var(--mag)}
+.card h3{margin:0;font-size:20px;line-height:1.2;color:var(--navy)}
+.card h3 button{all:unset;cursor:pointer}.card h3 button:hover{text-decoration:underline}
+.card .addr{color:var(--mut);font-size:15px;margin:2px 0 10px}
+.ss{list-style:none;margin:0 0 12px;padding:0;display:grid;gap:6px}
+.ss li{display:flex;flex-wrap:wrap;align-items:center;gap:6px 10px;background:var(--cream);border-radius:12px;padding:8px 12px}
+.ss time{font-weight:800;color:var(--mag);white-space:nowrap}
+.ss .film{font-weight:600}
+.bd{font-size:12px;font-weight:700;border-radius:6px;padding:2px 7px;background:var(--navy);color:#fff;white-space:nowrap}
+.bd.nat{background:var(--yel);color:var(--navy)}
+.card .btn{min-height:44px;font-size:16px;padding:8px 18px}
+.empty{background:#fff;border-radius:var(--r);padding:24px;text-align:center}
+.more{display:block;margin:14px auto 0}
+.sample{font-size:13px;color:var(--mut);margin:14px 4px 0}
+/* principle */
+.why{padding:clamp(40px,6vw,80px) 0}
+.why .wrap>p{max-width:68ch;font-size:19px}
+.feat{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:14px;margin-top:26px;padding:0;list-style:none}
+.feat li{background:var(--cream);border-radius:var(--r);padding:20px}
+.feat svg{width:44px;height:44px;margin-bottom:8px}
+.feat b{display:block;font-size:19px;color:var(--navy);line-height:1.2;margin-bottom:4px}
+.feat span{font-size:16px;color:var(--mut)}
+.natl{margin-top:22px;background:var(--blue);color:#fff;border-radius:var(--r);padding:20px 24px;display:flex;gap:18px;align-items:center;flex-wrap:wrap}
+.natl strong{font:400 clamp(30px,4vw,44px)/1 Anton,sans-serif;color:var(--yel)}
+.natl p{margin:0;flex:1 1 300px}
+/* films */
+.films{background:var(--blue);color:#fff;padding:clamp(40px,6vw,80px) 0}
+.films h2{color:#fff;text-shadow:3px 3px 0 var(--mag)}
+.fl{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px;list-style:none;padding:0;margin:20px 0 0}
+.fl li{background:#fff;color:var(--navy);border-radius:var(--r);overflow:hidden}
+.fl .pst{aspect-ratio:3/2;display:grid;place-items:center;font:400 30px/1 Anton,sans-serif;color:#fff;padding:14px;text-align:center;text-transform:uppercase}
+.fl div.t{padding:12px 16px}.fl b{display:block;font-size:18px;line-height:1.2}
+.fl button{all:unset;cursor:pointer;color:var(--mag);font-weight:700;font-size:15px;text-decoration:underline;padding:6px 0;display:inline-block}
+/* faq */
+.faq{padding:clamp(40px,6vw,80px) 0;background:var(--cream)}
+.faq .wrap{max-width:900px}
+details{background:#fff;border-radius:var(--r);margin:0 0 10px;box-shadow:0 2px 0 var(--line)}
+summary{cursor:pointer;list-style:none;padding:18px 54px 18px 20px;font-weight:700;font-size:18px;color:var(--navy);position:relative}
+summary::-webkit-details-marker{display:none}
+summary::after{content:"+";position:absolute;right:20px;top:50%;transform:translateY(-50%);width:30px;height:30px;border-radius:50%;background:var(--yel);display:grid;place-items:center;font-size:22px}
+details[open] summary::after{content:"–"}
+details p{margin:0;padding:0 20px 18px}
+.pro{margin-top:26px;background:var(--mag);color:#fff;border-radius:var(--r);padding:24px}
+.pro h3{margin:0 0 6px;font-size:24px}.pro p{margin:0 0 14px}
+/* partners */
+.part{padding:clamp(40px,6vw,80px) 0;background:#fff}
+.part h3{font-size:18px;color:var(--navy);margin:34px 0 12px}
+.org{display:flex;align-items:center;gap:18px;flex-wrap:wrap}.org p{margin:0;font-weight:700;color:var(--navy)}.org img{height:64px;width:auto}
+.logos{display:flex;flex-wrap:wrap;gap:12px;list-style:none;padding:0;margin:0 0 12px}
+.logos li{background:#fff;border:2px solid var(--line);border-radius:14px;height:88px;padding:14px 18px;display:grid;place-items:center;min-width:110px}
+.logos img{max-height:56px;max-width:170px;width:auto;height:auto}
+.logos li.txt{font-weight:800;color:var(--navy);font-size:16px;text-align:center}
+.also{margin:0;color:var(--mut)}
+@media(max-width:520px){.logos li{height:72px;padding:10px 12px;min-width:90px}.logos img{max-height:44px;max-width:130px}}
+footer{background:var(--blue);color:#fff;padding:32px 0 40px;font-size:15px}
+footer a{color:var(--yel)}
+footer .row{display:flex;flex-wrap:wrap;gap:12px 28px;align-items:center;margin-top:14px}
+[hidden]{display:none!important}
+</style>
+</head>
+<body>
+<a class="skip" href="#seances">Aller directement à la recherche de séances</a>
+<header><div class="wrap hd">
+  <a href="https://culture-relax.org" aria-label="Culture Relax, site de l'association"><img src="assets/logo-culture-relax.png" alt="Culture Relax" width="89" height="38"></a>
+  <nav aria-label="Navigation principale">
+    <a href="#principe">Le principe</a><a href="#films">Les films</a><a href="#partenaires">Partenaires</a><a href="#faq">Questions</a>
+    <button class="falc" id="falc" aria-pressed="false" title="Afficher les textes en version facile à lire et à comprendre">Facile à lire</button>
+    <a class="btn" href="#seances">Trouver ma séance</a>
+  </nav>
+</div></header>
+
+<main id="main">
+<section class="top" aria-label="Accroche">
+  <p class="sticker"><span>Avec ou sans handicap,</span> <b>le cinéma, c'est pour tout le monde !</b></p>
+</section>
+<div class="hall">
+  <h1 class="sr">Tous Ensemble au Cinéma avec Culture Relax, 2e édition</h1>
+  <img src="assets/illustration-salle.webp" alt="Illustration : une salle de cinéma pleine de spectateurs de tous âges, dont une personne en fauteuil roulant et un enfant avec un casque anti-bruit. Sur l'écran : Tous Ensemble au Cinéma avec Culture Relax." width="1080" height="690">
+</div>
+
+<section class="when" aria-labelledby="dates">
+  <div class="wrap">
+    <div class="datebox" id="dates"><b>Samedi 9 <small>et</small><br>dimanche 10</b><span>janvier 2027</span></div>
+    <div class="ticket" aria-label="Tarif unique : 5 euros la séance"><b>5 €</b><span>LA SÉANCE*</span></div>
+    <div class="intro">
+      <p data-falc="Le 9 et le 10 janvier 2027, des cinémas de toute la France vous accueillent. La place coûte 5 euros. Tout le monde est bienvenu, avec ou sans handicap.">Pour sa 2ᵉ édition, <strong>Tous Ensemble au Cinéma</strong> revient dans des cinémas partout en France. Un week-end festif et inclusif pour partager la magie du grand écran, en famille ou entre amis, avec ou sans handicap.</p>
+      <div class="kpi" aria-live="polite"><div><strong id="kC">0</strong>cinémas</div><div><strong id="kV">0</strong>villes</div><div><strong id="kR">0</strong>régions</div></div>
+      <div class="ctas"><a class="btn mag" href="#seances">Trouvez votre séance près de chez vous →</a><a class="lnk" href="https://culture-relax.org/post/tous-ensemble-au-cinema-revient-les-9-et-10-janvier-2027-pour-sa-deuxieme-edition">Lire l'annonce sur culture-relax.org<span aria-hidden="true"> ↗</span></a></div>
+    </div>
+  </div>
+</section>
+
+<section class="find" id="seances" aria-labelledby="t-seances">
+  <div class="wrap">
+    <h2 id="t-seances">Trouvez votre séance<small data-falc="Cherchez votre ville. Choisissez un cinéma. Réservez sur le site du cinéma.">Cherchez par ville, code postal ou cinéma, ou cliquez sur une région de la carte. La réservation se fait directement sur le site du cinéma.</small></h2>
+    <form class="filters" id="filters" role="search" onsubmit="return false">
+      <div class="q"><label for="q">Ville, code postal ou cinéma</label><input id="q" type="search" autocomplete="off" placeholder="Ex. : Lyon, 34000, Pathé…"></div>
+      <div><label for="film">Film</label><select id="film"><option value="">Tous les films</option></select></div>
+      <div><label for="region">Région</label><select id="region"><option value="">Toute la France</option></select></div>
+      <div class="chips" role="group" aria-label="Filtres">
+        <button type="button" class="chip" data-day="" aria-pressed="true">Les 2 jours</button>
+        <button type="button" class="chip" data-day="sam" aria-pressed="false">Samedi 9</button>
+        <button type="button" class="chip" data-day="dim" aria-pressed="false">Dimanche 10</button>
+        <span class="sep" aria-hidden="true"></span>
+        <button type="button" class="chip" data-acc="ad" aria-pressed="false">Audiodescription</button>
+        <button type="button" class="chip" data-acc="sme" aria-pressed="false">Sous-titres SME</button>
+        <button type="button" class="reset" id="reset">Effacer les filtres</button>
+      </div>
+    </form>
+    <div class="split">
+      <div class="mapbox">
+        <div class="fig"><svg id="map" role="img" aria-label="Carte de France des cinémas participants"></svg>
+          <div class="maptools"><span class="tag" id="mapTag">Toute la France</span><button type="button" class="zoomout" id="zoomout" hidden>← Toute la France</button></div>
+        </div>
+        <p class="maphint">Cliquez sur une région pour zoomer, puis sur un point pour voir le cinéma.</p>
+      </div>
+      <div>
+        <p class="count" id="count" aria-live="polite"></p>
+        <div class="list" id="list"></div>
+        <button type="button" class="btn more" id="more" hidden>Voir plus de cinémas</button>
+        <p class="sample" id="sampleNote">Programmation d'exemple pour la maquette : la liste définitive des cinémas sera publiée à partir du 15 décembre 2026.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="why" id="principe" aria-labelledby="t-why">
+  <div class="wrap">
+    <h2 id="t-why">Une séance pour tout le monde</h2>
+    <p data-falc="C'est une séance de cinéma normale. Tout le monde peut venir. Si vous faites du bruit ou si vous bougez, ce n'est pas grave. Le son est moins fort. La lumière s'éteint doucement.">Ce ne sont pas des séances « dédiées » : ce sont des séances ordinaires, ouvertes à tous les spectateurs, dans une ambiance bienveillante où chacun peut vivre ses émotions librement, dans le respect des autres. Un vrai moment de partage, quels que soient les handicaps, visibles ou invisibles.</p>
+    <ul class="feat">
+      <li><svg viewBox="0 0 48 48" aria-hidden="true"><circle cx="24" cy="24" r="22" fill="#fece00"/><path d="M14 20h6l8-6v20l-8-6h-6z" fill="#1e3d83"/><path d="M32 20c2 2 2 6 0 8" stroke="#1e3d83" stroke-width="3" fill="none" stroke-linecap="round"/></svg><b>Son modéré</b><span data-falc="Le son est moins fort.">Un volume plus doux, confortable pour tous.</span></li>
+      <li><svg viewBox="0 0 48 48" aria-hidden="true"><circle cx="24" cy="24" r="22" fill="#fece00"/><circle cx="24" cy="24" r="7" fill="#1e3d83"/><path d="M24 9v5M24 34v5M9 24h5M34 24h5M13.5 13.5l3.5 3.5M31 31l3.5 3.5M13.5 34.5l3.5-3.5M31 17l3.5-3.5" stroke="#1e3d83" stroke-width="3" stroke-linecap="round"/></svg><b>Lumière progressive</b><span data-falc="La lumière s'éteint doucement. Il ne fait pas tout noir.">La salle s'éteint doucement et reste en demi-jour.</span></li>
+      <li><svg viewBox="0 0 48 48" aria-hidden="true"><circle cx="24" cy="24" r="22" fill="#fece00"/><rect x="12" y="15" width="24" height="18" rx="3" fill="#1e3d83"/><path d="M12 36L36 12" stroke="#bf1a83" stroke-width="4" stroke-linecap="round"/></svg><b>Pas de pub</b><span data-falc="Le film commence tout de suite.">Ni publicité ni bande-annonce : le film commence tout de suite.</span></li>
+      <li><svg viewBox="0 0 48 48" aria-hidden="true"><circle cx="24" cy="24" r="22" fill="#fece00"/><rect x="10" y="17" width="28" height="15" rx="4" fill="#1e3d83"/><text x="24" y="28.5" font-family="Outfit,sans-serif" font-size="9" font-weight="800" fill="#fff" text-anchor="middle">AD · SME</text></svg><b>Films accessibles</b><span data-falc="Il y a parfois l'audiodescription et les sous-titres.">Audiodescription et sous-titres SME quand le film les propose.</span></li>
+      <li><svg viewBox="0 0 48 48" aria-hidden="true"><circle cx="24" cy="24" r="22" fill="#fece00"/><path d="M24 35s-11-6.5-11-14a6 6 0 0 1 11-3.3A6 6 0 0 1 35 21c0 7.5-11 14-11 14z" fill="#bf1a83"/></svg><b>Accueil bienveillant</b><span data-falc="Vous pouvez rire, parler, bouger. Personne ne vous juge.">Rire, réagir, bouger : chacun vit ses émotions comme il est.</span></li>
+    </ul>
+    <div class="natl"><strong>Samedi 16 h</strong><p data-falc="Le samedi à 16 heures, beaucoup de cinémas montrent un film en même temps, partout en France.">Une séance nationale et simultanée a lieu le samedi à 16 h dans les cinémas participants. Certains cinémas proposent aussi une séance le dimanche.</p></div>
+  </div>
+</section>
+
+<section class="films" id="films" aria-labelledby="t-films">
+  <div class="wrap">
+    <h2 id="t-films">Les films au programme</h2>
+    <p data-falc="Chaque cinéma choisit un film dans cette liste.">Une sélection « best of » des films plébiscités par les spectateurs Ciné Relax. Chaque cinéma choisit un film dans la sélection.</p>
+    <ul class="fl" id="fl"></ul>
+  </div>
+</section>
+
+<section class="faq" id="faq" aria-labelledby="t-faq">
+  <div class="wrap">
+    <h2 id="t-faq">Vos questions</h2>
+    <details><summary>Faut-il être en situation de handicap pour venir ?</summary><p data-falc="Non. Tout le monde peut venir.">Non. Les séances sont ouvertes à tous les spectateurs, avec ou sans handicap. C'est tout l'esprit de l'événement : partager la salle, ensemble.</p></details>
+    <details><summary>Combien coûte la place ?</summary><p data-falc="La place coûte 5 euros. Le prix est le même pour tout le monde.">5 € la place, tarif unique pour tous, dans tous les cinémas participants. Offre non cumulable avec d'autres avantages tarifaires.</p></details>
+    <details><summary>Comment réserver ma place ?</summary><p data-falc="Trouvez un cinéma sur cette page. Cliquez sur le bouton Réserver. Vous allez sur le site du cinéma.">Trouvez votre séance ci-dessus, puis cliquez sur « Réserver sur le site du cinéma ». La réservation et le paiement se font auprès du cinéma.</p></details>
+    <details><summary>Qu'est-ce qui change par rapport à une séance habituelle ?</summary><p data-falc="Le son est moins fort. La lumière s'éteint doucement. Il n'y a pas de publicité. Vous pouvez bouger et faire du bruit.">Son modéré, lumière éteinte progressivement, aucune publicité ni bande-annonce, et un accueil attentif. Les spectateurs peuvent réagir, se lever ou sortir sans gêne.</p></details>
+    <details><summary>Qu'est-ce que Culture Relax ?</summary><p data-falc="Culture Relax est une association. Elle aide les personnes handicapées à aller au cinéma et au spectacle.">Depuis 2005, l'association Culture Relax rend accessibles des séances de cinéma et de spectacle ordinaires aux personnes dont le handicap les exclut habituellement des lieux culturels (autisme, polyhandicap, handicap intellectuel ou psychique, maladie d'Alzheimer…). Les séances Ciné Relax ont lieu toute l'année : retrouvez-les sur <a href="https://culture-relax.org">culture-relax.org</a>.</p></details>
+    <div class="pro"><h3>Vous êtes un cinéma ?</h3><p>Rejoignez la 2ᵉ édition : une séance à programmer le week-end des 9 et 10 janvier, un kit de communication et un webinaire de préparation pour vos équipes. Écrivez à l'équipe : <strong>tousensemble@culture-relax.org</strong></p><a class="btn" href="mailto:tousensemble@culture-relax.org">Contacter l'équipe</a></div>
+  </div>
+</section>
+
+<section class="part" id="partenaires" aria-labelledby="t-part">
+  <div class="wrap">
+    <h2 id="t-part">Un événement national</h2>
+    <div class="org"><p>Organisé par</p><a href="https://culture-relax.org"><img src="assets/partenaires/culturerelax.webp" alt="Culture Relax"></a></div>
+    <h3>Porté par les réseaux de cinémas</h3>
+    <ul class="logos"><li><img src="assets/partenaires/cgr.webp" alt="CGR Cinémas" loading="lazy"></li><li><img src="assets/partenaires/pathe.webp" alt="Cinémas Pathé" loading="lazy"></li><li class="txt">Ciné Relax</li><li><img src="assets/partenaires/cineville.webp" alt="Cinéville" loading="lazy"></li><li><img src="assets/partenaires/kinepolis.webp" alt="Kinepolis" loading="lazy"></li><li><img src="assets/partenaires/megarama.webp" alt="Mégarama" loading="lazy"></li><li><img src="assets/partenaires/ugc.webp" alt="UGC" loading="lazy"></li><li><img src="assets/partenaires/cineo.webp" alt="Cinéo" loading="lazy"></li><li class="txt">Cinewest</li><li class="txt">Grand Écran</li><li><img src="assets/partenaires/noe.webp" alt="Noé Cinémas" loading="lazy"></li></ul>
+    <p class="also">… ainsi que des cinémas indépendants partout en France.</p>
+    <h3>Avec le soutien de</h3>
+    <ul class="logos"><li><img src="assets/partenaires/cnc.webp" alt="CNC, Centre national du cinéma et de l'image animée" loading="lazy"></li><li><img src="assets/partenaires/canal.webp" alt="Fondation Canal+" loading="lazy"></li><li><img src="assets/partenaires/fsg.webp" alt="Fondation Sainte-Geneviève" loading="lazy"></li><li><img src="assets/partenaires/entraide.webp" alt="L'Entraide du Cinéma" loading="lazy"></li><li><img src="assets/partenaires/matmut.webp" alt="Matmut pour les Arts" loading="lazy"></li></ul>
+    <ul class="logos"><li><img src="assets/partenaires/allocine.webp" alt="AlloCiné" loading="lazy"></li><li><img src="assets/partenaires/cinegroup.webp" alt="Ciné Group" loading="lazy"></li><li><img src="assets/partenaires/confisud.webp" alt="Confisud" loading="lazy"></li><li><img src="assets/partenaires/fnef.webp" alt="FNEF, Fédération nationale des éditeurs de films" loading="lazy"></li><li><img src="assets/partenaires/globecast.webp" alt="Globecast" loading="lazy"></li><li><img src="assets/partenaires/yeuxdits.webp" alt="Les Yeux Dits" loading="lazy"></li><li><img src="assets/partenaires/bavarde.webp" alt="La Bavarde" loading="lazy"></li><li><img src="assets/partenaires/passculture.webp" alt="pass Culture" loading="lazy"></li><li class="txt">Premium Events</li><li><img src="assets/partenaires/retour.webp" alt="Retour d'image" loading="lazy"></li><li><img src="assets/partenaires/scare.webp" alt="SCARE, Syndicat des cinémas d'art, de répertoire et d'essai" loading="lazy"></li></ul>
+    <h3>Partenaires médias</h3>
+    <ul class="logos"><li><img src="assets/partenaires/boxoffice.webp" alt="Boxoffice Pro" loading="lazy"></li><li><img src="assets/partenaires/filmfr.webp" alt="Le Film Français" loading="lazy"></li><li class="txt">Satellifacts</li><li><img src="assets/partenaires/ecrantotal.webp" alt="Écran Total" loading="lazy"></li></ul>
+  </div>
+</section>
+</main>
+
+<footer><div class="wrap">
+  <p>* Tarif unique de 5 € pour toutes les séances « Tous Ensemble au Cinéma avec Culture Relax » du samedi 9 au dimanche 10 janvier 2027 inclus. Offre non cumulable avec d'autres avantages tarifaires.</p>
+  <div class="row"><span>Une opération organisée par <a href="https://culture-relax.org">Culture Relax</a></span><a href="https://culture-relax.org/post/tous-ensemble-au-cinema-revient-les-9-et-10-janvier-2027-pour-sa-deuxieme-edition">L'annonce de la 2ᵉ édition</a><span>#tousensembleaucinema</span><span>Illustration © Marie Charlemagne</span></div>
+</div></footer>
+
+<!-- DONNÉES : remplacer ce tableau par la liste définitive des cinémas (export du formulaire d'inscription) -->
+<script type="application/json" id="data">{
+ "exemple": true,
+ "films": [
+  {
+   "id": "zootopie2",
+   "titre": "Zootopie 2",
+   "info": "Animation · dès 6 ans"
+  },
+  {
+   "id": "pagnol",
+   "titre": "Marcel et Monsieur Pagnol",
+   "info": "Animation · tout public"
+  },
+  {
+   "id": "ptittruc",
+   "titre": "Un p'tit truc en plus",
+   "info": "Comédie · tout public"
+  },
+  {
+   "id": "schtroumpfs",
+   "titre": "Les Schtroumpfs, le film",
+   "info": "Animation · dès 3 ans"
+  },
+  {
+   "id": "elio",
+   "titre": "Elio",
+   "info": "Animation · dès 6 ans"
+  }
+ ],
+ "cinemas": [
+  {
+   "id": "c00",
+   "nom": "UGC Ciné Cité Bercy",
+   "ville": "Paris",
+   "cp": "75012",
+   "region": "Île-de-France",
+   "lat": 48.833,
+   "lng": 2.386,
+   "adresse": "2 cour Saint-Émilion",
+   "url": "https://www.ugc.fr",
+   "seances": [
+    {
+     "jour": "sam",
+     "heure": "16:00",
+     "film": "zootopie2",
+     "ad": true,
+     "sme": true
+    },
+    {
+     "jour": "dim",
+     "heure": "11:00",
+     "film": "ptittruc",
+     "ad": true,
+     "sme": true
+    }
+   ]
+  },
+  {
+   "id": "c01",
+   "nom": "Pathé Wepler",
+   "ville": "Paris",
+   "cp": "75018",
+   "region": "Île-de-France",
+   "lat": 48.884,
+   "lng": 2.327,
+   "adresse": "140 boulevard de Clichy",
+   "url": "https://www.pathe.fr",
+   "seances": [
+    {
+     "jour": "sam",
+     "heure": "16:00",
+     "film": "pagnol",
+     "ad": false,
+     "sme": false
+    }
+   ]
+  },
+  {
+   "id": "c02",
+   "nom": "Les 7 Parnassiens",
+   "ville": "Paris",
+   "cp": "75014",
+   "region": "Île-de-France",
+   "lat": 48.842,
+   "lng": 2.329,
+   "adresse": "98 boulevard du Montparnasse",
+   "url": "https://www.allocine.fr",
+   "seances": [
+    {
+     "jour": "sam",
+     "heure": "16:00",
+     "film": "ptittruc",
+     "ad": true,
+     "sme": true
+    },
+    {
+     "jour": "dim",
+     "heure": "16:30",
+     "film": "schtroumpfs",
+     "ad": true,
+     "sme": false
+    }
+   ]
+  },
+  {
+   "id": "c03",
+   "nom": "Pathé Boulogne",
+   "ville": "Boulogne-Billancourt",
+   "cp": "92100",
+   "region": "Île-de-France",
+   "lat": 48.835,
+   "lng": 2.24,
+   "adresse": "26 cours de l'Île Seguin",
+   "url": "https://www.pathe.fr",
+   "seances": [
+    {
+     "jour": "sam",
+     "heure": "16:00",
+     "film": "schtroumpfs",
+     "ad": true,
+     "sme": false
+    },
+    {
+     "jour": "dim",
+     "heure": "14:00",
+     "film": "zootopie2",
+     "ad": false,
+     "sme": true
+    }
+   ]
+  },
+  {
+   "id": "c04",
+   "nom": "Mégarama Villeneuve-la-Garenne",
+   "ville": "Villeneuve-la-Garenne",
+   "cp": "92390",
+   "region": "Île-de-France",
+   "lat": 48.935,
+   "lng": 2.326,
+   "adresse": "Centre commercial Qwartz",
+   "url": "https://www.megarama.fr",
+   "seances": [
+    {
+     "jour": "sam",
+     "heure": "16:00",
+     "film": "elio",
+     "ad": false,
+     "sme": true
+    }
+   ]
+  },
+  {
+   "id": "c05",
+   "nom": "UGC Ciné Cité Rosny",
+   "ville": "Rosny-sous-Bois",
+   "cp": "93110",
+   "region": "Île-de-France",
+   "lat": 48.881,
+   "lng": 2.48,
+   "adresse": "Centre commercial Rosny 2",
+   "url": "https://www.ugc.fr",
+   "seances": [
+    {
+     "jour": "sam",
+     "heure": "16:00",
+     "film": "zootopie2",
+     "ad": true,
+     "sme": false
+    }
+   ]
+  },
+  {
+   "id": "c06",
+   "nom": "UGC Ciné Cité Lille",
+   "ville": "Lille",
+   "cp": "59000",
+   "region": "Hauts-de-France",
+   "lat": 50.637,
+   "lng": 3.065,
+   "adresse": "40 rue de Béthune",
+   "url": "https://www.ugc.fr",
+   "seances": [
+    {
+     "jour": "sam",
+     "heure": "16:00",
+     "film": "pagnol",
+     "ad": true,
+     "sme": true
+    },
+    {
+     "jour": "dim",
+     "heure": "14:30",
+     "film": "schtroumpfs",
+     "ad": false,
+     "sme": true
+    }
+   ]
+  },
+  {
+   "id": "c07",
+   "nom": "Kinepolis Lomme",
+   "ville": "Lomme",
+   "cp": "59160",
+   "region": "Hauts-de-France",
+   "lat": 50.643,
+   "lng": 2.98,
+   "adresse": "Rue du Château d'Isenghien",
+   "url": "https://kinepolis.fr",
+   "seances": [
+    {
+     "jour": "sam",
+     "heure": "16:00",
+     "film": "ptittruc",
+     "ad": false,
+     "sme": false
+    }
+   ]
+  },
+  {
+   "id": "c08",
+   "nom": "Pathé Amiens",
+   "ville": "Amiens",
+   "cp": "80000",
+   "region": "Hauts-de-France",
+   "lat": 49.894,
+   "lng": 2.296,
+   "adresse": "Boulevard de Belfort",
+   "url": "https://www.pathe.fr",
+   "seances": [
+    {
+     "jour": "sam",
+     "heure": "16:00",
+     "film": "schtroumpfs",
+     "ad": true,
+     "sme": true
+    }
+   ]
+  },
+  {
+   "id": "c09",
+   "nom": "UGC Ciné Cité Strasbourg",
+   "ville": "Strasbourg",
+   "cp": "67000",
+   "region": "Grand Est",
+   "lat": 48.576,
+   "lng": 7.77,
+   "adresse": "25 route du Rhin",
+   "url": "https://www.ugc.fr",
+   "seances": [
+    {
+     "jour": "sam",
+     "heure": "16:00",
+     "film": "elio",
+     "ad": true,
+     "sme": false
+    },
+    {
+     "jour": "dim",
+     "heure": "11:00",
+     "film": "pagnol",
+     "ad": false,
+     "sme": true
+    },
+    {
+     "jour": "dim",
+     "heure": "16:30",
+     "film": "zootopie2",
+     "ad": true,
+     "sme": false
+    }
+   ]
+  },
+  {
+   "id": "c10",
+   "nom": "Kinepolis Metz",
+   "ville": "Saint-Julien-lès-Metz",
+   "cp": "57070",
+   "region": "Grand Est",
+   "lat": 49.13,
+   "lng": 6.2,
+   "adresse": "Rue du Saint-Julien",
+   "url": "https://kinepolis.fr",
+   "seances": [
+    {
+     "jour": "sam",
+     "heure": "16:00",
+     "film": "zootopie2",
+     "ad": false,
+     "sme": true
+    }
+   ]
+  },
+  {
+   "id": "c11",
+   "nom": "Kinepolis Nancy",
+   "ville": "Nancy",
+   "cp": "54000",
+   "region": "Grand Est",
+   "lat": 48.69,
+   "lng": 6.195,
+   "adresse": "Quai de la Bataille",
+   "url": "https://kinepolis.fr",
+   "seances": [
+    {
+     "jour": "sam",
+     "heure": "16:00",
+     "film": "pagnol",
+     "ad": true,
+     "sme": false
+    }
+   ]
+  },
+  {
+   "id": "c12",
+   "nom": "Pathé Caen",
+   "ville": "Caen",
+   "cp": "14000",
+   "region": "Normandie",
+   "lat": 49.18,
+   "lng": -0.37,
+   "adresse": "Avenue de la Libération",
+   "url": "https://www.pathe.fr",
+   "seances": [
+    {
+     "jour": "sam",
+     "heure": "16:00",
+     "film": "ptittruc",
+     "ad": true,
+     "sme": true
+    },
+    {
+     "jour": "dim",
+     "heure": "14:00",
+     "film": "elio",
+     "ad": true,
+     "sme": true
+    }
+   ]
+  },
+  {
+   "id": "c13",
+   "nom": "Cinéma Le Grand Mercure",
+   "ville": "Elbeuf",
+   "cp": "76500",
+   "region": "Normandie",
+   "lat": 49.288,
+   "lng": 1.008,
+   "adresse": "Rue Henry",
+   "url": "https://www.allocine.fr",
+   "seances": [
+    {
+     "jour": "sam",
+     "heure": "16:00",
+     "film": "schtroumpfs",
+     "ad": false,
+     "sme": false
+    }
+   ]
+  },
+  {
+   "id": "c14",
+   "nom": "Pathé Rennes",
+   "ville": "Rennes",
+   "cp": "35000",
+   "region": "Bretagne",
+   "lat": 48.108,
+   "lng": -1.68,
+   "adresse": "Esplanade Charles de Gaulle",
+   "url": "https://www.pathe.fr",
+   "seances": [
+    {
+     "jour": "sam",
+     "heure": "16:00",
+     "film": "elio",
+     "ad": true,
+     "sme": true
+    }
+   ]
+  },
+  {
+   "id": "c15",
+   "nom": "Cinéville Garenne",
+   "ville": "Vannes",
+   "cp": "56000",
+   "region": "Bretagne",
+   "lat": 47.656,
+   "lng": -2.759,
+   "adresse": "12 rue Alexandre Le Pontois",
+   "url": "https://www.cineville.fr",
+   "seances": [
+    {
+     "jour": "sam",
+     "heure": "16:00",
+     "film": "zootopie2",
+     "ad": true,
+     "sme": false
+    },
+    {
+     "jour": "dim",
+     "heure": "14:30",
+     "film": "ptittruc",
+     "ad": false,
+     "sme": true
+    }
+   ]
+  },
+  {
+   "id": "c16",
+   "nom": "Cinéville Saint-Brieuc",
+   "ville": "Saint-Brieuc",
+   "cp": "22000",
+   "region": "Bretagne",
+   "lat": 48.514,
+   "lng": -2.765,
+   "adresse": "Rue du Combat des Trente",
+   "url": "https://www.cineville.fr",
+   "seances": [
+    {
+     "jour": "sam",
+     "heure": "16:00",
+     "film": "pagnol",
+     "ad": false,
+     "sme": true
+    },
+    {
+     "jour": "dim",
+     "heure": "16:30",
+     "film": "ptittruc",
+     "ad": true,
+     "sme": false
+    }
+   ]
+  },
+  {
+   "id": "c17",
+   "nom": "Pathé Atlantis",
+   "ville": "Saint-Herblain",
+   "cp": "44800",
+   "region": "Pays de la Loire",
+   "lat": 47.224,
+   "lng": -1.63,
+   "adresse": "Centre commercial Atlantis",
+   "url": "https://www.pathe.fr",
+   "seances": [
+    {
+     "jour": "sam",
+     "heure": "16:00",
+     "film": "ptittruc",
+     "ad": true,
+     "sme": false
+    }
+   ]
+  },
+  {
+   "id": "c18",
+   "nom": "CGR Le Mans",
+   "ville": "Le Mans",
+   "cp": "72000",
+   "region": "Pays de la Loire",
+   "lat": 48.004,
+   "lng": 0.197,
+   "adresse": "Place des Jacobins",
+   "url": "https://www.cgrcinemas.fr",
+   "seances": [
+    {
+     "jour": "sam",
+     "heure": "16:00",
+     "film": "schtroumpfs",
+     "ad": true,
+     "sme": true
+    },
+    {
+     "jour": "dim",
+     "heure": "11:00",
+     "film": "zootopie2",
+     "ad": false,
+     "sme": true
+    }
+   ]
+  },
+  {
+   "id": "c19",
+   "nom": "Cinéville Laval",
+   "ville": "Laval",
+   "cp": "53000",
+   "region": "Pays de la Loire",
+   "lat": 48.071,
+   "lng": -0.77,
+   "adresse": "Place de la Commune",
+   "url": "https://www.cineville.fr",
+   "seances": [
+    {
+     "jour": "sam",
+     "heure": "16:00",
+     "film": "elio",
+     "ad": false,
+     "sme": false
+    }
+   ]
+  },
+  {
+   "id": "c20",
+   "nom": "CGR Tours Centre",
+   "ville": "Tours",
+   "cp": "37000",
+   "region": "Centre-Val de Loire",
+   "lat": 47.394,
+   "lng": 0.689,
+   "adresse": "Rue Michelet",
+   "url": "https://www.cgrcinemas.fr",
+   "seances": [
+    {
+     "jour": "sam",
+     "heure": "16:00",
+     "film": "zootopie2",
+     "ad": true,
+     "sme": true
+    }
+   ]
+  },
+  {
+   "id": "c21",
+   "nom": "Pathé Orléans",
+   "ville": "Orléans",
+   "cp": "45000",
+   "region": "Centre-Val de Loire",
+   "lat": 47.902,
+   "lng": 1.904,
+   "adresse": "Place de l'Étape",
+   "url": "https://www.pathe.fr",
+   "seances": [
+    {
+     "jour": "sam",
+     "heure": "16:00",
+     "film": "pagnol",
+     "ad": true,
+     "sme": false
+    },
+    {
+     "jour": "dim",
+     "heure": "14:00",
+     "film": "schtroumpfs",
+     "ad": false,
+     "sme": true
+    }
+   ]
+  },
+  {
+   "id": "c22",
+   "nom": "Mégarama Beaux-Arts",
+   "ville": "Besançon",
+   "cp": "25000",
+   "region": "Bourgogne-Franche-Comté",
+   "lat": 47.24,
+   "lng": 6.022,
+   "adresse": "Rue Gustave Courbet",
+   "url": "https://www.megarama.fr",
+   "seances": [
+    {
+     "jour": "sam",
+     "heure": "16:00",
+     "film": "ptittruc",
+     "ad": false,
+     "sme": true
+    }
+   ]
+  },
+  {
+   "id": "c23",
+   "nom": "Cinéma Olympia",
+   "ville": "Dijon",
+   "cp": "21000",
+   "region": "Bourgogne-Franche-Comté",
+   "lat": 47.32,
+   "lng": 5.04,
+   "adresse": "Avenue Foch",
+   "url": "https://www.allocine.fr",
+   "seances": [
+    {
+     "jour": "sam",
+     "heure": "16:00",
+     "film": "schtroumpfs",
+     "ad": true,
+     "sme": false
+    },
+    {
+     "jour": "dim",
+     "heure": "16:30",
+     "film": "elio",
+     "ad": true,
+     "sme": false
+    }
+   ]
+  },
+  {
+   "id": "c24",
+   "nom": "UGC Ciné Cité Bordeaux",
+   "ville": "Bordeaux",
+   "cp": "33000",
+   "region": "Nouvelle-Aquitaine",
+   "lat": 44.838,
+   "lng": -0.578,
+   "adresse": "13 rue Georges Bonnac",
+   "url": "https://www.ugc.fr",
+   "seances": [
+    {
+     "jour": "sam",
+     "heure": "16:00",
+     "film": "elio",
+     "ad": true,
+     "sme": true
+    },
+    {
+     "jour": "dim",
+     "heure": "14:30",
+     "film": "pagnol",
+     "ad": true,
+     "sme": true
+    }
+   ]
+  },
+  {
+   "id": "c25",
+   "nom": "Mégarama Bordeaux",
+   "ville": "Bordeaux",
+   "cp": "33100",
+   "region": "Nouvelle-Aquitaine",
+   "lat": 44.843,
+   "lng": -0.556,
+   "adresse": "Quai de Queyries",
+   "url": "https://www.megarama.fr",
+   "seances": [
+    {
+     "jour": "sam",
+     "heure": "16:00",
+     "film": "zootopie2",
+     "ad": false,
+     "sme": false
+    }
+   ]
+  },
+  {
+   "id": "c26",
+   "nom": "CGR La Rochelle",
+   "ville": "La Rochelle",
+   "cp": "17000",
+   "region": "Nouvelle-Aquitaine",
+   "lat": 46.16,
+   "lng": -1.152,
+   "adresse": "Rue Chef de Ville",
+   "url": "https://www.cgrcinemas.fr",
+   "seances": [
+    {
+     "jour": "sam",
+     "heure": "16:00",
+     "film": "pagnol",
+     "ad": true,
+     "sme": true
+    }
+   ]
+  },
+  {
+   "id": "c27",
+   "nom": "CGR Limoges",
+   "ville": "Limoges",
+   "cp": "87000",
+   "region": "Nouvelle-Aquitaine",
+   "lat": 45.833,
+   "lng": 1.261,
+   "adresse": "Place Denis Dussoubs",
+   "url": "https://www.cgrcinemas.fr",
+   "seances": [
+    {
+     "jour": "sam",
+     "heure": "16:00",
+     "film": "ptittruc",
+     "ad": true,
+     "sme": false
+    },
+    {
+     "jour": "dim",
+     "heure": "11:00",
+     "film": "elio",
+     "ad": false,
+     "sme": true
+    }
+   ]
+  },
+  {
+   "id": "c28",
+   "nom": "Cinéma Le Royal",
+   "ville": "Biarritz",
+   "cp": "64200",
+   "region": "Nouvelle-Aquitaine",
+   "lat": 43.481,
+   "lng": -1.558,
+   "adresse": "Avenue du Maréchal Foch",
+   "url": "https://www.allocine.fr",
+   "seances": [
+    {
+     "jour": "sam",
+     "heure": "16:00",
+     "film": "schtroumpfs",
+     "ad": false,
+     "sme": true
+    }
+   ]
+  },
+  {
+   "id": "c29",
+   "nom": "CGR Lido",
+   "ville": "Montpellier",
+   "cp": "34000",
+   "region": "Occitanie",
+   "lat": 43.608,
+   "lng": 3.88,
+   "adresse": "Rue du Pont de Lattes",
+   "url": "https://www.cgrcinemas.fr",
+   "seances": [
+    {
+     "jour": "sam",
+     "heure": "16:00",
+     "film": "elio",
+     "ad": true,
+     "sme": false
+    }
+   ]
+  },
+  {
+   "id": "c30",
+   "nom": "Pathé Wilson",
+   "ville": "Toulouse",
+   "cp": "31000",
+   "region": "Occitanie",
+   "lat": 43.605,
+   "lng": 1.447,
+   "adresse": "Place du Président Wilson",
+   "url": "https://www.pathe.fr",
+   "seances": [
+    {
+     "jour": "sam",
+     "heure": "16:00",
+     "film": "zootopie2",
+     "ad": true,
+     "sme": true
+    },
+    {
+     "jour": "dim",
+     "heure": "14:00",
+     "film": "ptittruc",
+     "ad": false,
+     "sme": true
+    },
+    {
+     "jour": "dim",
+     "heure": "16:30",
+     "film": "pagnol",
+     "ad": true,
+     "sme": false
+    }
+   ]
+  },
+  {
+   "id": "c31",
+   "nom": "CGR Nîmes",
+   "ville": "Nîmes",
+   "cp": "30000",
+   "region": "Occitanie",
+   "lat": 43.836,
+   "lng": 4.36,
+   "adresse": "Rue de la République",
+   "url": "https://www.cgrcinemas.fr",
+   "seances": [
+    {
+     "jour": "sam",
+     "heure": "16:00",
+     "film": "pagnol",
+     "ad": false,
+     "sme": false
+    }
+   ]
+  },
+  {
+   "id": "c32",
+   "nom": "Méga CGR Perpignan",
+   "ville": "Perpignan",
+   "cp": "66000",
+   "region": "Occitanie",
+   "lat": 42.699,
+   "lng": 2.895,
+   "adresse": "Avenue de Grande-Bretagne",
+   "url": "https://www.cgrcinemas.fr",
+   "seances": [
+    {
+     "jour": "sam",
+     "heure": "16:00",
+     "film": "ptittruc",
+     "ad": true,
+     "sme": true
+    }
+   ]
+  },
+  {
+   "id": "c33",
+   "nom": "Pathé Bellecour",
+   "ville": "Lyon",
+   "cp": "69002",
+   "region": "Auvergne-Rhône-Alpes",
+   "lat": 45.759,
+   "lng": 4.833,
+   "adresse": "79 rue de la République",
+   "url": "https://www.pathe.fr",
+   "seances": [
+    {
+     "jour": "sam",
+     "heure": "16:00",
+     "film": "schtroumpfs",
+     "ad": true,
+     "sme": false
+    },
+    {
+     "jour": "dim",
+     "heure": "14:30",
+     "film": "zootopie2",
+     "ad": false,
+     "sme": true
+    }
+   ]
+  },
+  {
+   "id": "c34",
+   "nom": "UGC Ciné Cité Confluence",
+   "ville": "Lyon",
+   "cp": "69002",
+   "region": "Auvergne-Rhône-Alpes",
+   "lat": 45.741,
+   "lng": 4.818,
+   "adresse": "112 cours Charlemagne",
+   "url": "https://www.ugc.fr",
+   "seances": [
+    {
+     "jour": "sam",
+     "heure": "16:00",
+     "film": "elio",
+     "ad": false,
+     "sme": true
+    }
+   ]
+  },
+  {
+   "id": "c35",
+   "nom": "Pathé Chavant",
+   "ville": "Grenoble",
+   "cp": "38000",
+   "region": "Auvergne-Rhône-Alpes",
+   "lat": 45.188,
+   "lng": 5.731,
+   "adresse": "Boulevard Gambetta",
+   "url": "https://www.pathe.fr",
+   "seances": [
+    {
+     "jour": "sam",
+     "heure": "16:00",
+     "film": "zootopie2",
+     "ad": true,
+     "sme": false
+    }
+   ]
+  },
+  {
+   "id": "c36",
+   "nom": "CGR Clermont Jaude",
+   "ville": "Clermont-Ferrand",
+   "cp": "63000",
+   "region": "Auvergne-Rhône-Alpes",
+   "lat": 45.776,
+   "lng": 3.082,
+   "adresse": "Place de Jaude",
+   "url": "https://www.cgrcinemas.fr",
+   "seances": [
+    {
+     "jour": "sam",
+     "heure": "16:00",
+     "film": "pagnol",
+     "ad": true,
+     "sme": true
+    },
+    {
+     "jour": "dim",
+     "heure": "11:00",
+     "film": "schtroumpfs",
+     "ad": true,
+     "sme": true
+    }
+   ]
+  },
+  {
+   "id": "c37",
+   "nom": "Cinéma Le Méliès",
+   "ville": "Saint-Étienne",
+   "cp": "42000",
+   "region": "Auvergne-Rhône-Alpes",
+   "lat": 45.44,
+   "lng": 4.387,
+   "adresse": "Place Jean Jaurès",
+   "url": "https://www.allocine.fr",
+   "seances": [
+    {
+     "jour": "sam",
+     "heure": "16:00",
+     "film": "ptittruc",
+     "ad": false,
+     "sme": false
+    },
+    {
+     "jour": "dim",
+     "heure": "16:30",
+     "film": "schtroumpfs",
+     "ad": true,
+     "sme": false
+    }
+   ]
+  },
+  {
+   "id": "c38",
+   "nom": "Mégarama Chambéry",
+   "ville": "Chambéry",
+   "cp": "73000",
+   "region": "Auvergne-Rhône-Alpes",
+   "lat": 45.566,
+   "lng": 5.92,
+   "adresse": "Avenue de Lyon",
+   "url": "https://www.megarama.fr",
+   "seances": [
+    {
+     "jour": "sam",
+     "heure": "16:00",
+     "film": "schtroumpfs",
+     "ad": true,
+     "sme": true
+    }
+   ]
+  },
+  {
+   "id": "c39",
+   "nom": "Pathé La Joliette",
+   "ville": "Marseille",
+   "cp": "13002",
+   "region": "Provence-Alpes-Côte d'Azur",
+   "lat": 43.307,
+   "lng": 5.366,
+   "adresse": "Place de la Joliette",
+   "url": "https://www.pathe.fr",
+   "seances": [
+    {
+     "jour": "sam",
+     "heure": "16:00",
+     "film": "elio",
+     "ad": true,
+     "sme": false
+    },
+    {
+     "jour": "dim",
+     "heure": "14:00",
+     "film": "pagnol",
+     "ad": false,
+     "sme": true
+    }
+   ]
+  },
+  {
+   "id": "c40",
+   "nom": "Pathé Gare du Sud",
+   "ville": "Nice",
+   "cp": "06000",
+   "region": "Provence-Alpes-Côte d'Azur",
+   "lat": 43.709,
+   "lng": 7.262,
+   "adresse": "Avenue Malausséna",
+   "url": "https://www.pathe.fr",
+   "seances": [
+    {
+     "jour": "sam",
+     "heure": "16:00",
+     "film": "zootopie2",
+     "ad": false,
+     "sme": true
+    }
+   ]
+  },
+  {
+   "id": "c41",
+   "nom": "Pathé Capitole",
+   "ville": "Avignon",
+   "cp": "84000",
+   "region": "Provence-Alpes-Côte d'Azur",
+   "lat": 43.949,
+   "lng": 4.806,
+   "adresse": "Rue Pourquery de Boisserin",
+   "url": "https://www.pathe.fr",
+   "seances": [
+    {
+     "jour": "sam",
+     "heure": "16:00",
+     "film": "pagnol",
+     "ad": true,
+     "sme": false
+    }
+   ]
+  },
+  {
+   "id": "c42",
+   "nom": "Ellipse Cinéma",
+   "ville": "Ajaccio",
+   "cp": "20000",
+   "region": "Corse",
+   "lat": 41.926,
+   "lng": 8.737,
+   "adresse": "Avenue du Général Leclerc",
+   "url": "https://www.allocine.fr",
+   "seances": [
+    {
+     "jour": "sam",
+     "heure": "16:00",
+     "film": "ptittruc",
+     "ad": true,
+     "sme": true
+    },
+    {
+     "jour": "dim",
+     "heure": "14:30",
+     "film": "elio",
+     "ad": false,
+     "sme": true
+    }
+   ]
+  }
+ ]
+}</script>
+<script type="application/json" id="mapdata">{"paths":[["\u00cele-de-France","M9.7,-248.0L12.6,-250.8L15.3,-249.1L17.6,-246.6L20.9,-246.1L23.2,-247.5L23.5,-249.0L27.2,-248.5L27.9,-247.0L30.6,-247.7L31.0,-248.5L36.0,-247.5L38.4,-249.2L41.1,-248.6L42.7,-251.8L44.9,-250.8L47.1,-250.7L49.1,-250.0L48.3,-248.3L50.3,-246.1L49.4,-241.7L53.5,-238.8L55.1,-237.2L56.2,-233.8L58.7,-234.9L59.3,-232.1L60.5,-230.9L63.0,-232.3L64.1,-228.9L63.9,-227.5L65.6,-226.4L68.9,-225.6L69.4,-223.9L71.1,-225.2L71.1,-222.5L67.5,-221.2L68.2,-218.6L65.9,-218.4L65.0,-215.9L67.3,-215.7L68.3,-213.7L70.1,-213.8L69.7,-210.7L70.0,-208.6L68.1,-206.4L69.4,-205.3L73.3,-204.3L73.5,-203.3L76.0,-202.0L72.4,-200.5L72.0,-199.0L69.8,-197.0L70.7,-194.5L69.3,-193.1L66.9,-193.4L65.6,-192.8L67.7,-189.8L64.5,-188.0L65.7,-185.2L64.7,-182.4L66.8,-181.3L66.3,-179.0L64.1,-180.0L63.0,-179.4L62.9,-177.2L58.8,-177.3L57.2,-177.8L55.3,-176.5L53.8,-177.0L51.7,-176.4L47.4,-177.3L44.6,-175.8L41.2,-176.0L40.3,-174.0L40.7,-172.9L38.9,-170.8L40.8,-167.2L38.1,-160.8L36.0,-160.6L35.8,-159.4L33.3,-157.9L33.4,-156.3L28.7,-155.6L25.5,-153.0L23.9,-154.1L24.0,-156.8L20.0,-156.0L21.0,-154.6L18.6,-153.7L17.6,-152.5L14.7,-152.2L13.0,-153.9L10.5,-153.1L8.3,-154.1L6.0,-154.0L4.9,-152.7L2.8,-152.7L0.7,-153.7L2.3,-156.5L3.9,-155.6L4.1,-158.3L5.0,-159.5L3.9,-162.6L1.3,-165.5L0.2,-165.0L-1.8,-166.0L-2.0,-169.9L-3.3,-172.1L-6.0,-171.0L-8.4,-173.3L-9.4,-173.1L-10.6,-170.8L-14.6,-171.6L-15.5,-173.6L-17.0,-174.5L-18.5,-171.2L-20.2,-170.4L-25.3,-169.4L-27.3,-169.5L-27.9,-168.6L-31.3,-168.7L-32.6,-168.7L-33.7,-170.9L-32.3,-171.8L-33.0,-174.0L-31.8,-176.2L-32.7,-178.9L-32.5,-179.9L-36.0,-181.3L-35.0,-182.5L-36.3,-185.8L-37.3,-184.0L-39.7,-184.0L-41.6,-184.9L-42.5,-186.8L-44.4,-187.3L-46.3,-190.9L-46.3,-192.8L-45.5,-195.4L-47.0,-196.9L-50.9,-197.8L-51.4,-198.5L-50.5,-201.4L-53.9,-201.4L-54.9,-203.8L-58.2,-206.2L-57.6,-208.9L-59.8,-210.2L-56.6,-214.8L-59.3,-217.4L-60.1,-219.1L-59.0,-221.5L-60.0,-224.4L-59.7,-225.5L-62.1,-227.2L-61.2,-228.2L-62.6,-230.7L-62.6,-232.2L-64.8,-232.8L-65.2,-234.1L-65.5,-238.0L-66.8,-237.9L-66.8,-241.7L-68.2,-242.6L-68.9,-244.5L-68.0,-246.3L-66.3,-245.2L-62.7,-247.2L-61.4,-247.0L-58.3,-248.5L-57.8,-247.8L-56.0,-251.4L-54.6,-253.0L-54.0,-255.3L-53.3,-261.0L-51.2,-263.2L-49.2,-262.1L-48.6,-258.0L-47.7,-257.5L-45.0,-258.5L-41.5,-257.0L-39.4,-257.1L-38.8,-256.3L-35.6,-257.4L-33.6,-257.4L-32.7,-258.4L-30.9,-257.6L-25.8,-260.9L-24.3,-259.0L-21.8,-259.1L-18.4,-257.4L-15.9,-258.1L-13.6,-255.3L-11.2,-256.0L-9.6,-258.6L-7.1,-256.2L-4.0,-254.9L-2.5,-255.2L1.5,-253.5L3.7,-251.8L2.7,-250.6L7.4,-249.8L9.7,-248.0Z"],["Centre-Val de Loire","M29.2,-92.0L30.1,-90.9L31.1,-87.9L33.1,-84.2L32.3,-80.7L29.1,-74.8L29.3,-72.2L31.5,-71.1L33.5,-68.8L36.6,-66.0L36.5,-62.2L38.4,-58.0L39.7,-52.9L39.9,-49.2L39.4,-46.3L42.1,-44.5L43.0,-41.9L42.1,-38.6L43.2,-35.5L41.2,-31.1L42.5,-27.8L42.6,-25.3L41.9,-22.7L40.0,-19.5L35.0,-20.4L31.5,-18.8L31.6,-17.9L25.9,-13.5L23.4,-13.3L21.2,-11.8L19.7,-14.3L18.2,-14.4L17.3,-12.8L13.6,-8.9L11.9,-5.7L10.2,-6.5L8.4,-5.9L10.1,-3.7L8.8,-0.4L10.4,1.0L11.0,5.0L6.0,8.0L5.4,7.1L3.4,7.9L2.3,6.7L-0.3,8.0L-5.6,8.2L-6.7,8.8L-9.9,12.5L-11.3,14.6L-11.6,18.0L-13.8,17.4L-16.2,17.7L-17.3,17.2L-19.4,17.6L-22.0,18.0L-24.8,19.1L-25.8,18.0L-27.9,17.9L-31.4,16.9L-32.4,16.0L-36.1,16.8L-37.2,15.6L-38.9,16.7L-43.3,17.0L-44.8,14.5L-48.3,15.0L-47.4,17.2L-49.6,21.1L-50.8,20.8L-52.7,18.2L-55.3,21.3L-57.4,19.5L-60.5,19.5L-62.1,20.7L-62.3,18.3L-63.7,17.3L-67.8,22.5L-69.7,23.6L-71.1,25.3L-71.5,23.9L-73.3,22.5L-75.2,20.0L-77.5,21.0L-78.8,22.9L-81.7,22.1L-84.6,23.4L-85.6,21.2L-87.4,21.6L-85.1,17.1L-89.2,15.1L-89.1,12.7L-90.4,10.5L-89.4,9.8L-92.2,6.8L-93.6,6.2L-98.2,6.3L-98.6,3.2L-100.5,3.4L-103.7,1.9L-105.4,0.3L-106.9,-2.6L-106.1,-4.8L-105.9,-8.3L-104.6,-9.5L-106.4,-13.6L-108.7,-14.8L-111.4,-17.7L-112.6,-19.5L-112.7,-22.8L-116.7,-26.1L-119.9,-30.3L-119.8,-33.7L-120.8,-37.4L-124.6,-38.5L-125.8,-40.7L-129.4,-40.2L-128.6,-38.0L-127.0,-37.3L-127.0,-35.9L-129.6,-35.6L-131.3,-36.0L-133.8,-35.8L-137.8,-34.1L-138.2,-33.0L-143.2,-35.0L-146.0,-33.1L-147.0,-33.8L-147.7,-37.4L-147.2,-40.0L-147.8,-42.0L-147.1,-44.4L-147.8,-45.4L-149.7,-44.6L-151.5,-47.1L-154.0,-45.3L-156.4,-47.1L-154.5,-49.1L-155.9,-51.4L-157.6,-50.3L-159.1,-50.8L-159.0,-52.2L-163.1,-52.4L-164.6,-56.4L-163.8,-59.0L-164.7,-59.7L-163.4,-62.1L-163.7,-64.7L-162.9,-68.4L-160.3,-73.2L-158.2,-74.5L-158.1,-76.2L-155.8,-78.0L-156.8,-78.7L-156.8,-80.5L-155.6,-82.5L-155.9,-85.3L-154.0,-89.4L-153.2,-90.2L-152.9,-92.7L-154.5,-94.4L-153.6,-97.1L-152.2,-97.8L-152.5,-100.8L-150.5,-101.2L-149.2,-99.7L-146.1,-99.3L-145.0,-97.9L-142.3,-96.9L-140.7,-97.9L-141.1,-99.4L-143.3,-102.6L-141.1,-104.1L-139.2,-101.8L-137.4,-101.9L-137.0,-103.9L-134.1,-104.5L-132.8,-105.5L-130.9,-105.7L-129.9,-107.1L-128.2,-106.9L-126.1,-108.3L-126.1,-109.4L-128.4,-111.2L-126.3,-112.8L-125.7,-114.7L-123.6,-115.5L-118.5,-119.9L-117.1,-122.6L-115.1,-124.0L-116.3,-129.1L-114.7,-131.0L-112.7,-131.1L-112.2,-133.4L-110.2,-134.1L-110.8,-136.9L-112.1,-138.9L-111.1,-139.7L-110.6,-142.1L-113.5,-143.7L-113.3,-147.2L-110.4,-147.3L-110.5,-150.3L-109.8,-153.4L-105.6,-153.5L-105.7,-154.9L-109.1,-156.7L-110.8,-156.7L-113.5,-159.4L-111.3,-161.4L-114.2,-166.1L-113.7,-168.6L-115.5,-172.2L-114.4,-174.0L-112.1,-174.9L-107.6,-175.7L-105.9,-177.0L-103.2,-180.3L-103.5,-181.5L-102.5,-184.3L-104.0,-187.6L-102.6,-188.2L-102.8,-190.4L-101.9,-192.4L-104.9,-193.8L-103.8,-195.1L-107.1,-197.2L-108.7,-197.3L-110.0,-198.4L-110.2,-200.5L-112.1,-201.6L-111.5,-203.1L-112.4,-207.0L-111.5,-208.1L-109.1,-208.7L-108.1,-211.5L-106.3,-211.1L-102.7,-211.7L-102.3,-212.6L-98.7,-212.8L-95.6,-215.7L-93.1,-214.9L-91.5,-215.5L-91.3,-218.9L-89.2,-218.6L-88.7,-217.0L-86.9,-217.3L-82.7,-217.0L-81.1,-215.7L-79.0,-216.8L-77.7,-216.1L-73.7,-219.2L-75.0,-221.6L-74.7,-223.4L-71.5,-226.1L-68.4,-227.0L-67.2,-229.8L-68.8,-232.4L-67.9,-233.8L-65.2,-234.1L-64.8,-232.8L-62.6,-232.2L-62.6,-230.7L-61.2,-228.2L-62.1,-227.2L-59.7,-225.5L-60.0,-224.4L-59.0,-221.5L-60.1,-219.1L-59.3,-217.4L-56.6,-214.8L-59.8,-210.2L-57.6,-208.9L-58.2,-206.2L-54.9,-203.8L-53.9,-201.4L-50.5,-201.4L-51.4,-198.5L-50.9,-197.8L-47.0,-196.9L-45.5,-195.4L-46.3,-192.8L-46.3,-190.9L-44.4,-187.3L-42.5,-186.8L-41.6,-184.9L-39.7,-184.0L-37.3,-184.0L-36.3,-185.8L-35.0,-182.5L-36.0,-181.3L-32.5,-179.9L-32.7,-178.9L-31.8,-176.2L-33.0,-174.0L-32.3,-171.8L-33.7,-170.9L-32.6,-168.7L-31.3,-168.7L-27.9,-168.6L-27.3,-169.5L-25.3,-169.4L-20.2,-170.4L-18.5,-171.2L-17.0,-174.5L-15.5,-173.6L-14.6,-171.6L-10.6,-170.8L-9.4,-173.1L-8.4,-173.3L-6.0,-171.0L-3.3,-172.1L-2.0,-169.9L-1.8,-166.0L0.2,-165.0L1.3,-165.5L3.9,-162.6L5.0,-159.5L4.1,-158.3L3.9,-155.6L2.3,-156.5L0.7,-153.7L2.8,-152.7L4.9,-152.7L6.0,-154.0L8.3,-154.1L10.5,-153.1L13.0,-153.9L14.7,-152.2L17.6,-152.5L18.6,-153.7L21.0,-154.6L20.0,-156.0L24.0,-156.8L23.9,-154.1L25.5,-153.0L28.7,-155.6L33.4,-156.3L35.8,-155.2L37.2,-155.2L39.8,-153.3L41.2,-148.9L41.3,-147.2L43.9,-145.4L44.9,-141.4L46.3,-140.6L46.6,-137.1L43.2,-133.1L42.2,-133.1L38.3,-129.5L38.2,-126.4L39.8,-125.7L39.8,-123.5L38.7,-123.4L39.7,-120.1L39.4,-118.7L37.0,-118.6L34.7,-117.6L34.3,-116.6L31.9,-116.9L27.9,-116.1L27.4,-112.6L28.1,-111.1L31.7,-109.1L32.2,-107.0L34.6,-104.6L33.4,-103.7L33.7,-100.3L35.2,-97.7L36.2,-96.9L34.9,-95.7L31.9,-96.6L30.3,-95.3L28.0,-95.3L27.4,-93.8L29.2,-92.0Z"],["Bourgogne-Franche-Comt\u00e9","M81.0,-14.9L77.3,-15.0L78.9,-12.4L77.5,-11.5L75.6,-11.6L76.3,-8.9L75.3,-7.8L73.8,-8.6L71.4,-6.0L69.1,-5.2L68.5,-6.4L69.0,-8.4L67.5,-9.3L67.6,-11.2L64.4,-11.5L63.0,-9.1L61.6,-8.4L59.4,-8.9L58.5,-11.6L56.3,-11.7L52.6,-8.3L51.3,-8.0L49.0,-9.4L46.7,-12.7L43.6,-13.8L41.2,-15.8L40.0,-19.5L41.9,-22.7L42.6,-25.3L42.5,-27.8L41.2,-31.1L43.2,-35.5L42.1,-38.6L43.0,-41.9L42.1,-44.5L39.4,-46.3L39.9,-49.2L39.7,-52.9L38.4,-58.0L36.5,-62.2L36.6,-66.0L33.5,-68.8L31.5,-71.1L29.3,-72.2L29.1,-74.8L32.3,-80.7L33.1,-84.2L31.1,-87.9L30.1,-90.9L29.2,-92.0L27.4,-93.8L28.0,-95.3L30.3,-95.3L31.9,-96.6L34.9,-95.7L36.2,-96.9L35.2,-97.7L33.7,-100.3L33.4,-103.7L34.6,-104.6L32.2,-107.0L31.7,-109.1L28.1,-111.1L27.4,-112.6L27.9,-116.1L31.9,-116.9L34.3,-116.6L34.7,-117.6L37.0,-118.6L39.4,-118.7L39.7,-120.1L38.7,-123.4L39.8,-123.5L39.8,-125.7L38.2,-126.4L38.3,-129.5L42.2,-133.1L43.2,-133.1L46.6,-137.1L46.3,-140.6L44.9,-141.4L43.9,-145.4L41.3,-147.2L41.2,-148.9L39.8,-153.3L37.2,-155.2L35.8,-155.2L33.4,-156.3L33.3,-157.9L35.8,-159.4L36.0,-160.6L38.1,-160.8L40.8,-167.2L38.9,-170.8L40.7,-172.9L40.3,-174.0L41.2,-176.0L44.6,-175.8L47.4,-177.3L51.7,-176.4L53.8,-177.0L55.3,-176.5L57.2,-177.8L58.8,-177.3L62.9,-177.2L63.0,-179.4L64.1,-180.0L66.3,-179.0L67.2,-176.0L68.9,-177.4L72.1,-176.9L74.4,-174.1L76.5,-172.1L76.7,-170.7L78.2,-170.1L78.1,-168.0L80.2,-167.1L80.7,-165.5L79.0,-163.7L80.5,-162.6L79.8,-161.2L77.3,-158.9L78.6,-157.9L80.4,-159.1L81.9,-158.4L83.7,-153.9L86.2,-154.4L88.7,-157.0L89.7,-155.0L88.6,-153.3L90.9,-153.0L93.1,-150.3L93.2,-148.4L94.4,-146.1L94.4,-144.3L97.6,-141.6L95.5,-140.4L96.2,-138.4L98.1,-137.9L99.6,-139.8L100.6,-137.6L99.7,-133.9L102.9,-133.1L105.5,-133.1L106.8,-134.2L107.7,-132.8L109.6,-132.6L110.7,-134.6L112.9,-134.3L114.2,-132.7L117.9,-136.0L120.8,-134.7L120.7,-137.2L122.2,-136.9L121.8,-135.0L123.2,-133.2L124.7,-132.4L126.7,-132.6L127.7,-136.1L130.6,-135.7L135.0,-136.8L137.3,-135.7L140.4,-136.9L142.1,-136.7L145.0,-137.1L143.3,-140.1L146.5,-142.9L148.9,-143.1L152.8,-141.5L154.9,-142.0L156.0,-140.9L158.0,-140.4L160.7,-140.8L161.1,-138.3L160.4,-136.9L162.2,-135.9L164.6,-136.1L166.0,-134.1L163.5,-131.5L165.4,-129.6L166.7,-132.0L168.5,-132.1L170.3,-128.7L170.3,-127.1L172.1,-126.7L173.0,-123.2L174.8,-122.0L174.3,-120.3L169.6,-117.7L170.4,-116.1L171.7,-116.5L173.3,-113.0L172.0,-110.7L172.4,-109.7L174.7,-108.8L177.3,-110.9L178.2,-107.7L181.0,-105.7L184.0,-104.8L187.5,-108.1L187.1,-105.3L189.7,-104.2L191.6,-101.6L191.6,-99.7L192.6,-97.7L195.8,-100.5L198.6,-100.9L199.6,-99.1L200.9,-100.5L200.8,-101.8L203.1,-104.7L203.1,-107.3L205.9,-107.1L208.4,-108.5L211.6,-107.3L214.2,-110.5L215.4,-110.0L216.2,-107.2L220.1,-107.7L222.6,-108.5L222.2,-111.2L222.8,-113.8L224.0,-114.5L223.7,-116.9L221.9,-117.0L222.1,-120.6L223.3,-122.4L225.5,-121.8L226.5,-122.4L226.3,-124.9L227.5,-125.9L230.6,-124.7L233.7,-130.6L235.0,-130.1L236.4,-131.1L236.0,-132.6L237.1,-134.5L238.3,-134.7L238.3,-136.6L239.6,-137.9L241.1,-136.6L239.6,-135.1L240.7,-133.7L241.9,-135.7L243.5,-135.8L245.5,-137.8L246.7,-140.4L252.9,-142.4L254.6,-140.6L254.4,-139.5L255.5,-135.2L257.2,-135.3L258.2,-134.0L260.3,-133.3L263.0,-135.4L266.2,-134.9L269.1,-136.2L273.6,-134.4L275.2,-130.7L276.6,-129.1L281.2,-130.3L282.6,-133.1L285.6,-134.3L288.0,-131.6L288.1,-130.5L292.3,-128.1L294.6,-126.2L297.8,-125.0L298.3,-123.0L300.5,-121.3L302.1,-122.3L302.2,-120.2L303.2,-118.6L307.4,-117.0L308.5,-117.2L310.6,-115.3L313.4,-114.2L315.2,-112.2L314.4,-110.1L315.8,-107.2L313.9,-105.1L313.0,-101.9L314.4,-99.3L317.1,-100.1L318.6,-99.3L319.9,-95.1L322.0,-93.6L321.6,-90.3L320.3,-89.5L317.2,-89.3L314.3,-90.4L311.7,-89.2L312.6,-85.2L310.6,-84.7L308.5,-83.3L308.4,-80.6L307.0,-80.6L306.5,-78.6L304.8,-77.5L304.3,-75.8L307.1,-75.5L312.2,-76.3L313.5,-77.3L316.0,-76.1L316.9,-74.4L315.8,-72.7L313.7,-71.4L312.2,-69.6L308.7,-68.8L309.5,-64.4L308.6,-63.2L304.5,-60.2L302.9,-56.4L298.9,-52.9L296.4,-52.0L294.8,-50.8L294.8,-49.1L293.2,-48.9L291.4,-46.7L293.0,-44.9L292.0,-43.9L289.4,-42.8L287.5,-39.8L284.7,-39.2L282.8,-38.1L279.6,-37.1L278.0,-37.4L274.6,-33.4L273.6,-32.9L275.8,-29.0L275.5,-25.2L274.3,-23.2L273.8,-20.1L275.4,-18.8L273.2,-15.5L271.1,-14.8L270.8,-13.8L267.6,-11.2L263.5,-9.1L259.6,-4.8L256.0,-1.4L252.7,1.0L251.5,2.4L253.4,4.2L254.7,5.5L251.7,9.0L250.6,11.9L249.0,13.6L249.8,15.9L248.3,18.4L245.9,21.3L242.8,23.8L239.9,29.1L238.3,29.1L237.7,31.6L236.7,31.3L235.6,33.1L233.6,33.8L227.8,33.2L225.0,33.9L224.3,31.8L224.3,29.1L222.2,28.9L219.8,26.1L217.6,27.1L216.3,30.3L214.1,30.6L212.5,33.0L211.0,33.6L207.7,33.5L206.6,32.6L207.9,28.5L207.3,27.7L205.3,28.5L204.5,26.1L202.8,26.1L200.9,24.8L201.0,22.0L198.7,19.8L195.7,18.7L197.2,16.9L196.5,15.3L192.8,14.8L190.0,13.2L189.0,9.2L187.1,8.7L184.6,9.1L182.6,10.8L179.1,11.6L177.1,10.6L175.5,9.0L170.8,8.6L169.4,11.1L169.4,13.5L167.8,16.0L167.5,19.7L165.0,24.4L165.1,27.2L163.7,30.3L163.2,32.5L162.2,34.0L162.0,36.3L161.1,38.2L160.1,42.3L158.5,42.8L156.7,42.2L156.0,40.6L157.0,38.9L156.0,37.8L157.1,36.6L153.2,34.1L155.1,31.5L153.8,29.9L151.5,29.7L148.9,31.9L149.0,33.5L146.8,33.1L144.8,30.5L143.4,33.0L141.1,33.3L140.1,31.2L138.0,30.3L134.4,30.4L133.4,33.7L133.2,38.0L131.4,40.4L128.2,42.8L126.6,42.8L125.9,44.3L124.2,44.3L124.2,41.5L121.9,42.2L120.8,40.5L119.2,41.2L119.4,42.5L115.7,42.3L113.7,40.2L110.1,41.8L108.6,43.0L105.2,42.4L104.6,39.7L100.6,39.3L98.9,38.6L100.3,34.2L99.6,32.4L100.6,30.3L102.9,29.7L103.1,27.9L105.6,28.1L105.9,23.0L104.9,20.1L106.2,17.3L105.7,16.5L106.4,13.5L103.6,11.0L100.9,10.4L99.0,11.9L97.0,10.8L97.2,9.0L95.5,8.2L95.1,6.9L92.9,8.0L90.5,6.1L88.8,6.0L88.1,5.0L88.8,3.5L88.1,-0.5L86.8,-1.4L86.7,-3.4L85.7,-6.1L83.8,-7.4L82.5,-10.3L81.6,-10.7L81.0,-14.9Z"],["Normandie","M-245.3,-275.6L-242.4,-278.8L-239.1,-279.0L-236.3,-279.7L-232.9,-279.5L-228.5,-277.0L-225.0,-275.8L-218.0,-274.7L-212.9,-274.6L-209.5,-274.0L-206.3,-274.6L-203.7,-274.5L-199.4,-273.5L-196.8,-273.6L-193.1,-272.3L-189.1,-269.8L-183.8,-268.2L-180.0,-268.6L-174.9,-269.8L-168.4,-272.6L-163.2,-276.5L-160.8,-279.4L-159.4,-280.3L-156.3,-281.2L-153.2,-282.7L-147.9,-283.0L-145.0,-284.1L-145.0,-285.0L-149.6,-285.3L-150.7,-284.6L-153.4,-285.3L-155.1,-285.1L-160.0,-286.3L-162.1,-288.2L-162.4,-290.1L-163.6,-290.6L-163.2,-293.6L-161.0,-298.3L-159.0,-301.9L-157.7,-304.9L-157.1,-308.6L-155.2,-310.6L-151.1,-312.3L-148.9,-313.7L-146.3,-314.1L-144.0,-315.5L-143.2,-316.6L-138.6,-318.8L-132.4,-322.5L-129.0,-325.0L-124.2,-326.4L-119.8,-327.2L-119.0,-327.0L-114.0,-327.6L-111.1,-329.0L-108.2,-329.5L-104.5,-330.7L-102.2,-332.0L-98.3,-331.6L-92.3,-333.7L-85.5,-337.3L-82.7,-339.5L-76.8,-344.7L-73.4,-346.6L-71.5,-345.7L-70.5,-347.1L-68.1,-346.2L-68.6,-344.0L-65.7,-341.8L-64.1,-341.2L-63.4,-339.7L-60.2,-337.4L-58.8,-334.9L-53.0,-331.8L-52.0,-329.6L-50.8,-328.9L-49.0,-320.8L-47.6,-318.1L-45.8,-315.8L-48.7,-315.2L-48.4,-313.9L-50.2,-313.0L-50.5,-310.9L-52.2,-309.5L-51.2,-308.1L-49.2,-309.9L-47.9,-308.1L-49.8,-307.3L-50.9,-304.6L-50.0,-302.2L-51.1,-300.6L-50.5,-297.6L-49.5,-296.1L-49.7,-294.2L-48.2,-293.8L-50.2,-290.8L-48.0,-289.5L-46.6,-291.3L-45.3,-290.3L-46.4,-288.6L-46.3,-287.1L-48.3,-285.9L-50.0,-283.4L-50.6,-280.9L-50.1,-279.5L-47.5,-276.8L-46.4,-273.5L-46.9,-272.0L-46.3,-270.0L-44.5,-267.2L-45.4,-264.8L-47.1,-266.3L-49.2,-266.9L-50.8,-266.4L-51.2,-263.2L-53.3,-261.0L-54.0,-255.3L-54.6,-253.0L-56.0,-251.4L-57.8,-247.8L-58.3,-248.5L-61.4,-247.0L-62.7,-247.2L-66.3,-245.2L-68.0,-246.3L-68.9,-244.5L-68.2,-242.6L-66.8,-241.7L-66.8,-237.9L-65.5,-238.0L-65.2,-234.1L-67.9,-233.8L-68.8,-232.4L-67.2,-229.8L-68.4,-227.0L-71.5,-226.1L-74.7,-223.4L-75.0,-221.6L-73.7,-219.2L-77.7,-216.1L-79.0,-216.8L-81.1,-215.7L-82.7,-217.0L-86.9,-217.3L-88.7,-217.0L-89.2,-218.6L-91.3,-218.9L-91.5,-215.5L-93.1,-214.9L-95.6,-215.7L-98.7,-212.8L-102.3,-212.6L-102.7,-211.7L-106.3,-211.1L-108.1,-211.5L-109.1,-208.7L-111.5,-208.1L-112.4,-207.0L-111.5,-203.1L-112.1,-201.6L-110.2,-200.5L-110.0,-198.4L-108.7,-197.3L-107.1,-197.2L-103.8,-195.1L-104.9,-193.8L-101.9,-192.4L-102.8,-190.4L-102.6,-188.2L-104.0,-187.6L-102.5,-184.3L-103.5,-181.5L-103.2,-180.3L-105.9,-177.0L-107.6,-175.7L-112.1,-174.9L-114.4,-174.0L-115.5,-172.2L-113.7,-168.6L-114.2,-166.1L-111.3,-161.4L-113.5,-159.4L-115.8,-158.2L-118.6,-159.8L-120.6,-163.6L-121.9,-165.5L-123.5,-166.4L-125.5,-164.5L-128.5,-164.4L-131.5,-165.0L-131.9,-166.6L-134.4,-168.7L-134.8,-170.8L-138.7,-170.7L-140.4,-171.5L-142.0,-173.4L-142.0,-175.5L-142.8,-181.0L-142.1,-182.5L-143.9,-185.8L-147.7,-188.1L-153.4,-187.4L-155.3,-186.2L-156.5,-186.5L-157.9,-183.7L-160.3,-183.6L-161.5,-181.0L-163.6,-180.7L-164.0,-178.3L-166.9,-178.0L-168.1,-179.6L-171.4,-178.0L-172.1,-178.2L-172.3,-182.9L-171.9,-185.3L-175.6,-184.8L-178.2,-185.5L-179.8,-191.6L-178.3,-192.8L-180.0,-193.7L-182.6,-196.3L-184.4,-196.2L-186.3,-194.8L-184.9,-193.7L-186.4,-192.4L-187.0,-190.7L-190.3,-192.3L-191.6,-190.1L-193.6,-189.3L-198.8,-191.4L-201.2,-190.2L-203.0,-190.6L-204.8,-189.5L-206.1,-187.4L-209.5,-187.1L-213.1,-184.4L-214.1,-188.6L-216.6,-186.7L-218.5,-187.3L-218.9,-186.1L-217.5,-184.9L-220.4,-183.7L-221.9,-184.6L-221.8,-186.5L-223.1,-186.5L-227.5,-190.1L-229.9,-189.5L-231.7,-191.2L-234.0,-191.7L-235.1,-189.5L-237.3,-188.9L-241.2,-191.5L-241.9,-190.8L-246.0,-192.2L-247.2,-191.7L-248.8,-193.1L-250.0,-192.9L-251.2,-194.2L-255.8,-193.4L-256.2,-190.9L-259.6,-189.6L-260.7,-187.3L-263.3,-185.7L-266.5,-186.3L-267.9,-188.6L-270.7,-188.9L-271.1,-190.9L-272.7,-194.0L-273.7,-194.8L-272.7,-196.7L-274.4,-198.0L-274.1,-200.0L-276.3,-202.6L-274.4,-203.1L-272.5,-201.8L-269.8,-201.9L-267.5,-202.8L-264.1,-205.1L-270.4,-208.6L-272.0,-209.1L-273.6,-213.1L-275.5,-213.5L-276.5,-215.2L-276.1,-220.3L-276.5,-222.2L-278.6,-223.8L-277.4,-224.6L-276.6,-226.6L-276.2,-229.9L-274.9,-230.8L-274.4,-233.1L-275.7,-234.1L-275.6,-240.1L-277.8,-242.3L-278.9,-247.9L-278.7,-251.0L-277.9,-253.2L-278.8,-259.7L-277.5,-263.3L-279.4,-263.2L-280.4,-261.4L-282.0,-264.1L-282.7,-266.6L-285.9,-272.5L-286.8,-272.7L-289.6,-276.4L-292.5,-277.2L-293.6,-280.1L-293.9,-285.3L-295.1,-287.1L-295.6,-291.0L-297.6,-291.9L-297.9,-294.0L-296.0,-295.2L-294.8,-297.2L-295.1,-301.9L-296.2,-305.0L-298.6,-306.5L-302.1,-307.4L-301.4,-309.4L-302.1,-310.5L-301.8,-312.6L-300.0,-312.5L-297.7,-310.6L-296.0,-311.6L-294.7,-311.2L-293.6,-309.0L-290.3,-308.1L-286.4,-308.0L-284.2,-307.3L-283.2,-305.8L-280.5,-306.1L-280.0,-304.6L-272.8,-305.7L-270.4,-306.9L-269.4,-309.7L-268.4,-309.1L-266.0,-310.4L-262.4,-310.7L-257.6,-309.4L-255.5,-309.5L-255.7,-308.0L-253.5,-305.2L-252.8,-300.9L-254.5,-301.3L-255.3,-299.3L-257.4,-298.3L-258.3,-295.3L-258.1,-293.9L-254.4,-288.1L-250.3,-283.2L-248.6,-280.8L-248.2,-279.2L-249.3,-277.8L-248.3,-276.7L-245.3,-275.6Z"],["Hauts-de-France","M109.8,-280.6L109.2,-279.7L108.9,-276.0L107.4,-275.8L106.2,-277.8L103.8,-277.7L101.4,-280.8L99.5,-279.3L97.2,-280.5L95.3,-279.6L96.6,-278.1L96.1,-276.4L94.3,-275.7L91.2,-275.6L88.8,-273.7L85.8,-273.2L82.0,-271.3L83.0,-269.1L82.8,-266.3L83.9,-264.0L83.3,-260.9L85.7,-260.5L86.2,-258.1L87.6,-257.4L89.4,-257.8L89.2,-255.7L86.0,-254.3L84.8,-255.4L82.7,-254.9L80.5,-255.1L79.7,-253.6L79.8,-251.8L81.7,-248.1L78.2,-245.9L78.2,-243.4L82.3,-244.1L83.4,-243.7L84.4,-241.7L83.5,-240.6L81.7,-240.2L80.4,-236.6L78.4,-236.0L79.2,-234.5L77.3,-233.9L77.2,-232.1L74.1,-231.2L72.7,-229.0L71.1,-225.2L69.4,-223.9L68.9,-225.6L65.6,-226.4L63.9,-227.5L64.1,-228.9L63.0,-232.3L60.5,-230.9L59.3,-232.1L58.7,-234.9L56.2,-233.8L55.1,-237.2L53.5,-238.8L49.4,-241.7L50.3,-246.1L48.3,-248.3L49.1,-250.0L47.1,-250.7L44.9,-250.8L42.7,-251.8L41.1,-248.6L38.4,-249.2L36.0,-247.5L31.0,-248.5L30.6,-247.7L27.9,-247.0L27.2,-248.5L23.5,-249.0L23.2,-247.5L20.9,-246.1L17.6,-246.6L15.3,-249.1L12.6,-250.8L9.7,-248.0L7.4,-249.8L2.7,-250.6L3.7,-251.8L1.5,-253.5L-2.5,-255.2L-4.0,-254.9L-7.1,-256.2L-9.6,-258.6L-11.2,-256.0L-13.6,-255.3L-15.9,-258.1L-18.4,-257.4L-21.8,-259.1L-24.3,-259.0L-25.8,-260.9L-30.9,-257.6L-32.7,-258.4L-33.6,-257.4L-35.6,-257.4L-38.8,-256.3L-39.4,-257.1L-41.5,-257.0L-45.0,-258.5L-47.7,-257.5L-48.6,-258.0L-49.2,-262.1L-51.2,-263.2L-50.8,-266.4L-49.2,-266.9L-47.1,-266.3L-45.4,-264.8L-44.5,-267.2L-46.3,-270.0L-46.9,-272.0L-46.4,-273.5L-47.5,-276.8L-50.1,-279.5L-50.6,-280.9L-50.0,-283.4L-48.3,-285.9L-46.3,-287.1L-46.4,-288.6L-45.3,-290.3L-46.6,-291.3L-48.0,-289.5L-50.2,-290.8L-48.2,-293.8L-49.7,-294.2L-49.5,-296.1L-50.5,-297.6L-51.1,-300.6L-50.0,-302.2L-50.9,-304.6L-49.8,-307.3L-47.9,-308.1L-49.2,-309.9L-51.2,-308.1L-52.2,-309.5L-50.5,-310.9L-50.2,-313.0L-48.4,-313.9L-48.7,-315.2L-45.8,-315.8L-47.6,-318.1L-49.0,-320.8L-50.8,-328.9L-52.0,-329.6L-53.0,-331.8L-58.8,-334.9L-60.2,-337.4L-63.4,-339.7L-64.1,-341.2L-65.7,-341.8L-68.6,-344.0L-68.1,-346.2L-70.5,-347.1L-71.5,-345.7L-73.4,-346.6L-68.4,-351.0L-66.5,-357.2L-64.4,-360.2L-61.9,-361.5L-58.7,-358.6L-56.5,-359.0L-53.4,-357.5L-52.6,-358.3L-54.1,-361.4L-56.9,-361.5L-58.8,-364.4L-58.9,-365.6L-61.9,-366.0L-62.7,-368.3L-61.8,-375.0L-60.4,-375.8L-57.5,-376.0L-55.5,-375.2L-56.7,-377.2L-59.8,-377.9L-61.4,-379.8L-60.5,-384.4L-60.0,-391.7L-59.4,-393.7L-57.1,-393.5L-59.7,-396.3L-60.0,-397.2L-60.1,-404.4L-61.1,-410.0L-58.8,-413.5L-58.1,-416.3L-58.0,-419.3L-59.9,-425.3L-59.5,-427.2L-55.5,-427.9L-53.8,-429.2L-52.0,-431.5L-49.5,-433.8L-46.0,-435.5L-42.4,-436.3L-39.8,-437.5L-38.5,-437.2L-36.7,-438.4L-27.8,-439.8L-26.3,-440.7L-23.4,-440.5L-21.4,-442.0L-17.8,-441.8L-17.7,-443.5L-15.9,-443.2L-13.1,-444.3L-7.4,-445.7L-3.8,-445.0L-1.7,-445.6L6.6,-448.8L7.8,-446.5L8.7,-441.4L8.5,-440.4L10.9,-438.7L12.6,-434.6L9.6,-431.9L10.8,-431.2L11.0,-426.2L12.7,-421.3L18.4,-421.3L19.8,-418.3L22.8,-415.1L23.1,-413.4L25.0,-411.7L27.4,-412.3L28.9,-410.3L30.8,-409.4L32.5,-410.3L33.5,-414.2L35.7,-415.0L39.3,-417.2L42.0,-418.1L43.9,-417.3L45.4,-419.4L48.2,-418.2L51.5,-413.5L52.3,-411.3L54.6,-411.3L55.5,-410.1L55.8,-407.8L54.4,-405.8L55.3,-402.3L56.4,-401.1L57.1,-397.7L56.8,-395.9L57.5,-392.8L62.7,-390.3L63.6,-389.1L67.5,-390.7L70.4,-393.4L73.5,-392.3L71.9,-389.9L73.7,-389.5L76.8,-390.1L78.0,-389.1L79.5,-389.7L82.0,-386.3L83.4,-385.3L84.1,-379.0L83.0,-377.1L84.1,-373.5L86.6,-370.3L88.1,-371.2L88.4,-374.3L89.1,-375.1L96.4,-375.2L98.9,-373.0L100.2,-372.8L104.3,-375.0L106.1,-374.9L108.4,-375.7L109.1,-374.3L114.9,-369.8L115.0,-367.4L120.8,-367.3L121.7,-365.7L119.5,-363.7L117.5,-360.3L116.8,-357.5L117.1,-356.1L115.2,-353.5L120.0,-353.5L120.1,-350.9L122.1,-348.0L121.5,-346.1L118.4,-344.6L117.6,-344.9L115.9,-342.0L117.3,-338.8L116.2,-337.9L118.3,-337.7L120.0,-336.8L120.0,-335.6L122.5,-335.8L121.4,-331.5L124.1,-330.3L123.6,-325.7L121.9,-323.4L121.2,-320.6L122.1,-319.3L120.8,-318.1L122.9,-316.7L123.5,-315.5L122.2,-314.4L121.9,-312.7L119.6,-311.6L119.2,-309.9L116.4,-308.9L115.2,-307.8L115.1,-305.0L113.1,-302.9L110.9,-303.7L109.4,-303.0L108.7,-301.4L111.8,-297.1L110.5,-295.3L111.7,-294.0L111.8,-292.5L109.3,-290.9L109.4,-286.9L110.5,-285.1L109.1,-283.8L109.8,-280.6Z"],["Grand Est","M122.5,-335.8L127.7,-337.0L130.5,-335.2L132.5,-335.3L137.2,-333.8L139.6,-334.8L141.6,-334.7L143.6,-336.8L145.9,-338.0L152.9,-339.7L154.5,-345.4L153.4,-346.9L154.7,-349.6L158.1,-351.2L158.9,-353.6L163.1,-356.1L163.7,-355.4L166.9,-355.2L168.0,-353.5L166.3,-352.4L166.2,-349.8L165.0,-350.1L163.5,-344.8L164.2,-343.8L162.6,-341.6L162.8,-339.5L160.8,-337.0L160.8,-335.8L164.9,-334.6L165.5,-333.3L167.6,-331.0L165.0,-326.1L166.1,-324.0L166.1,-321.4L165.3,-319.2L170.5,-318.7L172.2,-320.1L175.1,-319.9L175.8,-318.2L179.5,-316.2L181.4,-316.5L183.1,-314.1L183.8,-311.5L186.6,-310.7L186.6,-309.3L189.6,-309.5L191.9,-308.6L193.6,-309.7L198.0,-305.5L196.4,-303.6L196.6,-301.4L198.8,-302.7L202.2,-301.7L204.8,-299.3L205.6,-295.1L207.2,-293.9L206.0,-291.7L207.6,-289.7L212.4,-291.5L213.4,-292.9L216.0,-292.2L217.5,-292.7L219.0,-294.5L220.8,-295.3L223.4,-294.0L225.5,-294.4L228.4,-296.3L229.8,-295.1L232.7,-294.2L232.7,-292.0L234.9,-289.9L236.6,-289.7L239.8,-290.1L242.0,-289.1L242.7,-285.1L245.8,-285.6L247.7,-286.5L249.2,-286.4L252.4,-287.3L254.6,-290.4L261.5,-291.0L263.1,-290.3L264.3,-288.0L265.4,-288.0L269.0,-285.9L271.9,-286.8L272.7,-287.5L276.2,-286.3L282.0,-281.8L281.1,-280.1L282.6,-278.8L284.3,-278.5L283.0,-274.5L284.8,-273.0L284.4,-272.2L286.3,-270.2L287.8,-269.6L289.3,-266.1L291.0,-264.2L291.7,-261.6L293.4,-262.1L294.2,-260.6L292.8,-258.9L294.7,-256.4L297.8,-256.8L301.3,-255.1L303.1,-257.9L302.4,-260.0L301.3,-261.1L302.8,-262.2L304.7,-261.1L308.2,-262.2L309.8,-260.3L310.9,-261.0L312.5,-259.4L315.0,-259.0L314.5,-257.0L315.8,-253.9L316.4,-251.3L319.7,-254.0L323.4,-252.1L325.3,-253.1L326.8,-252.3L329.5,-253.0L332.0,-251.7L333.1,-251.7L335.3,-254.5L337.6,-254.5L337.8,-257.2L343.2,-258.4L343.9,-256.6L346.6,-257.0L346.4,-254.2L348.0,-252.1L349.0,-249.7L351.7,-248.0L353.8,-248.3L356.0,-247.0L356.3,-245.4L359.0,-244.5L361.2,-245.4L362.9,-244.4L365.5,-244.8L367.2,-246.6L372.3,-243.4L373.9,-244.8L375.6,-244.1L376.8,-245.8L378.8,-244.3L380.0,-242.6L381.1,-242.8L384.7,-241.4L387.6,-238.9L390.9,-237.8L396.6,-237.6L397.3,-236.7L394.8,-235.6L390.9,-229.3L389.9,-227.1L388.0,-221.0L385.4,-218.9L383.3,-218.6L382.9,-216.8L381.7,-215.9L379.3,-215.5L378.8,-212.1L373.8,-206.3L370.3,-204.1L369.6,-201.8L367.9,-199.2L367.6,-197.9L368.1,-192.1L367.2,-190.2L365.4,-189.0L365.2,-185.7L363.2,-180.4L362.9,-177.5L363.8,-173.6L363.0,-171.8L360.9,-170.9L358.5,-162.4L357.0,-160.9L355.8,-158.2L353.9,-155.8L353.6,-153.3L352.3,-152.0L352.5,-150.6L351.7,-148.1L351.9,-143.0L354.2,-140.4L355.4,-137.2L352.7,-133.1L352.7,-130.2L350.9,-128.0L351.3,-125.2L349.1,-118.7L349.2,-116.8L350.3,-114.0L350.0,-112.2L347.9,-110.3L348.5,-106.2L351.5,-103.3L353.3,-99.5L352.8,-97.7L347.4,-94.4L348.7,-92.0L347.5,-91.5L347.4,-89.6L346.1,-88.2L342.5,-89.8L341.7,-88.4L343.6,-87.5L341.5,-84.5L338.8,-83.2L335.8,-84.1L332.0,-83.4L329.5,-82.2L328.6,-83.9L326.8,-83.5L324.4,-84.4L325.4,-89.1L323.5,-89.1L321.6,-90.3L322.0,-93.6L319.9,-95.1L318.6,-99.3L317.1,-100.1L314.4,-99.3L313.0,-101.9L313.9,-105.1L315.8,-107.2L314.4,-110.1L315.2,-112.2L313.4,-114.2L310.6,-115.3L308.5,-117.2L307.4,-117.0L303.2,-118.6L302.2,-120.2L302.1,-122.3L300.5,-121.3L298.3,-123.0L297.8,-125.0L294.6,-126.2L292.3,-128.1L288.1,-130.5L288.0,-131.6L285.6,-134.3L282.6,-133.1L281.2,-130.3L276.6,-129.1L275.2,-130.7L273.6,-134.4L269.1,-136.2L266.2,-134.9L263.0,-135.4L260.3,-133.3L258.2,-134.0L257.2,-135.3L255.5,-135.2L254.4,-139.5L254.6,-140.6L252.9,-142.4L246.7,-140.4L245.5,-137.8L243.5,-135.8L241.9,-135.7L240.7,-133.7L239.6,-135.1L241.1,-136.6L239.6,-137.9L238.3,-136.6L238.3,-134.7L237.1,-134.5L236.0,-132.6L236.4,-131.1L235.0,-130.1L233.7,-130.6L230.6,-124.7L227.5,-125.9L226.3,-124.9L226.5,-122.4L225.5,-121.8L223.3,-122.4L222.1,-120.6L221.9,-117.0L223.7,-116.9L224.0,-114.5L222.8,-113.8L222.2,-111.2L222.6,-108.5L220.1,-107.7L216.2,-107.2L215.4,-110.0L214.2,-110.5L211.6,-107.3L208.4,-108.5L205.9,-107.1L203.1,-107.3L203.1,-104.7L200.8,-101.8L200.9,-100.5L199.6,-99.1L198.6,-100.9L195.8,-100.5L192.6,-97.7L191.6,-99.7L191.6,-101.6L189.7,-104.2L187.1,-105.3L187.5,-108.1L184.0,-104.8L181.0,-105.7L178.2,-107.7L177.3,-110.9L174.7,-108.8L172.4,-109.7L172.0,-110.7L173.3,-113.0L171.7,-116.5L170.4,-116.1L169.6,-117.7L174.3,-120.3L174.8,-122.0L173.0,-123.2L172.1,-126.7L170.3,-127.1L170.3,-128.7L168.5,-132.1L166.7,-132.0L165.4,-129.6L163.5,-131.5L166.0,-134.1L164.6,-136.1L162.2,-135.9L160.4,-136.9L161.1,-138.3L160.7,-140.8L158.0,-140.4L156.0,-140.9L154.9,-142.0L152.8,-141.5L148.9,-143.1L146.5,-142.9L143.3,-140.1L145.0,-137.1L142.1,-136.7L140.4,-136.9L137.3,-135.7L135.0,-136.8L130.6,-135.7L127.7,-136.1L126.7,-132.6L124.7,-132.4L123.2,-133.2L121.8,-135.0L122.2,-136.9L120.7,-137.2L120.8,-134.7L117.9,-136.0L114.2,-132.7L112.9,-134.3L110.7,-134.6L109.6,-132.6L107.7,-132.8L106.8,-134.2L105.5,-133.1L102.9,-133.1L99.7,-133.9L100.6,-137.6L99.6,-139.8L98.1,-137.9L96.2,-138.4L95.5,-140.4L97.6,-141.6L94.4,-144.3L94.4,-146.1L93.2,-148.4L93.1,-150.3L90.9,-153.0L88.6,-153.3L89.7,-155.0L88.7,-157.0L86.2,-154.4L83.7,-153.9L81.9,-158.4L80.4,-159.1L78.6,-157.9L77.3,-158.9L79.8,-161.2L80.5,-162.6L79.0,-163.7L80.7,-165.5L80.2,-167.1L78.1,-168.0L78.2,-170.1L76.7,-170.7L76.5,-172.1L74.4,-174.1L72.1,-176.9L68.9,-177.4L67.2,-176.0L66.3,-179.0L66.8,-181.3L64.7,-182.4L65.7,-185.2L64.5,-188.0L67.7,-189.8L65.6,-192.8L66.9,-193.4L69.3,-193.1L70.7,-194.5L69.8,-197.0L72.0,-199.0L72.4,-200.5L76.0,-202.0L73.5,-203.3L73.3,-204.3L69.4,-205.3L68.1,-206.4L70.0,-208.6L69.7,-210.7L70.1,-213.8L68.3,-213.7L67.3,-215.7L65.0,-215.9L65.9,-218.4L68.2,-218.6L67.5,-221.2L71.1,-222.5L71.1,-225.2L72.7,-229.0L74.1,-231.2L77.2,-232.1L77.3,-233.9L79.2,-234.5L78.4,-236.0L80.4,-236.6L81.7,-240.2L83.5,-240.6L84.4,-241.7L83.4,-243.7L82.3,-244.1L78.2,-243.4L78.2,-245.9L81.7,-248.1L79.8,-251.8L79.7,-253.6L80.5,-255.1L82.7,-254.9L84.8,-255.4L86.0,-254.3L89.2,-255.7L89.4,-257.8L87.6,-257.4L86.2,-258.1L85.7,-260.5L83.3,-260.9L83.9,-264.0L82.8,-266.3L83.0,-269.1L82.0,-271.3L85.8,-273.2L88.8,-273.7L91.2,-275.6L94.3,-275.7L96.1,-276.4L96.6,-278.1L95.3,-279.6L97.2,-280.5L99.5,-279.3L101.4,-280.8L103.8,-277.7L106.2,-277.8L107.4,-275.8L108.9,-276.0L109.2,-279.7L109.8,-280.6L109.1,-283.8L110.5,-285.1L109.4,-286.9L109.3,-290.9L111.8,-292.5L111.7,-294.0L110.5,-295.3L111.8,-297.1L108.7,-301.4L109.4,-303.0L110.9,-303.7L113.1,-302.9L115.1,-305.0L115.2,-307.8L116.4,-308.9L119.2,-309.9L119.6,-311.6L121.9,-312.7L122.2,-314.4L123.5,-315.5L122.9,-316.7L120.8,-318.1L122.1,-319.3L121.2,-320.6L121.9,-323.4L123.6,-325.7L124.1,-330.3L121.4,-331.5L122.5,-335.8Z"],["Pays de la Loire","M-337.3,-84.8L-336.9,-86.2L-334.8,-87.7L-333.2,-85.6L-331.2,-86.3L-330.1,-85.5L-327.3,-86.4L-327.3,-88.6L-326.3,-90.0L-323.7,-91.4L-322.5,-89.4L-318.9,-91.2L-318.3,-89.2L-316.3,-89.6L-316.5,-92.2L-312.5,-93.4L-312.4,-97.2L-312.9,-98.9L-311.7,-100.3L-311.6,-102.1L-312.4,-103.1L-310.9,-105.2L-309.2,-105.1L-308.2,-106.9L-306.4,-107.1L-303.6,-108.8L-302.6,-107.2L-301.4,-108.7L-296.4,-110.7L-293.6,-110.6L-290.1,-109.8L-288.7,-110.7L-286.8,-109.9L-284.5,-111.3L-282.1,-111.1L-280.9,-112.2L-280.7,-114.3L-279.4,-116.4L-277.8,-117.6L-273.3,-118.6L-271.7,-120.1L-269.1,-120.7L-269.7,-122.5L-269.0,-123.5L-265.8,-122.7L-263.9,-122.8L-261.8,-119.8L-258.9,-119.2L-253.9,-117.7L-253.4,-121.0L-251.9,-123.1L-251.7,-124.4L-250.0,-126.8L-250.6,-128.9L-249.2,-129.7L-248.0,-133.9L-247.6,-136.6L-245.7,-137.3L-244.1,-138.9L-241.9,-138.2L-238.5,-139.5L-238.3,-141.2L-239.4,-143.4L-238.6,-146.9L-240.5,-149.0L-241.2,-155.0L-242.5,-158.3L-242.1,-160.1L-244.0,-166.2L-242.7,-169.8L-240.1,-172.8L-241.5,-176.8L-240.8,-178.4L-242.3,-181.2L-242.7,-183.4L-241.6,-185.1L-242.2,-189.9L-241.9,-190.8L-241.2,-191.5L-237.3,-188.9L-235.1,-189.5L-234.0,-191.7L-231.7,-191.2L-229.9,-189.5L-227.5,-190.1L-223.1,-186.5L-221.8,-186.5L-221.9,-184.6L-220.4,-183.7L-217.5,-184.9L-218.9,-186.1L-218.5,-187.3L-216.6,-186.7L-214.1,-188.6L-213.1,-184.4L-209.5,-187.1L-206.1,-187.4L-204.8,-189.5L-203.0,-190.6L-201.2,-190.2L-198.8,-191.4L-193.6,-189.3L-191.6,-190.1L-190.3,-192.3L-187.0,-190.7L-186.4,-192.4L-184.9,-193.7L-186.3,-194.8L-184.4,-196.2L-182.6,-196.3L-180.0,-193.7L-178.3,-192.8L-179.8,-191.6L-178.2,-185.5L-175.6,-184.8L-171.9,-185.3L-172.3,-182.9L-172.1,-178.2L-171.4,-178.0L-168.1,-179.6L-166.9,-178.0L-164.0,-178.3L-163.6,-180.7L-161.5,-181.0L-160.3,-183.6L-157.9,-183.7L-156.5,-186.5L-155.3,-186.2L-153.4,-187.4L-147.7,-188.1L-143.9,-185.8L-142.1,-182.5L-142.8,-181.0L-142.0,-175.5L-142.0,-173.4L-140.4,-171.5L-138.7,-170.7L-134.8,-170.8L-134.4,-168.7L-131.9,-166.6L-131.5,-165.0L-128.5,-164.4L-125.5,-164.5L-123.5,-166.4L-121.9,-165.5L-120.6,-163.6L-118.6,-159.8L-115.8,-158.2L-113.5,-159.4L-110.8,-156.7L-109.1,-156.7L-105.7,-154.9L-105.6,-153.5L-109.8,-153.4L-110.5,-150.3L-110.4,-147.3L-113.3,-147.2L-113.5,-143.7L-110.6,-142.1L-111.1,-139.7L-112.1,-138.9L-110.8,-136.9L-110.2,-134.1L-112.2,-133.4L-112.7,-131.1L-114.7,-131.0L-116.3,-129.1L-115.1,-124.0L-117.1,-122.6L-118.5,-119.9L-123.6,-115.5L-125.7,-114.7L-126.3,-112.8L-128.4,-111.2L-126.1,-109.4L-126.1,-108.3L-128.2,-106.9L-129.9,-107.1L-130.9,-105.7L-132.8,-105.5L-134.1,-104.5L-137.0,-103.9L-137.4,-101.9L-139.2,-101.8L-141.1,-104.1L-143.3,-102.6L-141.1,-99.4L-140.7,-97.9L-142.3,-96.9L-145.0,-97.9L-146.1,-99.3L-149.2,-99.7L-150.5,-101.2L-152.5,-100.8L-152.2,-97.8L-153.6,-97.1L-154.5,-94.4L-152.9,-92.7L-153.2,-90.2L-154.0,-89.4L-155.9,-85.3L-155.6,-82.5L-156.8,-80.5L-156.8,-78.7L-155.8,-78.0L-158.1,-76.2L-158.2,-74.5L-160.3,-73.2L-162.9,-68.4L-163.7,-64.7L-163.4,-62.1L-164.7,-59.7L-163.8,-59.0L-164.6,-56.4L-165.8,-56.0L-167.0,-57.6L-169.1,-55.8L-170.8,-52.5L-171.4,-49.3L-174.2,-50.1L-175.1,-49.1L-175.4,-46.5L-177.2,-45.4L-178.5,-47.0L-180.6,-47.0L-178.8,-50.1L-181.0,-50.8L-182.3,-49.6L-184.9,-50.6L-188.1,-50.1L-191.8,-48.7L-192.9,-49.4L-194.7,-48.8L-195.9,-47.1L-197.8,-47.3L-200.2,-46.8L-200.1,-48.2L-202.4,-48.2L-206.8,-46.2L-206.5,-44.4L-207.2,-41.9L-210.6,-39.3L-212.6,-39.4L-214.8,-40.2L-217.5,-38.6L-219.4,-40.1L-220.7,-39.2L-222.4,-40.5L-227.1,-37.9L-229.6,-37.6L-228.3,-34.4L-226.9,-34.7L-225.3,-33.3L-224.5,-30.4L-225.5,-28.5L-224.4,-27.9L-222.0,-24.3L-218.7,-22.2L-217.0,-22.1L-218.3,-16.8L-216.4,-13.6L-214.3,-11.7L-213.4,-10.1L-215.1,-8.7L-212.1,-6.2L-211.9,-3.7L-210.5,-2.0L-211.4,-0.6L-210.4,1.2L-211.2,2.3L-210.0,3.8L-209.7,6.7L-211.2,7.0L-212.7,9.1L-211.3,10.3L-210.7,13.8L-210.9,16.1L-212.1,16.8L-212.4,18.4L-211.0,21.0L-210.3,18.6L-207.2,20.7L-205.3,21.4L-206.9,24.0L-209.8,23.9L-209.9,25.3L-212.1,26.2L-212.9,28.3L-214.5,28.4L-216.2,27.5L-217.8,28.5L-217.9,29.8L-219.9,29.6L-223.5,27.5L-223.9,26.2L-226.0,26.0L-226.8,28.3L-229.3,27.4L-230.5,28.6L-232.6,28.7L-234.4,27.7L-233.2,26.4L-232.4,23.4L-234.6,23.5L-235.5,24.9L-238.0,24.4L-240.7,25.7L-242.6,27.9L-245.9,29.0L-248.5,28.0L-250.9,28.4L-250.5,30.0L-251.2,31.1L-251.3,33.3L-256.4,29.0L-260.7,25.8L-262.2,25.1L-264.6,25.9L-266.5,25.3L-269.1,25.8L-270.6,21.9L-271.5,20.3L-273.7,19.1L-274.8,19.5L-279.0,18.7L-285.7,14.9L-289.0,12.5L-290.4,10.7L-293.0,10.5L-293.5,7.6L-295.9,-0.9L-298.2,-3.5L-301.7,-9.1L-303.4,-9.2L-304.6,-12.0L-310.7,-18.3L-315.4,-21.8L-316.4,-29.0L-314.2,-29.1L-312.9,-32.1L-309.8,-35.1L-307.8,-40.9L-304.4,-42.9L-306.1,-46.1L-308.0,-47.4L-309.4,-49.4L-313.6,-51.0L-316.4,-51.3L-318.0,-52.2L-320.5,-52.4L-321.3,-53.1L-321.3,-55.2L-317.2,-56.6L-316.6,-60.9L-318.2,-63.3L-317.5,-64.0L-317.4,-66.8L-318.6,-68.1L-322.6,-65.6L-324.3,-64.0L-326.5,-63.6L-329.1,-65.5L-331.2,-67.7L-333.1,-68.1L-336.1,-66.1L-337.1,-66.8L-341.1,-68.5L-340.3,-72.9L-341.6,-75.9L-344.2,-77.5L-342.5,-78.3L-339.0,-81.2L-336.7,-82.5L-337.3,-84.8ZM-326.7,-10.9L-328.8,-8.8L-330.9,-9.5L-332.7,-11.1L-333.2,-12.6L-331.3,-13.2L-327.6,-11.9L-326.7,-10.9ZM-319.4,-35.1L-321.1,-36.5L-323.9,-36.1L-326.4,-38.9L-325.9,-41.3L-324.8,-42.9L-323.0,-42.7L-320.8,-40.8L-321.3,-37.6L-316.6,-35.0L-315.9,-33.4L-316.0,-31.3L-317.3,-30.8L-317.8,-32.9L-319.4,-35.1Z"],["Bretagne","M-419.8,-205.9L-418.2,-207.1L-414.4,-207.0L-414.6,-211.7L-412.6,-212.8L-412.3,-214.8L-414.6,-217.1L-414.2,-218.8L-411.2,-220.3L-411.6,-222.3L-410.4,-223.0L-406.6,-222.3L-404.0,-219.7L-401.8,-220.1L-400.7,-221.6L-399.0,-222.0L-396.7,-223.7L-392.5,-223.5L-391.3,-225.7L-389.6,-226.6L-388.4,-223.5L-386.0,-225.3L-383.0,-226.5L-381.0,-226.8L-380.2,-222.7L-378.2,-221.5L-375.4,-222.2L-374.9,-220.0L-377.6,-218.8L-375.2,-216.7L-371.0,-216.4L-369.6,-215.4L-370.7,-212.1L-369.3,-210.8L-366.9,-209.8L-366.3,-207.4L-364.6,-207.4L-362.6,-205.1L-361.8,-201.0L-362.1,-199.4L-359.3,-198.5L-358.8,-197.1L-355.2,-195.5L-355.3,-193.3L-353.7,-190.6L-352.2,-191.1L-352.6,-193.1L-349.1,-192.6L-349.1,-193.8L-347.4,-195.2L-344.2,-198.6L-339.8,-200.9L-338.2,-202.3L-337.9,-205.0L-335.7,-205.2L-334.1,-204.1L-330.6,-205.6L-327.4,-207.4L-326.0,-206.0L-327.3,-203.3L-328.9,-202.0L-327.2,-201.1L-326.4,-202.4L-323.9,-204.4L-319.9,-197.9L-317.8,-197.6L-316.6,-198.8L-317.1,-200.4L-314.3,-200.4L-315.5,-203.2L-313.4,-203.9L-310.8,-204.0L-309.5,-202.7L-307.8,-202.3L-308.1,-200.9L-306.7,-198.8L-306.2,-196.6L-303.9,-193.5L-302.2,-193.9L-303.1,-195.0L-305.2,-199.4L-306.4,-200.8L-307.5,-203.4L-307.5,-205.2L-305.4,-206.0L-303.7,-208.6L-301.5,-209.4L-299.3,-209.0L-298.2,-209.9L-295.3,-209.5L-294.5,-208.1L-296.3,-206.7L-296.9,-204.7L-295.1,-201.6L-290.2,-200.3L-282.5,-201.1L-276.3,-202.6L-274.1,-200.0L-274.4,-198.0L-272.7,-196.7L-273.7,-194.8L-272.7,-194.0L-271.1,-190.9L-270.7,-188.9L-267.9,-188.6L-266.5,-186.3L-263.3,-185.7L-260.7,-187.3L-259.6,-189.6L-256.2,-190.9L-255.8,-193.4L-251.2,-194.2L-250.0,-192.9L-248.8,-193.1L-247.2,-191.7L-246.0,-192.2L-241.9,-190.8L-242.2,-189.9L-241.6,-185.1L-242.7,-183.4L-242.3,-181.2L-240.8,-178.4L-241.5,-176.8L-240.1,-172.8L-242.7,-169.8L-244.0,-166.2L-242.1,-160.1L-242.5,-158.3L-241.2,-155.0L-240.5,-149.0L-238.6,-146.9L-239.4,-143.4L-238.3,-141.2L-238.5,-139.5L-241.9,-138.2L-244.1,-138.9L-245.7,-137.3L-247.6,-136.6L-248.0,-133.9L-249.2,-129.7L-250.6,-128.9L-250.0,-126.8L-251.7,-124.4L-251.9,-123.1L-253.4,-121.0L-253.9,-117.7L-258.9,-119.2L-261.8,-119.8L-263.9,-122.8L-265.8,-122.7L-269.0,-123.5L-269.7,-122.5L-269.1,-120.7L-271.7,-120.1L-273.3,-118.6L-277.8,-117.6L-279.4,-116.4L-280.7,-114.3L-280.9,-112.2L-282.1,-111.1L-284.5,-111.3L-286.8,-109.9L-288.7,-110.7L-290.1,-109.8L-293.6,-110.6L-296.4,-110.7L-301.4,-108.7L-302.6,-107.2L-303.6,-108.8L-306.4,-107.1L-308.2,-106.9L-309.2,-105.1L-310.9,-105.2L-312.4,-103.1L-311.6,-102.1L-311.7,-100.3L-312.9,-98.9L-312.4,-97.2L-312.5,-93.4L-316.5,-92.2L-316.3,-89.6L-318.3,-89.2L-318.9,-91.2L-322.5,-89.4L-323.7,-91.4L-326.3,-90.0L-327.3,-88.6L-327.3,-86.4L-330.1,-85.5L-331.2,-86.3L-333.2,-85.6L-334.8,-87.7L-336.9,-86.2L-337.3,-84.8L-338.7,-84.3L-340.0,-85.7L-339.4,-87.4L-340.2,-89.0L-336.1,-89.6L-337.8,-91.2L-341.3,-92.6L-343.1,-92.3L-343.7,-91.3L-347.2,-91.6L-347.2,-93.1L-350.6,-93.9L-350.5,-92.9L-352.6,-89.6L-354.9,-90.6L-359.6,-89.4L-360.4,-88.6L-364.1,-89.9L-364.0,-91.2L-365.9,-93.4L-368.5,-94.3L-368.2,-96.0L-366.4,-96.3L-365.0,-94.1L-362.0,-94.7L-361.1,-95.5L-358.1,-93.6L-356.2,-95.2L-354.9,-97.7L-354.8,-99.3L-357.8,-101.3L-357.6,-103.6L-360.4,-102.0L-362.9,-101.4L-364.2,-101.9L-366.8,-100.4L-367.2,-98.2L-370.1,-99.7L-371.1,-97.9L-374.8,-96.6L-376.3,-98.4L-381.0,-96.5L-382.9,-97.0L-383.6,-93.2L-382.5,-89.6L-381.0,-88.2L-383.4,-87.4L-384.9,-90.4L-384.9,-92.8L-383.7,-94.9L-384.1,-98.0L-385.3,-100.7L-387.8,-102.2L-388.9,-104.1L-388.8,-106.3L-387.6,-108.3L-385.9,-108.0L-383.3,-110.6L-383.1,-112.3L-385.4,-113.7L-386.6,-113.5L-386.4,-110.2L-389.4,-106.7L-389.2,-104.5L-393.1,-107.9L-394.2,-110.1L-397.9,-110.9L-398.4,-112.9L-401.1,-110.2L-404.0,-110.3L-405.6,-109.5L-408.7,-112.9L-410.3,-115.8L-410.9,-118.2L-410.0,-120.5L-411.3,-121.6L-411.4,-123.6L-410.4,-124.9L-411.5,-123.6L-411.7,-122.2L-410.4,-120.2L-411.5,-116.3L-413.2,-116.9L-416.9,-117.0L-420.3,-118.1L-421.2,-117.7L-425.0,-120.6L-426.8,-119.1L-429.5,-118.8L-430.9,-119.7L-432.9,-119.6L-436.4,-123.8L-438.7,-128.3L-441.7,-130.5L-442.4,-128.1L-441.7,-125.4L-446.0,-124.6L-448.1,-126.4L-451.8,-126.4L-454.4,-124.9L-455.2,-127.6L-456.7,-126.1L-455.5,-123.9L-454.1,-123.2L-455.7,-120.1L-458.1,-119.3L-461.7,-119.1L-463.7,-120.0L-468.1,-119.6L-469.2,-122.2L-467.2,-123.1L-467.2,-125.7L-468.4,-129.5L-469.8,-132.7L-472.3,-136.3L-474.3,-138.2L-478.2,-140.5L-480.3,-141.3L-482.0,-140.0L-485.6,-141.7L-486.7,-142.9L-488.0,-142.2L-491.2,-142.8L-492.4,-146.2L-489.5,-146.1L-488.9,-147.0L-485.9,-146.9L-483.0,-148.2L-481.2,-147.7L-479.8,-148.8L-476.7,-148.7L-475.2,-149.9L-472.7,-149.9L-468.9,-151.0L-464.3,-148.9L-462.8,-150.5L-462.7,-152.7L-461.8,-153.3L-461.9,-155.4L-463.5,-156.1L-463.2,-157.6L-464.0,-159.5L-466.0,-160.6L-468.4,-160.5L-469.0,-161.7L-475.0,-163.8L-477.6,-163.0L-478.9,-159.1L-481.2,-156.8L-481.1,-160.8L-481.9,-163.2L-480.6,-164.1L-481.4,-165.8L-483.3,-165.2L-484.8,-166.1L-482.1,-168.6L-483.1,-172.0L-481.2,-173.9L-480.6,-172.5L-481.1,-169.4L-479.9,-168.4L-478.8,-169.5L-477.7,-168.1L-474.4,-169.3L-472.3,-169.2L-471.5,-167.7L-469.6,-167.5L-466.4,-168.6L-464.3,-169.7L-461.8,-169.6L-461.2,-167.9L-458.5,-169.6L-462.5,-171.4L-465.8,-171.5L-464.9,-173.6L-468.4,-174.4L-469.0,-172.6L-473.6,-172.7L-473.7,-174.9L-470.9,-179.0L-472.4,-179.8L-473.1,-178.3L-474.6,-178.6L-478.0,-177.5L-480.1,-175.7L-480.9,-176.2L-485.0,-173.8L-486.3,-173.8L-489.8,-175.5L-490.9,-175.3L-491.8,-173.2L-496.2,-172.9L-496.1,-176.2L-495.5,-177.3L-496.4,-178.9L-496.3,-180.5L-497.8,-181.3L-496.6,-184.9L-495.3,-187.0L-496.6,-190.3L-495.3,-192.1L-495.6,-193.1L-493.4,-195.6L-491.6,-196.9L-490.0,-196.7L-486.3,-197.9L-485.1,-197.6L-483.8,-199.4L-481.8,-199.8L-481.5,-202.3L-478.9,-203.5L-477.7,-202.1L-472.8,-203.5L-471.9,-205.5L-470.5,-205.6L-467.2,-207.7L-464.9,-207.2L-461.8,-205.0L-458.5,-204.8L-457.6,-207.0L-456.0,-208.6L-450.7,-209.4L-447.1,-208.9L-446.8,-210.3L-445.4,-211.3L-443.2,-211.2L-442.0,-212.6L-440.9,-212.0L-441.4,-210.4L-441.1,-207.5L-439.7,-205.3L-436.5,-206.4L-435.6,-204.2L-432.6,-202.7L-433.3,-204.9L-432.6,-206.2L-433.2,-208.6L-430.9,-210.1L-428.6,-210.2L-427.1,-210.9L-424.8,-210.7L-422.7,-209.0L-419.8,-209.5L-418.6,-207.2L-419.8,-205.9ZM-518.9,-183.6L-519.0,-187.2L-516.4,-188.1L-514.7,-186.5L-516.2,-184.9L-518.9,-183.6ZM-403.4,-102.0L-404.7,-102.7L-406.2,-102.0L-409.3,-104.1L-408.6,-105.4L-404.0,-104.2L-403.4,-102.0ZM-387.8,-76.6L-385.2,-76.1L-384.1,-73.0L-380.9,-71.5L-378.5,-71.2L-379.6,-68.8L-381.0,-68.3L-385.5,-69.2L-386.0,-70.2L-387.9,-69.4L-389.6,-69.5L-391.6,-71.6L-390.9,-72.3L-392.4,-75.3L-392.4,-77.2L-389.6,-77.9L-387.8,-76.6Z"],["Nouvelle-Aquitaine","M-71.1,25.3L-69.7,23.6L-67.8,22.5L-63.7,17.3L-62.3,18.3L-62.1,20.7L-60.5,19.5L-57.4,19.5L-55.3,21.3L-52.7,18.2L-50.8,20.8L-49.6,21.1L-47.4,17.2L-48.3,15.0L-44.8,14.5L-43.3,17.0L-38.9,16.7L-37.2,15.6L-36.1,16.8L-32.4,16.0L-31.4,16.9L-27.9,17.9L-25.8,18.0L-24.8,19.1L-22.0,18.0L-19.4,17.6L-17.3,17.2L-16.2,17.7L-13.8,17.4L-11.6,18.0L-11.4,21.4L-8.7,23.3L-10.1,24.6L-8.7,27.1L-6.5,27.4L-5.5,28.7L-4.0,27.0L-2.0,29.0L-2.0,31.5L-0.5,30.5L2.1,31.9L1.9,33.1L2.9,35.2L4.5,36.3L5.4,41.4L7.5,42.7L7.9,45.7L6.9,48.1L7.0,51.7L8.4,55.2L10.5,56.7L9.9,61.1L11.0,62.9L8.2,64.1L7.0,65.9L5.4,70.1L2.9,73.6L1.4,72.8L-1.6,76.5L-3.3,76.2L-4.3,77.3L-1.6,80.6L-1.0,83.3L0.3,83.9L2.9,86.2L4.9,89.3L5.3,91.5L4.3,93.0L5.1,94.3L4.6,96.0L2.3,96.1L2.0,99.2L1.0,100.5L2.8,104.0L4.6,104.7L4.6,107.6L4.0,112.2L3.9,113.6L2.6,118.2L5.2,120.5L5.0,121.6L2.5,122.1L-0.3,121.7L-1.9,120.3L-3.6,120.0L-4.9,118.6L-6.6,119.9L-5.5,121.3L-5.9,124.2L-6.8,125.1L-6.8,127.2L-9.1,127.7L-11.2,131.3L-12.4,131.1L-13.2,133.0L-14.5,134.0L-16.9,137.2L-17.9,139.5L-16.6,144.1L-16.7,145.7L-18.4,146.7L-18.0,148.2L-19.1,151.9L-21.3,151.3L-24.4,154.4L-22.9,157.9L-21.3,159.4L-21.8,161.4L-24.5,161.5L-26.6,162.3L-27.8,161.6L-32.2,162.7L-35.0,164.5L-35.1,162.7L-37.2,162.2L-38.7,164.4L-42.5,165.5L-43.0,167.2L-45.5,166.8L-46.4,167.6L-47.8,165.9L-48.1,164.5L-50.8,163.3L-51.3,161.2L-53.5,159.6L-54.9,157.5L-56.6,156.6L-60.0,155.9L-61.7,157.2L-62.5,155.4L-66.4,156.9L-66.9,158.2L-68.8,158.1L-71.5,159.4L-69.8,166.2L-71.4,169.1L-69.4,171.1L-69.4,172.5L-71.8,173.8L-72.0,175.1L-74.8,175.9L-74.6,178.8L-77.1,179.3L-79.0,180.3L-79.3,182.2L-77.4,183.5L-77.9,186.0L-80.4,188.4L-82.6,189.2L-84.2,191.6L-88.0,192.0L-89.6,193.0L-89.1,196.1L-93.1,201.0L-94.5,202.3L-94.7,203.2L-97.6,204.8L-100.8,205.5L-98.5,209.4L-99.0,212.0L-98.0,212.5L-98.2,215.6L-97.6,216.6L-95.7,217.2L-95.5,219.6L-96.1,220.8L-95.2,222.1L-96.2,223.7L-99.9,223.1L-101.0,224.2L-103.1,224.0L-105.1,221.6L-106.6,221.9L-107.4,223.4L-106.8,225.4L-108.6,229.1L-106.8,230.3L-105.4,229.8L-104.9,231.1L-103.0,232.5L-105.2,236.2L-104.5,237.0L-106.1,240.3L-109.3,240.7L-109.7,242.5L-108.4,243.2L-107.3,245.1L-108.6,247.4L-112.0,245.7L-113.7,245.4L-113.6,248.5L-116.5,249.5L-117.6,252.5L-117.4,253.5L-119.7,254.2L-121.1,255.4L-121.8,257.3L-124.9,255.1L-125.2,253.9L-127.0,252.6L-128.7,252.5L-129.5,254.1L-131.3,254.7L-135.0,254.1L-136.8,254.5L-137.9,257.1L-141.2,258.0L-142.1,259.4L-143.8,258.4L-147.8,260.7L-152.2,259.2L-152.9,258.1L-155.3,258.5L-156.9,260.3L-157.1,262.4L-158.9,262.3L-158.7,260.5L-163.1,261.7L-164.5,264.2L-163.5,266.7L-163.4,268.6L-164.5,270.2L-166.2,269.9L-169.6,266.9L-168.0,265.7L-168.2,264.0L-170.8,261.6L-171.5,263.9L-173.3,265.3L-176.9,265.6L-179.8,267.2L-180.4,266.4L-182.1,268.5L-184.4,270.1L-181.7,271.8L-182.0,273.8L-181.6,279.0L-183.9,279.2L-182.5,285.0L-181.7,286.3L-184.0,288.5L-185.3,288.9L-184.8,290.6L-185.9,292.0L-184.8,292.9L-185.0,294.5L-187.7,295.7L-187.4,298.4L-185.3,298.4L-185.0,301.5L-182.8,300.7L-182.4,301.6L-180.2,300.6L-179.4,301.9L-176.7,301.4L-175.0,301.8L-174.4,304.3L-172.8,305.5L-171.1,308.7L-171.7,310.8L-170.7,312.5L-172.9,313.7L-173.1,316.7L-171.3,319.0L-170.7,316.8L-169.5,315.6L-167.7,317.8L-168.6,320.7L-168.7,322.6L-166.3,325.4L-167.6,327.5L-170.0,327.1L-171.5,329.9L-171.4,331.5L-169.5,333.0L-171.5,336.8L-173.3,337.6L-173.0,342.3L-176.4,342.0L-177.0,344.2L-178.4,347.2L-180.1,348.7L-181.5,348.9L-181.2,351.7L-182.0,353.6L-182.1,355.7L-183.8,356.6L-186.2,356.2L-186.5,359.0L-188.1,359.4L-188.4,360.9L-187.7,366.6L-190.8,368.4L-189.4,373.0L-189.9,375.1L-190.4,376.3L-192.2,376.4L-193.6,378.6L-195.3,380.0L-196.5,379.2L-198.9,380.4L-203.4,377.5L-204.4,378.8L-204.3,380.1L-205.7,380.7L-206.2,382.2L-207.5,381.7L-207.4,379.3L-209.1,379.7L-209.8,376.7L-212.9,374.5L-215.0,371.6L-216.4,372.0L-218.2,370.9L-218.8,368.8L-218.2,367.7L-220.0,363.3L-222.5,363.6L-224.0,364.9L-227.8,364.9L-230.2,363.8L-233.4,364.6L-237.1,362.2L-237.5,361.1L-242.8,359.8L-244.8,357.8L-246.2,359.0L-248.5,356.4L-249.5,356.7L-252.8,354.5L-254.0,355.8L-255.2,355.5L-256.5,353.9L-258.2,353.1L-257.6,350.7L-256.3,348.2L-259.2,348.8L-260.8,350.9L-260.5,352.0L-261.4,357.2L-267.4,355.4L-269.5,351.9L-269.4,350.8L-265.6,347.3L-265.6,345.0L-264.8,344.0L-264.7,342.2L-263.5,340.9L-263.3,334.7L-265.4,332.7L-267.2,333.3L-271.1,331.7L-271.8,330.7L-275.8,331.2L-275.4,332.3L-276.7,334.9L-278.9,334.8L-280.4,331.6L-279.8,329.9L-282.9,328.6L-284.7,328.8L-287.2,330.4L-289.1,325.6L-291.1,324.9L-291.3,322.6L-289.4,322.4L-281.0,319.2L-278.4,316.7L-275.7,311.5L-274.7,310.4L-273.1,307.0L-270.8,302.8L-268.7,298.0L-267.4,293.6L-267.0,288.9L-265.2,279.7L-262.8,268.8L-260.2,254.6L-258.8,247.0L-256.1,228.1L-254.5,213.2L-254.3,208.5L-254.8,205.3L-252.7,202.4L-251.0,197.7L-251.1,196.0L-250.2,193.9L-248.2,193.7L-246.7,195.3L-242.6,195.9L-241.6,195.3L-238.2,195.1L-238.7,192.4L-240.9,189.2L-244.4,185.7L-245.1,185.6L-248.4,182.5L-249.4,184.2L-249.0,185.5L-252.2,189.1L-253.4,192.0L-254.0,195.8L-255.1,196.8L-254.3,188.8L-252.5,174.6L-251.1,161.0L-250.1,149.2L-248.2,130.2L-248.0,124.2L-248.1,118.9L-247.4,115.8L-247.8,113.0L-246.4,108.9L-243.9,105.8L-243.3,103.8L-241.2,104.0L-239.8,106.4L-239.8,108.8L-237.4,110.7L-235.3,113.7L-232.5,115.6L-230.0,118.6L-225.9,122.2L-223.6,125.2L-221.1,131.0L-219.9,135.2L-219.3,141.0L-215.2,152.1L-213.2,155.0L-210.1,158.5L-208.9,155.8L-212.0,152.6L-213.1,149.2L-214.2,147.3L-214.4,143.1L-215.6,138.1L-216.7,131.6L-217.7,127.3L-218.8,123.1L-220.3,119.4L-223.4,114.0L-226.6,110.1L-232.4,105.2L-234.5,104.3L-236.6,102.3L-236.6,100.2L-237.7,98.9L-240.4,98.0L-242.5,96.1L-245.0,95.3L-247.9,92.8L-251.4,90.3L-253.3,89.4L-253.7,81.8L-251.4,80.4L-250.2,81.1L-246.1,79.5L-247.8,75.7L-247.6,73.8L-245.6,74.3L-244.0,72.8L-242.1,68.6L-242.3,66.3L-241.5,65.0L-243.8,60.9L-241.4,60.6L-240.7,58.9L-241.6,55.0L-243.1,54.6L-244.0,50.6L-245.0,49.8L-245.9,47.3L-248.9,46.1L-249.3,44.7L-251.3,45.4L-252.4,43.4L-250.7,40.6L-250.7,38.7L-248.8,37.6L-246.9,35.6L-246.7,34.6L-244.7,33.9L-245.9,29.0L-242.6,27.9L-240.7,25.7L-238.0,24.4L-235.5,24.9L-234.6,23.5L-232.4,23.4L-233.2,26.4L-234.4,27.7L-232.6,28.7L-230.5,28.6L-229.3,27.4L-226.8,28.3L-226.0,26.0L-223.9,26.2L-223.5,27.5L-219.9,29.6L-217.9,29.8L-217.8,28.5L-216.2,27.5L-214.5,28.4L-212.9,28.3L-212.1,26.2L-209.9,25.3L-209.8,23.9L-206.9,24.0L-205.3,21.4L-207.2,20.7L-210.3,18.6L-211.0,21.0L-212.4,18.4L-212.1,16.8L-210.9,16.1L-210.7,13.8L-211.3,10.3L-212.7,9.1L-211.2,7.0L-209.7,6.7L-210.0,3.8L-211.2,2.3L-210.4,1.2L-211.4,-0.6L-210.5,-2.0L-211.9,-3.7L-212.1,-6.2L-215.1,-8.7L-213.4,-10.1L-214.3,-11.7L-216.4,-13.6L-218.3,-16.8L-217.0,-22.1L-218.7,-22.2L-222.0,-24.3L-224.4,-27.9L-225.5,-28.5L-224.5,-30.4L-225.3,-33.3L-226.9,-34.7L-228.3,-34.4L-229.6,-37.6L-227.1,-37.9L-222.4,-40.5L-220.7,-39.2L-219.4,-40.1L-217.5,-38.6L-214.8,-40.2L-212.6,-39.4L-210.6,-39.3L-207.2,-41.9L-206.5,-44.4L-206.8,-46.2L-202.4,-48.2L-200.1,-48.2L-200.2,-46.8L-197.8,-47.3L-195.9,-47.1L-194.7,-48.8L-192.9,-49.4L-191.8,-48.7L-188.1,-50.1L-184.9,-50.6L-182.3,-49.6L-181.0,-50.8L-178.8,-50.1L-180.6,-47.0L-178.5,-47.0L-177.2,-45.4L-175.4,-46.5L-175.1,-49.1L-174.2,-50.1L-171.4,-49.3L-170.8,-52.5L-169.1,-55.8L-167.0,-57.6L-165.8,-56.0L-164.6,-56.4L-163.1,-52.4L-159.0,-52.2L-159.1,-50.8L-157.6,-50.3L-155.9,-51.4L-154.5,-49.1L-156.4,-47.1L-154.0,-45.3L-151.5,-47.1L-149.7,-44.6L-147.8,-45.4L-147.1,-44.4L-147.8,-42.0L-147.2,-40.0L-147.7,-37.4L-147.0,-33.8L-146.0,-33.1L-143.2,-35.0L-138.2,-33.0L-137.8,-34.1L-133.8,-35.8L-131.3,-36.0L-129.6,-35.6L-127.0,-35.9L-127.0,-37.3L-128.6,-38.0L-129.4,-40.2L-125.8,-40.7L-124.6,-38.5L-120.8,-37.4L-119.8,-33.7L-119.9,-30.3L-116.7,-26.1L-112.7,-22.8L-112.6,-19.5L-111.4,-17.7L-108.7,-14.8L-106.4,-13.6L-104.6,-9.5L-105.9,-8.3L-106.1,-4.8L-106.9,-2.6L-105.4,0.3L-103.7,1.9L-100.5,3.4L-98.6,3.2L-98.2,6.3L-93.6,6.2L-92.2,6.8L-89.4,9.8L-90.4,10.5L-89.1,12.7L-89.2,15.1L-85.1,17.1L-87.4,21.6L-85.6,21.2L-84.6,23.4L-81.7,22.1L-78.8,22.9L-77.5,21.0L-75.2,20.0L-73.3,22.5L-71.5,23.9L-71.1,25.3ZM-175.4,324.1L-174.5,324.1L-174.3,326.6L-176.3,326.8L-175.9,328.7L-173.5,329.3L-172.6,325.3L-174.1,322.9L-175.4,324.1ZM-175.4,335.7L-173.8,333.8L-174.9,331.5L-174.7,330.0L-176.0,329.0L-177.8,331.4L-178.0,332.8L-176.7,335.7L-175.4,335.7ZM-270.1,39.0L-268.2,37.1L-266.2,37.0L-266.5,39.4L-264.8,39.7L-262.0,39.3L-259.1,41.3L-257.0,41.4L-255.9,44.0L-256.0,45.3L-258.0,45.7L-261.4,44.4L-263.9,42.3L-268.8,39.8L-271.8,40.6L-273.6,39.8L-275.6,36.3L-272.3,34.2L-270.7,34.7L-269.7,36.7L-272.3,37.8L-270.1,39.0ZM-254.2,75.4L-255.3,72.2L-257.2,70.0L-261.2,67.5L-263.8,64.3L-264.2,62.3L-263.6,60.3L-265.5,55.3L-262.6,56.0L-262.6,56.8L-258.1,60.9L-254.1,61.0L-253.3,61.8L-253.7,64.3L-252.8,65.6L-253.1,67.3L-252.4,68.7L-250.0,71.3L-251.3,75.0L-250.5,77.0L-253.0,79.8L-253.9,77.9L-254.2,75.4Z"],["Occitanie","M-45.6,402.6L-46.5,401.9L-49.8,401.0L-48.9,398.9L-52.7,397.5L-54.1,398.1L-55.8,397.0L-58.0,397.3L-59.4,396.6L-61.0,394.7L-61.9,394.4L-65.2,395.5L-66.6,394.9L-67.4,397.2L-66.8,398.5L-68.3,399.8L-69.4,399.6L-70.8,397.4L-71.2,394.5L-73.0,392.9L-72.9,391.5L-75.3,390.1L-75.0,388.4L-77.3,387.6L-80.5,388.6L-82.3,388.4L-83.9,387.3L-84.7,388.0L-88.5,388.9L-90.5,387.1L-90.8,384.5L-92.3,382.8L-94.8,381.8L-100.8,381.3L-102.4,379.4L-104.9,381.0L-109.4,377.4L-113.3,376.0L-114.3,376.4L-117.6,375.1L-119.7,373.9L-123.1,376.1L-122.3,377.6L-122.3,379.5L-124.1,381.7L-123.7,383.6L-121.5,389.1L-122.3,391.0L-126.6,390.1L-128.0,390.5L-131.9,389.7L-132.7,390.8L-135.5,390.0L-138.4,391.0L-140.7,390.4L-141.4,388.7L-143.6,387.7L-145.9,389.5L-146.3,391.7L-148.2,392.5L-150.1,390.4L-150.5,388.4L-152.8,388.3L-154.2,387.1L-156.3,386.3L-157.3,387.6L-159.0,387.8L-160.7,389.0L-162.1,388.3L-165.2,390.3L-166.6,389.8L-169.1,391.6L-172.4,390.7L-173.1,388.2L-175.4,387.8L-179.3,380.3L-180.6,381.5L-184.7,379.2L-187.3,376.5L-189.9,375.1L-189.4,373.0L-190.8,368.4L-187.7,366.6L-188.4,360.9L-188.1,359.4L-186.5,359.0L-186.2,356.2L-183.8,356.6L-182.1,355.7L-182.0,353.6L-181.2,351.7L-181.5,348.9L-180.1,348.7L-178.4,347.2L-177.0,344.2L-176.4,342.0L-173.0,342.3L-173.3,337.6L-171.5,336.8L-169.5,333.0L-171.4,331.5L-171.5,329.9L-170.0,327.1L-167.6,327.5L-166.3,325.4L-168.7,322.6L-168.6,320.7L-167.7,317.8L-169.5,315.6L-170.7,316.8L-171.3,319.0L-173.1,316.7L-172.9,313.7L-170.7,312.5L-171.7,310.8L-171.1,308.7L-172.8,305.5L-174.4,304.3L-175.0,301.8L-176.7,301.4L-179.4,301.9L-180.2,300.6L-182.4,301.6L-182.8,300.7L-185.0,301.5L-185.3,298.4L-187.4,298.4L-187.7,295.7L-185.0,294.5L-184.8,292.9L-185.9,292.0L-184.8,290.6L-185.3,288.9L-184.0,288.5L-181.7,286.3L-182.5,285.0L-183.9,279.2L-181.6,279.0L-182.0,273.8L-181.7,271.8L-184.4,270.1L-182.1,268.5L-180.4,266.4L-179.8,267.2L-176.9,265.6L-173.3,265.3L-171.5,263.9L-170.8,261.6L-168.2,264.0L-168.0,265.7L-169.6,266.9L-166.2,269.9L-164.5,270.2L-163.4,268.6L-163.5,266.7L-164.5,264.2L-163.1,261.7L-158.7,260.5L-158.9,262.3L-157.1,262.4L-156.9,260.3L-155.3,258.5L-152.9,258.1L-152.2,259.2L-147.8,260.7L-143.8,258.4L-142.1,259.4L-141.2,258.0L-137.9,257.1L-136.8,254.5L-135.0,254.1L-131.3,254.7L-129.5,254.1L-128.7,252.5L-127.0,252.6L-125.2,253.9L-124.9,255.1L-121.8,257.3L-121.1,255.4L-119.7,254.2L-117.4,253.5L-117.6,252.5L-116.5,249.5L-113.6,248.5L-113.7,245.4L-112.0,245.7L-108.6,247.4L-107.3,245.1L-108.4,243.2L-109.7,242.5L-109.3,240.7L-106.1,240.3L-104.5,237.0L-105.2,236.2L-103.0,232.5L-104.9,231.1L-105.4,229.8L-106.8,230.3L-108.6,229.1L-106.8,225.4L-107.4,223.4L-106.6,221.9L-105.1,221.6L-103.1,224.0L-101.0,224.2L-99.9,223.1L-96.2,223.7L-95.2,222.1L-96.1,220.8L-95.5,219.6L-95.7,217.2L-97.6,216.6L-98.2,215.6L-98.0,212.5L-99.0,212.0L-98.5,209.4L-100.8,205.5L-97.6,204.8L-94.7,203.2L-94.5,202.3L-93.1,201.0L-89.1,196.1L-89.6,193.0L-88.0,192.0L-84.2,191.6L-82.6,189.2L-80.4,188.4L-77.9,186.0L-77.4,183.5L-79.3,182.2L-79.0,180.3L-77.1,179.3L-74.6,178.8L-74.8,175.9L-72.0,175.1L-71.8,173.8L-69.4,172.5L-69.4,171.1L-71.4,169.1L-69.8,166.2L-71.5,159.4L-68.8,158.1L-66.9,158.2L-66.4,156.9L-62.5,155.4L-61.7,157.2L-60.0,155.9L-56.6,156.6L-54.9,157.5L-53.5,159.6L-51.3,161.2L-50.8,163.3L-48.1,164.5L-47.8,165.9L-46.4,167.6L-45.5,166.8L-43.0,167.2L-42.5,165.5L-38.7,164.4L-37.2,162.2L-35.1,162.7L-35.0,164.5L-32.2,162.7L-27.8,161.6L-26.6,162.3L-25.4,164.6L-25.5,166.8L-23.5,168.9L-25.0,169.9L-24.5,172.7L-21.3,177.6L-19.5,178.8L-19.4,182.7L-20.4,184.7L-20.8,187.9L-20.4,190.0L-18.6,192.6L-19.6,193.7L-19.3,196.2L-16.7,198.4L-16.6,195.6L-15.2,194.5L-13.7,194.8L-10.9,193.3L-8.5,193.0L-8.1,194.9L-5.8,195.9L-4.7,194.9L-1.0,196.1L0.1,195.2L2.3,195.0L3.5,191.0L7.4,187.6L7.2,186.0L7.9,182.2L10.3,180.7L10.1,178.0L11.1,176.9L10.5,175.7L12.0,173.3L13.7,173.0L14.3,171.4L15.9,169.3L17.6,169.3L18.3,167.1L19.3,166.3L21.1,166.8L22.2,168.5L22.6,171.2L22.2,174.4L24.2,172.6L25.0,173.1L28.1,172.6L27.8,174.9L28.9,177.1L29.5,179.7L30.5,181.4L32.3,180.6L33.3,182.1L32.3,183.4L33.3,185.6L32.6,187.3L33.9,192.3L35.9,195.4L36.5,195.5L38.9,188.6L39.8,187.0L39.9,185.1L41.1,183.5L41.1,179.6L42.7,176.6L44.6,176.6L44.2,174.6L45.0,171.3L47.5,169.7L49.2,172.6L50.3,173.6L52.6,172.5L54.0,171.2L53.5,169.1L54.9,168.4L54.5,166.6L57.4,167.4L58.3,166.1L61.0,164.4L62.6,162.9L64.3,164.7L65.6,164.4L66.4,167.1L66.0,168.2L67.7,172.0L68.1,174.6L69.3,176.0L70.6,179.0L72.5,177.6L74.9,177.2L78.3,177.4L78.9,174.0L78.6,172.5L80.8,172.0L82.8,172.6L83.9,175.7L83.8,177.1L87.5,176.9L88.9,176.2L89.5,177.9L92.9,181.8L95.7,183.2L95.3,185.2L97.1,185.6L97.6,192.1L99.3,194.9L99.2,198.2L100.2,199.3L101.2,202.8L103.0,202.7L105.2,208.5L105.7,212.7L106.4,214.0L109.1,215.4L109.8,218.2L111.2,219.5L110.1,222.1L110.2,226.1L109.0,226.9L110.0,228.3L111.4,227.3L115.2,226.2L116.3,228.7L118.7,228.2L119.3,230.0L121.3,230.9L123.1,233.0L124.3,233.5L125.6,232.5L126.4,230.7L126.3,228.5L128.6,227.6L129.6,226.0L131.7,226.1L133.1,225.3L134.2,226.6L133.3,229.7L133.9,231.1L136.2,231.3L137.3,230.3L137.5,226.5L137.9,225.8L141.1,226.1L143.9,227.9L144.8,229.6L148.2,231.0L149.0,232.1L150.3,231.7L151.1,233.0L151.4,234.6L152.9,236.1L153.0,238.7L155.0,238.6L155.0,240.7L156.1,241.3L155.1,249.6L156.7,252.1L158.6,252.3L160.6,253.5L160.7,254.8L164.1,258.5L164.4,261.4L162.6,261.1L162.5,263.2L160.0,266.2L157.3,267.6L156.2,269.4L154.1,271.5L150.6,273.3L152.3,275.5L150.6,276.9L151.5,279.8L151.2,281.8L149.8,283.7L148.7,287.0L148.6,288.6L149.6,290.9L147.2,291.3L146.5,290.4L143.4,289.2L140.0,290.1L139.2,292.9L137.7,293.3L135.8,297.9L136.7,298.9L139.2,299.2L137.4,301.6L135.7,301.5L134.6,303.9L130.8,305.3L126.8,308.5L123.0,310.1L122.3,314.0L117.9,312.8L115.2,311.1L114.5,309.1L116.0,306.8L113.4,304.6L110.4,304.2L107.3,304.8L104.3,306.0L100.1,308.3L96.3,311.4L92.5,315.9L87.6,318.4L87.6,319.9L85.4,320.7L83.3,320.8L79.2,324.5L76.1,328.1L72.8,332.8L69.9,332.3L67.4,331.0L64.4,331.6L61.4,333.0L55.9,337.1L54.3,338.7L50.0,343.5L47.5,347.1L44.2,353.1L42.9,356.2L40.7,364.0L40.6,367.0L42.0,368.3L40.8,376.2L40.5,380.0L40.4,386.9L40.2,392.2L40.3,397.4L40.9,400.5L41.2,405.0L41.7,406.3L43.8,407.6L45.0,407.4L47.3,408.5L46.2,409.5L46.9,411.9L48.3,412.2L48.6,414.1L49.8,416.4L46.1,416.2L43.7,417.4L41.2,414.4L40.6,412.7L38.7,413.3L37.0,412.6L35.7,413.4L34.2,411.8L32.6,414.2L28.4,413.6L26.9,414.1L25.1,416.1L24.0,418.1L22.1,418.8L20.8,417.5L18.3,417.9L15.4,419.5L14.1,421.2L15.2,425.9L11.1,425.3L8.8,424.2L7.2,424.6L6.2,426.6L3.5,425.7L2.3,426.0L1.2,424.1L-1.1,422.3L-1.0,421.1L-6.9,419.3L-9.8,417.1L-10.8,417.7L-13.3,416.2L-14.0,417.1L-17.1,418.4L-20.2,417.7L-22.1,418.8L-23.0,421.8L-24.8,422.6L-25.2,423.7L-29.3,424.5L-31.9,423.8L-33.6,420.8L-33.8,417.6L-34.9,417.0L-35.4,414.6L-36.6,415.4L-38.8,415.1L-39.1,414.0L-41.2,413.3L-41.7,412.3L-44.4,411.0L-47.2,411.3L-49.4,410.7L-49.7,408.3L-49.1,404.9L-47.8,403.5L-45.6,402.6ZM-33.7,413.0L-33.7,414.7L-32.2,415.2L-30.0,415.2L-31.8,412.4L-33.7,413.0ZM-175.4,335.7L-176.7,335.7L-178.0,332.8L-177.8,331.4L-176.0,329.0L-174.7,330.0L-174.9,331.5L-173.8,333.8L-175.4,335.7ZM-175.4,324.1L-174.1,322.9L-172.6,325.3L-173.5,329.3L-175.9,328.7L-176.3,326.8L-174.3,326.6L-174.5,324.1L-175.4,324.1Z"],["Auvergne-Rh\u00f4ne-Alpes","M160.1,42.3L161.1,38.2L162.0,36.3L162.2,34.0L163.2,32.5L163.7,30.3L165.1,27.2L165.0,24.4L167.5,19.7L167.8,16.0L169.4,13.5L169.4,11.1L170.8,8.6L175.5,9.0L177.1,10.6L179.1,11.6L182.6,10.8L184.6,9.1L187.1,8.7L189.0,9.2L190.0,13.2L192.8,14.8L196.5,15.3L197.2,16.9L195.7,18.7L198.7,19.8L201.0,22.0L200.9,24.8L202.8,26.1L204.5,26.1L205.3,28.5L207.3,27.7L207.9,28.5L206.6,32.6L207.7,33.5L211.0,33.6L212.5,33.0L214.1,30.6L216.3,30.3L217.6,27.1L219.8,26.1L222.2,28.9L224.3,29.1L224.3,31.8L225.0,33.9L227.8,33.2L233.6,33.8L235.6,33.1L236.7,31.3L237.7,31.6L238.3,29.1L239.9,29.1L242.8,23.8L245.9,21.3L248.3,18.4L250.7,19.1L255.6,23.2L252.2,28.6L252.1,30.5L251.0,31.5L252.5,34.9L250.9,36.3L250.0,35.3L246.2,36.2L244.1,37.9L242.4,38.3L241.4,40.3L243.4,41.3L240.9,46.8L242.9,45.7L247.0,46.0L247.5,44.9L250.3,44.8L252.6,46.0L255.9,44.2L256.7,42.2L260.1,39.3L263.0,38.4L265.2,35.6L265.0,34.5L262.3,35.2L260.3,32.3L260.9,29.8L262.9,25.1L264.8,23.4L267.6,23.0L268.4,24.7L270.7,26.0L272.2,24.2L276.1,22.8L277.1,20.8L279.2,19.5L281.4,20.5L284.3,19.8L287.6,19.4L293.6,19.2L298.2,20.7L299.3,22.0L296.9,24.5L297.8,26.7L300.3,28.6L300.9,30.0L303.3,31.7L302.6,34.6L301.6,35.2L299.1,39.6L299.7,41.7L298.3,43.7L298.6,46.1L299.9,47.0L305.6,47.7L304.6,50.4L305.2,51.6L303.9,54.8L305.0,55.7L307.4,53.5L309.3,55.0L311.6,59.3L313.0,59.9L314.2,62.0L313.9,64.0L315.2,64.5L315.6,67.6L314.1,68.4L312.8,70.2L313.0,71.6L312.1,73.2L309.3,74.0L308.5,75.3L305.4,75.7L303.9,75.5L300.2,76.4L299.2,78.4L299.8,79.2L299.1,82.2L299.5,87.5L302.2,91.1L306.2,92.5L305.9,93.6L308.1,95.3L310.3,94.6L312.7,96.0L311.8,97.5L311.1,101.0L312.3,102.4L312.0,106.9L313.0,108.3L312.6,109.6L315.7,110.3L315.8,112.2L319.5,113.1L320.4,116.6L323.1,117.7L325.3,119.3L324.0,121.7L323.7,123.8L322.1,124.9L321.9,126.9L320.4,127.1L321.0,130.4L322.0,131.9L322.1,134.3L319.9,136.1L317.3,139.0L316.1,137.5L314.0,138.4L310.3,139.2L309.5,142.0L307.8,142.9L305.4,143.2L304.7,144.3L305.4,146.3L302.2,147.3L299.7,145.2L296.7,144.0L294.7,146.3L292.8,145.5L290.6,146.0L290.1,147.6L287.2,149.1L286.2,147.9L283.5,147.7L282.1,149.6L280.3,150.1L279.0,149.1L276.9,150.9L277.3,154.4L275.0,154.8L274.1,153.7L271.0,153.8L269.0,153.0L269.6,151.6L268.9,149.6L266.7,148.2L264.5,149.1L261.8,147.3L259.7,149.1L260.6,153.1L259.0,153.5L257.9,158.8L261.2,160.3L264.5,159.6L266.0,160.0L265.5,162.0L266.5,163.0L266.5,165.3L268.6,165.9L268.3,167.6L268.5,170.8L268.0,171.9L268.3,174.4L267.0,175.2L264.6,172.7L262.4,173.0L261.1,174.7L257.4,174.1L255.7,174.6L252.7,173.8L251.6,175.6L247.8,178.4L246.0,176.2L244.3,178.0L242.5,178.1L240.4,179.5L242.4,180.9L242.6,181.9L238.6,184.6L237.1,184.2L236.3,185.1L233.4,184.8L232.1,186.0L230.3,189.3L232.0,190.0L231.9,191.4L230.1,192.6L229.5,194.7L227.0,193.7L225.1,196.1L219.3,194.9L219.5,199.0L217.7,201.7L216.2,205.7L218.3,206.5L220.9,209.8L218.5,209.9L217.6,212.7L216.7,213.4L213.8,212.5L210.7,210.9L208.2,210.9L206.7,213.4L207.1,215.2L209.4,216.3L207.9,218.0L205.9,216.8L204.0,217.5L205.6,220.9L205.1,223.1L206.9,223.2L207.5,224.9L209.1,226.3L211.1,225.1L212.1,226.6L217.6,226.8L217.0,229.1L219.0,230.0L218.6,231.5L219.7,232.8L221.7,232.4L221.4,236.0L222.0,236.7L221.7,240.9L220.0,241.0L219.7,243.4L222.1,243.7L221.8,245.4L218.6,244.9L219.2,243.2L217.1,241.2L214.8,241.2L214.0,242.9L215.3,244.2L213.1,245.0L212.3,246.8L209.5,248.4L206.5,248.1L205.1,244.8L201.5,244.5L201.6,239.9L199.5,238.7L198.4,239.6L195.3,238.6L192.8,237.0L191.6,238.7L187.2,237.9L185.9,236.9L186.3,235.4L185.5,231.8L186.7,230.8L187.1,229.1L182.4,232.0L180.5,231.6L179.4,229.2L175.6,231.3L173.9,231.5L170.6,233.8L166.9,233.9L163.3,237.2L162.4,236.8L162.3,234.2L161.7,232.0L161.8,229.6L158.9,227.5L156.0,227.3L153.2,228.0L151.2,227.0L151.4,229.8L151.1,233.0L150.3,231.7L149.0,232.1L148.2,231.0L144.8,229.6L143.9,227.9L141.1,226.1L137.9,225.8L137.5,226.5L137.3,230.3L136.2,231.3L133.9,231.1L133.3,229.7L134.2,226.6L133.1,225.3L131.7,226.1L129.6,226.0L128.6,227.6L126.3,228.5L126.4,230.7L125.6,232.5L124.3,233.5L123.1,233.0L121.3,230.9L119.3,230.0L118.7,228.2L116.3,228.7L115.2,226.2L111.4,227.3L110.0,228.3L109.0,226.9L110.2,226.1L110.1,222.1L111.2,219.5L109.8,218.2L109.1,215.4L106.4,214.0L105.7,212.7L105.2,208.5L103.0,202.7L101.2,202.8L100.2,199.3L99.2,198.2L99.3,194.9L97.6,192.1L97.1,185.6L95.3,185.2L95.7,183.2L92.9,181.8L89.5,177.9L88.9,176.2L87.5,176.9L83.8,177.1L83.9,175.7L82.8,172.6L80.8,172.0L78.6,172.5L78.9,174.0L78.3,177.4L74.9,177.2L72.5,177.6L70.6,179.0L69.3,176.0L68.1,174.6L67.7,172.0L66.0,168.2L66.4,167.1L65.6,164.4L64.3,164.7L62.6,162.9L61.0,164.4L58.3,166.1L57.4,167.4L54.5,166.6L54.9,168.4L53.5,169.1L54.0,171.2L52.6,172.5L50.3,173.6L49.2,172.6L47.5,169.7L45.0,171.3L44.2,174.6L44.6,176.6L42.7,176.6L41.1,179.6L41.1,183.5L39.9,185.1L39.8,187.0L38.9,188.6L36.5,195.5L35.9,195.4L33.9,192.3L32.6,187.3L33.3,185.6L32.3,183.4L33.3,182.1L32.3,180.6L30.5,181.4L29.5,179.7L28.9,177.1L27.8,174.9L28.1,172.6L25.0,173.1L24.2,172.6L22.2,174.4L22.6,171.2L22.2,168.5L21.1,166.8L19.3,166.3L18.3,167.1L17.6,169.3L15.9,169.3L14.3,171.4L13.7,173.0L12.0,173.3L10.5,175.7L11.1,176.9L10.1,178.0L10.3,180.7L7.9,182.2L7.2,186.0L7.4,187.6L3.5,191.0L2.3,195.0L0.1,195.2L-1.0,196.1L-4.7,194.9L-5.8,195.9L-8.1,194.9L-8.5,193.0L-10.9,193.3L-13.7,194.8L-15.2,194.5L-16.6,195.6L-16.7,198.4L-19.3,196.2L-19.6,193.7L-18.6,192.6L-20.4,190.0L-20.8,187.9L-20.4,184.7L-19.4,182.7L-19.5,178.8L-21.3,177.6L-24.5,172.7L-25.0,169.9L-23.5,168.9L-25.5,166.8L-25.4,164.6L-26.6,162.3L-24.5,161.5L-21.8,161.4L-21.3,159.4L-22.9,157.9L-24.4,154.4L-21.3,151.3L-19.1,151.9L-18.0,148.2L-18.4,146.7L-16.7,145.7L-16.6,144.1L-17.9,139.5L-16.9,137.2L-14.5,134.0L-13.2,133.0L-12.4,131.1L-11.2,131.3L-9.1,127.7L-6.8,127.2L-6.8,125.1L-5.9,124.2L-5.5,121.3L-6.6,119.9L-4.9,118.6L-3.6,120.0L-1.9,120.3L-0.3,121.7L2.5,122.1L5.0,121.6L5.2,120.5L2.6,118.2L3.9,113.6L4.0,112.2L4.6,107.6L4.6,104.7L2.8,104.0L1.0,100.5L2.0,99.2L2.3,96.1L4.6,96.0L5.1,94.3L4.3,93.0L5.3,91.5L4.9,89.3L2.9,86.2L0.3,83.9L-1.0,83.3L-1.6,80.6L-4.3,77.3L-3.3,76.2L-1.6,76.5L1.4,72.8L2.9,73.6L5.4,70.1L7.0,65.9L8.2,64.1L11.0,62.9L9.9,61.1L10.5,56.7L8.4,55.2L7.0,51.7L6.9,48.1L7.9,45.7L7.5,42.7L5.4,41.4L4.5,36.3L2.9,35.2L1.9,33.1L2.1,31.9L-0.5,30.5L-2.0,31.5L-2.0,29.0L-4.0,27.0L-5.5,28.7L-6.5,27.4L-8.7,27.1L-10.1,24.6L-8.7,23.3L-11.4,21.4L-11.6,18.0L-11.3,14.6L-9.9,12.5L-6.7,8.8L-5.6,8.2L-0.3,8.0L2.3,6.7L3.4,7.9L5.4,7.1L6.0,8.0L11.0,5.0L10.4,1.0L8.8,-0.4L10.1,-3.7L8.4,-5.9L10.2,-6.5L11.9,-5.7L13.6,-8.9L17.3,-12.8L18.2,-14.4L19.7,-14.3L21.2,-11.8L23.4,-13.3L25.9,-13.5L31.6,-17.9L31.5,-18.8L35.0,-20.4L40.0,-19.5L41.2,-15.8L43.6,-13.8L46.7,-12.7L49.0,-9.4L51.3,-8.0L52.6,-8.3L56.3,-11.7L58.5,-11.6L59.4,-8.9L61.6,-8.4L63.0,-9.1L64.4,-11.5L67.6,-11.2L67.5,-9.3L69.0,-8.4L68.5,-6.4L69.1,-5.2L71.4,-6.0L73.8,-8.6L75.3,-7.8L76.3,-8.9L75.6,-11.6L77.5,-11.5L78.9,-12.4L77.3,-15.0L81.0,-14.9L81.6,-10.7L82.5,-10.3L83.8,-7.4L85.7,-6.1L86.7,-3.4L86.8,-1.4L88.1,-0.5L88.8,3.5L88.1,5.0L88.8,6.0L90.5,6.1L92.9,8.0L95.1,6.9L95.5,8.2L97.2,9.0L97.0,10.8L99.0,11.9L100.9,10.4L103.6,11.0L106.4,13.5L105.7,16.5L106.2,17.3L104.9,20.1L105.9,23.0L105.6,28.1L103.1,27.9L102.9,29.7L100.6,30.3L99.6,32.4L100.3,34.2L98.9,38.6L100.6,39.3L104.6,39.7L105.2,42.4L108.6,43.0L110.1,41.8L113.7,40.2L115.7,42.3L119.4,42.5L119.2,41.2L120.8,40.5L121.9,42.2L124.2,41.5L124.2,44.3L125.9,44.3L126.6,42.8L128.2,42.8L131.4,40.4L133.2,38.0L133.4,33.7L134.4,30.4L138.0,30.3L140.1,31.2L141.1,33.3L143.4,33.0L144.8,30.5L146.8,33.1L149.0,33.5L148.9,31.9L151.5,29.7L153.8,29.9L155.1,31.5L153.2,34.1L157.1,36.6L156.0,37.8L157.0,38.9L156.0,40.6L156.7,42.2L158.5,42.8L160.1,42.3ZM167.8,223.5L166.4,225.0L168.0,226.2L167.1,227.5L167.6,229.6L169.9,229.1L173.7,230.3L176.8,225.4L177.1,223.7L178.8,223.5L178.6,221.9L176.3,220.7L176.1,219.5L174.4,217.7L172.7,217.8L169.6,219.2L168.8,222.6L167.8,223.5Z"],["Provence-Alpes-C\u00f4te d'Azur","M309.1,194.5L310.0,197.3L309.1,198.3L308.0,200.7L308.0,202.7L306.7,204.1L304.1,205.0L302.6,207.1L303.4,210.5L304.5,212.3L306.2,213.3L306.5,214.8L308.3,216.1L308.3,217.0L305.3,217.9L305.5,222.6L304.9,223.9L307.3,224.9L307.6,226.5L309.9,228.9L309.6,230.3L312.2,231.9L312.4,234.8L313.2,236.4L315.3,237.6L317.4,236.7L320.3,238.3L322.3,239.9L323.6,239.4L326.6,241.5L327.7,243.1L328.9,242.6L329.7,244.1L331.9,245.9L336.0,245.4L337.3,248.2L339.3,247.5L341.9,248.2L342.2,247.2L344.2,247.4L347.4,245.6L350.9,245.3L352.3,244.7L354.9,245.0L356.9,242.2L359.7,242.6L358.7,244.6L358.5,246.7L359.0,248.2L361.8,251.7L361.7,253.5L360.7,255.9L358.3,256.9L358.7,260.2L357.5,262.5L354.6,264.5L353.6,264.3L352.0,266.2L351.1,268.6L351.0,270.3L347.8,271.8L346.6,273.8L348.2,279.7L349.1,281.2L346.3,283.3L345.3,284.9L344.2,284.0L341.0,286.6L341.0,287.5L338.4,288.2L337.4,287.8L335.8,288.8L335.1,290.4L333.0,291.4L332.2,290.6L329.4,291.1L328.1,293.8L326.8,295.4L326.0,294.2L323.5,294.6L322.2,296.4L321.1,301.2L321.0,304.1L319.6,302.9L317.3,303.8L316.5,305.2L313.6,304.9L310.9,305.4L309.3,306.5L308.4,308.4L309.5,309.5L309.0,311.6L308.1,312.0L307.3,314.8L306.1,315.5L305.2,317.1L302.8,317.0L302.9,318.5L300.7,318.3L297.7,319.1L296.6,317.6L294.3,319.4L294.2,321.1L293.0,323.2L292.7,325.5L290.6,326.0L289.7,328.2L284.0,332.3L284.2,333.6L286.6,333.6L287.9,332.6L289.4,333.5L290.5,332.1L291.8,333.4L291.3,334.6L289.5,336.2L289.9,339.4L288.1,341.5L286.5,343.9L284.6,341.5L282.1,341.2L278.0,344.9L275.5,344.4L271.8,345.1L269.3,346.3L268.6,348.0L269.1,351.1L266.8,350.9L265.7,349.4L262.8,347.9L260.5,348.6L258.2,348.4L256.3,349.3L254.9,351.1L254.2,353.9L254.7,357.2L251.9,356.1L253.0,355.2L252.6,352.2L249.2,351.3L246.1,352.3L245.5,350.5L244.3,349.6L239.9,349.2L238.5,347.6L237.0,348.7L238.2,351.4L235.1,353.2L234.1,355.3L232.2,355.1L230.5,352.2L231.1,349.3L228.3,348.2L228.9,346.9L225.1,346.3L224.6,345.3L223.0,345.6L221.4,342.1L220.0,341.3L218.1,341.3L216.5,343.7L214.3,342.5L211.7,338.8L210.3,340.2L206.4,338.9L202.1,338.8L200.2,339.3L198.6,338.5L199.1,337.0L200.8,335.5L200.4,333.1L199.0,331.8L200.2,328.8L197.5,324.3L195.6,324.0L192.8,326.3L190.4,327.2L187.4,326.6L186.8,327.2L177.8,327.1L176.5,325.7L176.9,324.4L173.6,319.8L173.0,317.4L170.5,316.7L168.8,318.0L165.9,319.4L164.8,322.6L166.6,324.0L165.2,326.7L163.7,327.0L160.3,325.3L155.8,325.0L152.0,325.4L146.7,324.0L145.2,322.8L144.8,321.2L146.9,319.9L146.5,316.9L145.1,315.7L142.0,314.5L138.5,314.3L134.1,315.3L132.7,314.8L122.3,314.0L123.0,310.1L126.8,308.5L130.8,305.3L134.6,303.9L135.7,301.5L137.4,301.6L139.2,299.2L136.7,298.9L135.8,297.9L137.7,293.3L139.2,292.9L140.0,290.1L143.4,289.2L146.5,290.4L147.2,291.3L149.6,290.9L148.6,288.6L148.7,287.0L149.8,283.7L151.2,281.8L151.5,279.8L150.6,276.9L152.3,275.5L150.6,273.3L154.1,271.5L156.2,269.4L157.3,267.6L160.0,266.2L162.5,263.2L162.6,261.1L164.4,261.4L164.1,258.5L160.7,254.8L160.6,253.5L158.6,252.3L156.7,252.1L155.1,249.6L156.1,241.3L155.0,240.7L155.0,238.6L153.0,238.7L152.9,236.1L151.4,234.6L151.1,233.0L151.4,229.8L151.2,227.0L153.2,228.0L156.0,227.3L158.9,227.5L161.8,229.6L161.7,232.0L162.3,234.2L162.4,236.8L163.3,237.2L166.9,233.9L170.6,233.8L173.9,231.5L175.6,231.3L179.4,229.2L180.5,231.6L182.4,232.0L187.1,229.1L186.7,230.8L185.5,231.8L186.3,235.4L185.9,236.9L187.2,237.9L191.6,238.7L192.8,237.0L195.3,238.6L198.4,239.6L199.5,238.7L201.6,239.9L201.5,244.5L205.1,244.8L206.5,248.1L209.5,248.4L212.3,246.8L213.1,245.0L215.3,244.2L214.0,242.9L214.8,241.2L217.1,241.2L219.2,243.2L218.6,244.9L221.8,245.4L222.1,243.7L219.7,243.4L220.0,241.0L221.7,240.9L222.0,236.7L221.4,236.0L221.7,232.4L219.7,232.8L218.6,231.5L219.0,230.0L217.0,229.1L217.6,226.8L212.1,226.6L211.1,225.1L209.1,226.3L207.5,224.9L206.9,223.2L205.1,223.1L205.6,220.9L204.0,217.5L205.9,216.8L207.9,218.0L209.4,216.3L207.1,215.2L206.7,213.4L208.2,210.9L210.7,210.9L213.8,212.5L216.7,213.4L217.6,212.7L218.5,209.9L220.9,209.8L218.3,206.5L216.2,205.7L217.7,201.7L219.5,199.0L219.3,194.9L225.1,196.1L227.0,193.7L229.5,194.7L230.1,192.6L231.9,191.4L232.0,190.0L230.3,189.3L232.1,186.0L233.4,184.8L236.3,185.1L237.1,184.2L238.6,184.6L242.6,181.9L242.4,180.9L240.4,179.5L242.5,178.1L244.3,178.0L246.0,176.2L247.8,178.4L251.6,175.6L252.7,173.8L255.7,174.6L257.4,174.1L261.1,174.7L262.4,173.0L264.6,172.7L267.0,175.2L268.3,174.4L268.0,171.9L268.5,170.8L268.3,167.6L268.6,165.9L266.5,165.3L266.5,163.0L265.5,162.0L266.0,160.0L264.5,159.6L261.2,160.3L257.9,158.8L259.0,153.5L260.6,153.1L259.7,149.1L261.8,147.3L264.5,149.1L266.7,148.2L268.9,149.6L269.6,151.6L269.0,153.0L271.0,153.8L274.1,153.7L275.0,154.8L277.3,154.4L276.9,150.9L279.0,149.1L280.3,150.1L282.1,149.6L283.5,147.7L286.2,147.9L287.2,149.1L287.0,149.9L289.4,152.8L289.2,154.8L290.1,157.9L293.8,157.8L295.0,158.4L295.5,160.2L294.6,160.9L296.4,162.9L295.7,165.7L295.5,169.4L296.9,169.7L299.3,172.3L303.2,174.9L306.7,175.5L308.1,173.8L310.7,175.4L313.1,176.1L313.9,178.8L312.6,181.1L314.3,183.8L314.3,185.9L315.6,188.2L317.1,188.6L317.9,191.9L316.7,192.0L314.3,190.9L311.7,191.2L309.7,193.0L309.1,194.5ZM176.2,304.4L176.3,307.0L175.1,310.2L175.5,313.0L177.8,312.9L178.8,313.6L180.0,320.0L182.8,319.6L184.6,320.0L186.2,318.9L188.3,316.5L190.7,314.7L190.5,311.7L189.1,310.9L185.2,314.1L182.3,307.4L179.6,307.2L178.4,307.8L177.5,305.5L176.2,304.4ZM273.8,358.4L275.2,357.3L276.2,355.5L277.6,355.7L276.2,358.4L273.8,358.4ZM271.2,360.7L270.2,358.8L272.8,358.6L271.2,360.7ZM260.7,358.0L261.1,360.1L258.3,361.7L255.2,359.9L256.2,359.2L257.8,359.9L260.7,358.0ZM167.8,223.5L168.8,222.6L169.6,219.2L172.7,217.8L174.4,217.7L176.1,219.5L176.3,220.7L178.6,221.9L178.8,223.5L177.1,223.7L176.8,225.4L173.7,230.3L169.9,229.1L167.6,229.6L167.1,227.5L168.0,226.2L166.4,225.0L167.8,223.5Z"],["Corse","M477.7,474.1L478.0,477.8L477.1,480.1L478.1,483.4L477.5,490.7L475.6,492.1L476.6,494.0L475.5,496.3L474.4,495.9L473.2,497.8L469.8,499.1L470.4,501.7L471.9,499.5L473.6,500.6L475.1,500.4L473.5,504.1L470.8,505.4L469.6,508.0L469.0,510.4L469.7,511.9L467.6,514.5L465.4,515.8L465.6,518.3L467.2,519.2L465.0,523.2L462.4,523.3L461.5,521.4L460.3,521.5L458.5,520.3L456.4,520.1L457.2,517.4L456.7,515.6L455.1,515.7L452.8,513.1L451.6,513.6L449.6,511.5L447.3,510.8L444.7,510.7L444.2,509.3L442.1,509.5L441.6,507.6L439.9,506.7L439.0,505.4L437.7,505.4L436.3,502.8L434.6,500.8L435.6,499.4L435.9,497.0L437.8,497.0L439.8,495.4L441.1,495.4L441.9,493.2L444.3,491.8L444.2,491.0L439.1,490.2L437.2,488.6L434.5,488.8L435.2,486.5L434.4,485.8L430.9,487.6L428.5,485.2L430.3,483.9L431.5,482.3L430.1,480.1L432.2,479.9L434.3,478.9L435.2,477.0L435.6,473.4L434.9,471.6L436.5,471.0L434.9,467.5L432.2,467.9L430.6,469.2L427.5,469.5L425.4,469.0L423.5,469.9L424.0,467.4L422.4,464.7L423.6,462.9L425.7,463.2L427.1,462.1L426.4,459.1L428.8,457.2L429.6,457.3L432.3,455.9L432.1,453.7L430.8,453.6L430.1,450.4L428.3,449.2L426.6,449.4L425.8,447.9L424.2,447.7L421.0,444.3L421.9,443.6L421.1,441.1L421.3,439.4L419.9,436.3L423.6,434.6L428.7,433.6L428.8,432.2L426.7,429.8L425.1,429.8L424.3,428.8L424.5,426.1L423.6,425.0L421.9,424.8L420.0,426.7L419.2,425.3L420.7,421.9L423.2,421.4L423.1,418.3L424.2,417.9L426.4,418.4L427.7,412.4L427.0,410.7L427.1,408.6L429.2,407.4L430.1,407.6L430.8,404.4L433.3,402.9L433.6,404.1L435.4,404.2L436.6,403.0L436.9,400.1L441.5,398.7L441.9,397.1L443.3,397.3L444.4,396.3L446.0,396.6L450.8,396.0L454.3,393.5L453.7,392.0L455.9,388.5L458.6,386.8L461.6,386.4L463.7,387.5L465.2,386.4L470.2,392.6L472.2,390.2L472.2,388.3L473.8,386.3L473.2,383.5L473.4,379.9L471.5,377.0L472.9,373.0L472.2,370.0L473.9,368.7L474.7,365.5L473.5,360.6L474.7,359.3L478.5,359.3L481.9,361.4L481.1,363.6L482.1,365.9L482.3,369.5L483.2,373.5L483.8,380.5L482.5,382.9L480.7,392.6L482.7,397.5L485.4,401.5L486.3,403.4L486.8,407.7L486.4,411.1L487.2,414.4L487.4,417.2L486.6,421.6L487.0,425.6L488.5,431.9L488.0,436.5L488.4,440.4L488.3,445.8L487.8,449.6L486.5,451.4L482.1,458.7L480.4,461.0L478.5,464.4L478.6,467.2L477.3,472.5L477.7,474.1Z"]],"box":[-518.9984733933372,-448.84023051031147,488.50004495569357,523.2945006824011],"K":100,"LON0":2.45,"LAT0":46.6}</script>
+<script>
+{
+const D=JSON.parse(document.getElementById('data').textContent);
+const M=JSON.parse(document.getElementById('mapdata').textContent);
+const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
+const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const norm=s=>String(s??'').toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,'');
+const C=Math.cos(M.LAT0*Math.PI/180);
+const proj=(lat,lng)=>[(lng-M.LON0)*C*M.K,-(lat-M.LAT0)*M.K];
+const DAY={sam:'Samedi 9',dim:'Dimanche 10'};
+const FILMS=D.films, CIN=D.cinemas;
+const filmById=Object.fromEntries(FILMS.map(f=>[f.id,f]));
+const st={q:'',film:'',region:'',day:'',ad:false,sme:false,sel:null,shown:12};
+
+/* chiffres clés */
+const anim=(el,n)=>{let t0=null;const f=t=>{t0??=t;const p=Math.min(1,(t-t0)/900);el.textContent=Math.round(n*p*(2-p));if(p<1)requestAnimationFrame(f)};requestAnimationFrame(f)};
+anim($('#kC'),CIN.length);anim($('#kV'),new Set(CIN.map(c=>c.ville)).size);anim($('#kR'),new Set(CIN.map(c=>c.region)).size);
+
+/* selects */
+$('#film').insertAdjacentHTML('beforeend',FILMS.map(f=>`<option value="${esc(f.id)}">${esc(f.titre)}</option>`).join(''));
+const regions=[...new Set(CIN.map(c=>c.region))].sort((a,b)=>a.localeCompare(b,'fr'));
+$('#region').insertAdjacentHTML('beforeend',regions.map(r=>`<option>${esc(r)}</option>`).join(''));
+
+/* films */
+const cols=['#bf1a83','#028bab','#1e3d83','#e08a00','#5b3aa0','#1b8a5a'];
+$('#fl').innerHTML=FILMS.map((f,i)=>`<li><div class="pst" style="background:${cols[i%cols.length]}">${esc(f.titre)}</div><div class="t"><b>${esc(f.titre)}</b><span>${esc(f.info||'')}</span><br><button type="button" data-film="${esc(f.id)}">Voir les séances de ce film</button></div></li>`).join('');
+$('#fl').addEventListener('click',e=>{const b=e.target.closest('[data-film]');if(!b)return;st.film=b.dataset.film;$('#film').value=st.film;update();$('#seances').scrollIntoView()});
+
+/* carte */
+const svg=$('#map');const [bx0,by0,bx1,by1]=M.box;const pad=18;
+const FULL=[bx0-pad,by0-pad,bx1-bx0+2*pad,by1-by0+2*pad];
+let vb=FULL.slice();
+svg.innerHTML=`<g id="rgs">${M.paths.map(([n,d])=>`<path class="rg" data-r="${esc(n)}" d="${d}"><title>${esc(n)}</title></path>`).join('')}</g><g id="pins"></g>`;
+const bboxOf=r=>{const p=svg.querySelector(`.rg[data-r="${CSS.escape(r)}"]`);if(!p)return FULL;const b=p.getBBox();const s=Math.max(b.width,b.height)*1.18+40;return[b.x+b.width/2-s/2,b.y+b.height/2-s/2,s,s]};
+let raf;const zoomTo=t=>{cancelAnimationFrame(raf);const a=vb.slice(),t0=performance.now(),red=matchMedia('(prefers-reduced-motion:reduce)').matches;
+ const step=n=>{const p=red?1:Math.min(1,(n-t0)/550),e=p<.5?2*p*p:1-(-2*p+2)**2/2;vb=a.map((v,i)=>v+(t[i]-v)*e);svg.setAttribute('viewBox',vb.join(' '));drawPins();if(p<1)raf=requestAnimationFrame(step)};raf=requestAnimationFrame(step)};
+svg.setAttribute('viewBox',vb.join(' '));
+svg.addEventListener('click',e=>{const pin=e.target.closest('.pin');if(pin){select(pin.dataset.id,true);return}const rg=e.target.closest('.rg');if(rg){st.region=st.region===rg.dataset.r?'':rg.dataset.r;$('#region').value=st.region;update(true)}});
+svg.addEventListener('keydown',e=>{const pin=e.target.closest('.pin');if(pin&&(e.key==='Enter'||e.key===' ')){e.preventDefault();select(pin.dataset.id,true)}});
+
+/* filtres */
+function sessionsOf(c){return c.seances.filter(s=>(!st.day||s.jour===st.day)&&(!st.film||s.film===st.film)&&(!st.ad||s.ad)&&(!st.sme||s.sme))}
+function results(){const q=norm(st.q).trim();return CIN.filter(c=>(!st.region||c.region===st.region)&&(!q||norm(`${c.nom} ${c.ville} ${c.cp} ${c.adresse}`).includes(q)||(/^\d{2,5}$/.test(q)&&c.cp.startsWith(q)))&&sessionsOf(c).length).sort((a,b)=>a.ville.localeCompare(b.ville,'fr'))}
+let R=[];
+function drawPins(){const k=vb[2]/FULL[2],r=Math.max(2.2,9*k),ids=new Set(R.map(c=>c.id));
+ $('#pins').innerHTML=R.map(c=>{const[x,y]=proj(c.lat,c.lng);return`<g class="pin${st.sel===c.id?' sel':''}" data-id="${esc(c.id)}" tabindex="0" role="button" aria-label="${esc(c.nom+', '+c.ville)}"><circle cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="${(st.sel===c.id?r*1.5:r).toFixed(2)}" stroke-width="${(r*.35).toFixed(2)}"/><title>${esc(c.nom+' – '+c.ville)}</title></g>`}).join('');
+ const sel=$('#pins .sel');if(sel)$('#pins').appendChild(sel)}
+function card(c){const ss=sessionsOf(c);return`<article class="card${st.sel===c.id?' sel':''}" id="c-${esc(c.id)}"><h3><button type="button" data-sel="${esc(c.id)}">${esc(c.nom)}</button></h3><p class="addr">${esc(c.adresse)}, ${esc(c.cp)} ${esc(c.ville)}</p>
+ <ul class="ss">${ss.map(s=>`<li><time>${esc(DAY[s.jour])} · ${esc(s.heure.replace(':','h'))}</time><span class="film">${esc(filmById[s.film]?.titre)}</span>${s.jour==='sam'&&s.heure==='16:00'?'<span class="bd nat">Séance nationale</span>':''}${s.ad?'<span class="bd" title="Audiodescription">AD</span>':''}${s.sme?'<span class="bd" title="Sous-titres pour sourds et malentendants">ST-SME</span>':''}</li>`).join('')}</ul>
+ <a class="btn" href="${esc(c.url)}" target="_blank" rel="noopener">Réserver sur le site du cinéma<span aria-hidden="true"> ↗</span><span class="sr" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)"> (nouvel onglet)</span></a></article>`}
+function update(zoom){R=results();
+ $$('.rg').forEach(p=>{p.classList.toggle('on',p.dataset.r===st.region);p.classList.toggle('dim',!!st.region&&p.dataset.r!==st.region)});
+ if(zoom)zoomTo(st.region?bboxOf(st.region):FULL);
+ $('#mapTag').textContent=st.region||'Toute la France';$('#zoomout').hidden=!st.region;
+ if(st.sel&&!R.some(c=>c.id===st.sel))st.sel=null;
+ const n=R.reduce((a,c)=>a+sessionsOf(c).length,0);
+ $('#count').textContent=R.length?`${R.length} cinéma${R.length>1?'s':''}, ${n} séance${n>1?'s':''}`:'';
+ const list=st.sel?[R.find(c=>c.id===st.sel),...R.filter(c=>c.id!==st.sel)]:R;
+ $('#list').innerHTML=R.length?list.slice(0,st.shown).map(card).join(''):`<div class="empty"><p><strong>Aucune séance ne correspond à votre recherche.</strong></p><p>Essayez une autre ville ou effacez les filtres. De nouveaux cinémas rejoignent l'opération chaque semaine.</p><button type="button" class="btn" data-reset>Effacer les filtres</button></div>`;
+ $('#more').hidden=R.length<=st.shown;drawPins()}
+function select(id,fromMap){st.sel=st.sel===id?null:id;st.shown=Math.max(st.shown,12);update(false);
+ if(st.sel&&fromMap){const el=document.getElementById('c-'+id);if(el&&innerWidth>900)el.scrollIntoView({block:'nearest'});else if(el)el.scrollIntoView({block:'start'})}
+ if(st.sel&&!fromMap){const c=CIN.find(x=>x.id===id);const[x,y]=proj(c.lat,c.lng);const s=Math.min(vb[2],180);zoomTo([x-s/2,y-s/2,s,s])}}
+$('#list').addEventListener('click',e=>{const b=e.target.closest('[data-sel]');if(b)select(b.dataset.sel,false);if(e.target.closest('[data-reset]'))reset()});
+let tq;$('#q').addEventListener('input',e=>{clearTimeout(tq);tq=setTimeout(()=>{st.q=e.target.value;st.shown=12;update(false)},120)});
+$('#film').addEventListener('change',e=>{st.film=e.target.value;update(false)});
+$('#region').addEventListener('change',e=>{st.region=e.target.value;st.shown=12;update(true)});
+$$('[data-day]').forEach(b=>b.addEventListener('click',()=>{st.day=b.dataset.day;$$('[data-day]').forEach(x=>x.setAttribute('aria-pressed',x===b));update(false)}));
+$$('[data-acc]').forEach(b=>b.addEventListener('click',()=>{st[b.dataset.acc]=!st[b.dataset.acc];b.setAttribute('aria-pressed',st[b.dataset.acc]);update(false)}));
+$('#zoomout').addEventListener('click',()=>{st.region='';$('#region').value='';update(true)});
+$('#more').addEventListener('click',()=>{st.shown+=12;update(false)});
+function reset(){Object.assign(st,{q:'',film:'',region:'',day:'',ad:false,sme:false,sel:null,shown:12});$('#q').value='';$('#film').value='';$('#region').value='';$$('[data-day]').forEach(x=>x.setAttribute('aria-pressed',x.dataset.day===''));$$('[data-acc]').forEach(x=>x.setAttribute('aria-pressed','false'));update(true)}
+$('#reset').addEventListener('click',reset);
+$('#sampleNote').hidden=!D.exemple;
+
+/* facile à lire */
+const fx=$$('[data-falc]');fx.forEach(el=>el.dataset.std=el.innerHTML);
+$('#falc').addEventListener('click',e=>{const on=e.currentTarget.getAttribute('aria-pressed')!=='true';e.currentTarget.setAttribute('aria-pressed',on);
+ fx.forEach(el=>{if(on)el.textContent=el.dataset.falc;else el.innerHTML=el.dataset.std});try{localStorage.setItem('teac-falc',on?'1':'')}catch(_){}});
+try{if(localStorage.getItem('teac-falc'))$('#falc').click()}catch(_){}
+
+update(false);
+}
+</script>
+</body>
+</html>
