@@ -101,7 +101,7 @@ h1.sr,.vh{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0
 .bd.nat{background:var(--yel);color:var(--brand)}
 .card .btn{min-height:44px;font-size:16px;padding:8px 18px}
 .btn.ghost{background:var(--surf);border:2px solid var(--brand);box-shadow:none;color:var(--brand)}
-.empty{background:var(--surf);border-radius:var(--r);padding:24px;text-align:center}
+.empty{background:var(--surf);border-radius:var(--r);padding:24px;text-align:center;grid-column:1/-1}
 .more{display:block;margin:14px auto 0}
 .sample{font-size:13px;color:var(--mut);margin:14px 4px 0}
 /* principle */
@@ -520,7 +520,7 @@ const st={q:'',film:'',region:'',day:'',sel:null,shown:6,load:'wait'};
 const anim=(el,n)=>{let t0=null;const f=t=>{t0??=t;const p=Math.min(1,(t-t0)/900);el.textContent=Math.round(n*p*(2-p));if(p<1)requestAnimationFrame(f)};requestAnimationFrame(f)};
 
 /* selects */
-$('#film').insertAdjacentHTML('beforeend',FILMS.map(f=>`<option value="${esc(f.id)}">${esc(f.titre)}</option>`).join(''));
+
 
 /* films */
 const cols=['#bf1a83','#016b85','#1e3d83','#9c4500','#5b3aa0','#136b45'];
@@ -564,7 +564,7 @@ function update(zoom){R=results();
  const list=st.sel?[R.find(c=>c.id===st.sel),...R.filter(c=>c.id!==st.sel)]:R;
  const items=FULL_PAGE?list.flatMap(c=>sessionsOf(c).map((s,i)=>[c,s,i===0])).sort((a,b)=>a[0].id===st.sel?-1:b[0].id===st.sel?1:((a[1].jour==='sam'?'0':'1')+a[1].heure+a[0].ville).localeCompare((b[1].jour==='sam'?'0':'1')+b[1].heure+b[0].ville)):list;
  const qs=new URLSearchParams(Object.entries({q:st.q,film:st.film,region:st.region,jour:st.day}).filter(([k,v])=>v)).toString();$('#allLink').href=$('#allBtn').href='/seances'+(qs?'?'+qs:'');
- $('#list').innerHTML=st.load==='wait'?'<div class="empty" role="status"><p>Chargement des séances…</p></div>':st.load==='err'?`<div class="empty" role="alert"><p><strong>La liste des séances n'a pas pu être chargée.</strong></p><p><a href="${esc(SRC)}">Voir la liste sur culture-relax.org</a></p></div>`:R.length?(FULL_PAGE?items.map(([c,s,f])=>bigcard(c,s,f)).join(''):items.slice(0,st.shown).map(card).join('')):`<div class="empty"><p><strong>Aucune séance ne correspond à votre recherche.</strong></p><p>Essayez une autre ville ou effacez les filtres. De nouveaux cinémas rejoignent l'opération chaque semaine.</p><button type="button" class="btn" data-reset>Effacer les filtres</button></div>`;
+ $('#list').innerHTML=st.load==='wait'?'<div class="empty" role="status"><p>Chargement des séances…</p></div>':st.load==='err'?`<div class="empty" role="alert"><p><strong>La liste des séances n'a pas pu être chargée.</strong></p><p><a href="${esc(SRC)}">Voir la liste sur culture-relax.org</a></p></div>`:R.length?(FULL_PAGE?items.map(([c,s,f])=>bigcard(c,s,f)).join(''):items.slice(0,st.shown).map(card).join('')):(FILM&&!CIN.some(c=>c.seances.some(s=>norm(s.film)===norm(FILM.id)))?`<div class="empty"><p><strong>Aucun cinéma n'a encore programmé ce film.</strong></p><p>La liste des séances est mise à jour jusqu'au 15 décembre. Les autres films de la sélection sont déjà à l'affiche.</p><a class="btn" href="/seances">Voir toutes les séances</a></div>`:`<div class="empty"><p><strong>Aucune séance ne correspond à votre recherche.</strong></p><p>Essayez une autre ville ou effacez les filtres. De nouveaux cinémas rejoignent l'opération chaque semaine.</p><button type="button" class="btn" data-reset>Effacer les filtres</button></div>`);
  $('#more').hidden=FULL_PAGE||R.length<=st.shown;$('#allBtn').parentNode.hidden=FULL_PAGE||!R.length;$('#allLink').hidden=FULL_PAGE;drawPins()}
 function select(id,fromMap){st.sel=st.sel===id?null:id;st.shown=Math.max(st.shown,6);update(false);
  if(st.sel&&fromMap){const el=document.getElementById('c-'+id);if(el&&innerWidth>900)el.scrollIntoView({block:'nearest',behavior:R0.dataset.motion==='reduce'?'auto':'smooth'});else if(el)el.scrollIntoView({block:'start'})}
@@ -607,7 +607,9 @@ function boot(list){CIN=list;st.load='ok';
  anim($('#kC'),CIN.length);anim($('#kV'),new Set(CIN.map(c=>c.ville)).size);anim($('#kR'),new Set(CIN.map(c=>c.region)).size);
  const regions=[...new Set(CIN.map(c=>c.region))].sort((a,b)=>a.localeCompare(b,'fr'));
  $('#region').insertAdjacentHTML('beforeend',regions.map(r=>`<option>${esc(r)}</option>`).join(''));
- if(FILM)$('#film').value=FILM.id;const n={};CIN.forEach(c=>c.seances.forEach(s=>{n[norm(s.film)]=(n[norm(s.film)]||0)+1}));
+ const n={};CIN.forEach(c=>c.seances.forEach(s=>{n[norm(s.film)]=(n[norm(s.film)]||0)+1}));
+ $('#film').insertAdjacentHTML('beforeend',FILMS.filter(f=>n[norm(f.id)]||(FILM&&FILM.id===f.id)).map(f=>`<option value="${esc(f.id)}">${esc(f.titre)} (${n[norm(f.id)]||0})</option>`).join(''));
+ if(FILM)$('#film').value=FILM.id;
  $$('#fl [data-film]').forEach(b=>{const k=n[norm(b.dataset.film)]||0;b.textContent=k?`${k} séance${k>1?'s':''} · bande-annonce`:'Séances bientôt annoncées'});if(FILM){const k=n[norm(FILM.id)]||0;$('#fCount').textContent=k?`${k} séance${k>1?'s':''} les 9 et 10 janvier 2027, à 5 € la place.`:'Les séances de ce film seront bientôt annoncées.'}
  const P=new URLSearchParams(location.search);if(P.get('q')){st.q=P.get('q');$('#q').value=st.q}if(P.get('film')){st.film=P.get('film');$('#film').value=st.film}if(P.get('region')){st.region=P.get('region');$('#region').value=st.region}if(P.get('jour')){st.day=P.get('jour');$$('[data-day]').forEach(x=>x.setAttribute('aria-pressed',x.dataset.day===st.day))}
  update(!!st.region)}
