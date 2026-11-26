@@ -295,8 +295,10 @@ body.filmp .sequence,body.filmp .static-title,body.filmp .when,body.filmp .why,b
 
 /* Ouverture du rideau au défilement (kit TEAC V2) : calques décor, logo, rideau, personnages, slogan */
 :root{--nav-h:65px;--scene-h:720px;--run:684px}
-.sequence{height:calc(var(--scene-h) + var(--run));position:relative;background:#fff}
-.pinned{position:sticky;top:var(--nav-h);height:var(--scene-h);overflow:hidden;display:flex;flex-direction:column;align-items:center;justify-content:center;background:#fefefe;isolation:isolate}
+.sequence{position:relative}
+.run-space{height:var(--run)}
+.pin-all{position:sticky;top:var(--nav-h)}
+.pinned{position:relative;height:var(--scene-h);overflow:hidden;display:flex;flex-direction:column;align-items:center;justify-content:center;background:#fefefe;isolation:isolate}
 /* fond de la scène : même papier et même filtre que le décor, pour que les marges se confondent avec le dessin */
 .pinned::before{content:"";position:absolute;inset:0;background:#fefefe;filter:var(--fx,none);z-index:-1}
 .art{position:relative;isolation:isolate;aspect-ratio:1659/948;width:var(--art-w,100%);flex:none;container-type:inline-size}
@@ -310,11 +312,10 @@ body.filmp .sequence,body.filmp .static-title,body.filmp .when,body.filmp .why,b
 .slogan span,.static-title span{display:block;font-weight:500}.slogan b,.static-title b{display:block;font-weight:800}
 .static-title{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;margin:0}
 .when:focus{outline:none}
-:root[data-scene=static] .sequence{height:auto}
-:root[data-scene=static] .pinned{position:relative;top:auto;height:auto}
+:root[data-scene=static] .run-space{display:none}:root[data-scene=static] .pin-all{position:static}
+:root[data-scene=static] .pinned{height:auto}
 :root[data-scene=static] .art{width:100%}
 :root[data-scene=static] .slogan{display:none}
-.sequence ~ *{transform:var(--lift,none)}
 .skip-scene{position:absolute;z-index:6;left:50%;bottom:12px;transform:translate(-50%,200%);background:#fff;color:#1e3d83;font:700 15px Outfit,sans-serif;padding:10px 18px;border-radius:999px;border:2px solid #1e3d83;text-decoration:none}
 .skip-scene:focus{transform:translate(-50%,0)}
 :root[data-scene=static] .decor,:root[data-scene=static] .foreground,:root[data-scene=static] .curtain{filter:none}
@@ -352,8 +353,9 @@ body.filmp .sequence,body.filmp .static-title,body.filmp .when,body.filmp .why,b
 
 <main id="main">
 <p class="static-title" id="sloganMobile"><span>Avec ou sans handicap,</span> <b>le cinéma, c’est pour tout le monde !</b></p>
-<section class="sequence" id="sequence" aria-label="Ouverture du rideau">
-  <div class="pinned" id="pinned">
+<section class="sequence" id="sequence">
+  <div class="pin-all">
+  <div class="pinned" id="pinned" role="group" aria-label="Ouverture du rideau">
     <div class="art" id="art">
       <img class="decor" id="decor" src="/assets/scene/decor-sans-logo.webp" width="1659" height="948" alt="Une salle de cinéma dessinée pleine de spectateurs de tous âges, dont une personne en fauteuil roulant et un enfant avec un casque anti-bruit. Illustration de Marie Charlemagne.">
       <h1 class="logo-h1"><img class="logo" id="logo" src="/assets/scene/logo-teac.svg" alt="Tous Ensemble au Cinéma avec Culture Relax"></h1>
@@ -363,9 +365,7 @@ body.filmp .sequence,body.filmp .static-title,body.filmp .when,body.filmp .why,b
     </div>
     <a class="skip-scene" href="#apres-rideau" id="skipAnim">Passer l’animation</a>
   </div>
-</section>
-
-<section class="when" id="apres-rideau" tabindex="-1" aria-labelledby="dates">
+  <section class="when" id="apres-rideau" tabindex="-1" aria-labelledby="dates">
   <div class="wrap">
     <div class="datebox" id="dates"><b>Samedi 9 <small>et</small><br>dimanche 10</b><span>janvier 2027</span></div>
     <div class="ticket" aria-label="Tarif unique : 5 euros la séance"><b>5 €</b><span>LA SÉANCE*</span></div>
@@ -376,6 +376,11 @@ body.filmp .sequence,body.filmp .static-title,body.filmp .when,body.filmp .why,b
     </div>
   </div>
 </section>
+  </div>
+  <div class="run-space" aria-hidden="true"></div>
+</section>
+
+
 
 <section class="fpage" id="fpage" hidden aria-labelledby="fTitre">
   <div class="wrap">
@@ -695,9 +700,6 @@ update(false);
   el.logo.style.opacity=st||index>0?'1':'0';
   const growth=st?1:Math.floor(clamp((p-.64)/.24)*6)/6;
   el.logo.style.transform=`scale(${.72+.68*growth})`; // grandit jusqu’à déborder du cadre de l’écran, comme sur l’affiche
-  // la suite de la page reste collée sous la scène pendant l’ouverture, puis défile normalement
-  const lift=st?0:Math.round(run-Math.min(Math.max(0,(nav-el.seq.getBoundingClientRect().top)),run));
-  el.seq.parentElement.style.setProperty('--lift',lift?`translateY(${-lift}px)`:'none');
   el.seq.style.setProperty('--fx',st?'none':`brightness(${light[index]}) saturate(${.88+.12*index/6})`);
   if(audience){audience.setEnabled(!st);audience.setSceneVisible(!st);audience.setReveal(st?1:index/6)}
  }
@@ -706,17 +708,15 @@ update(false);
  new ResizeObserver(layout).observe(header);
  sysReduce.addEventListener('change',layout);
  new MutationObserver(layout).observe(R0,{attributes:true,attributeFilter:['data-motion','data-size']});
- el.skip.addEventListener('click',ev=>{ev.preventDefault();goTo(el.after);el.after.focus({preventScroll:true})});
+ // « Passer l’animation » : aller juste après l’ouverture, dates en haut de l’écran
+ el.skip.addEventListener('click',ev=>{ev.preventDefault();const nav=header.getBoundingClientRect().height;const top=scrollY+el.seq.getBoundingClientRect().top-nav+run+el.seq.querySelector('.pinned').offsetHeight;scrollTo({top:isStatic()?scrollY+el.after.getBoundingClientRect().top-nav:top,behavior:'instant'});el.after.focus({preventScroll:true})});
  Promise.all(files.map(src=>{const i=new Image();i.src=src;return i.decode()})).then(()=>{ready=true;render()}).catch(()=>{failed=true;layout()});
  el.decor.decode().then(async()=>{
   if(!window.createTeacAudience)return;
   try{audience=await createTeacAudience({canvas:el.fg,image:el.decor,onState:()=>{}});render()}catch(e){/* WebGL indisponible : décor fixe */}
  }).catch(()=>{failed=true;layout()});
- // liens internes (#principe, #seances…) : on vise la vraie position, sans le décalage provisoire de la suite
- const liftNow=()=>{const m=/-?\d+/.exec(getComputedStyle(el.seq.parentElement).getPropertyValue('--lift'));return m?-Number(m[0]):0};
- function goTo(t){if(!t)return;const mt=parseFloat(getComputedStyle(t).scrollMarginTop)||0;const y=scrollY+t.getBoundingClientRect().top+liftNow()-mt;scrollTo({top:y,behavior:'instant'})}
- document.addEventListener('click',ev=>{const a=ev.target.closest('a[href]');if(!a||a.id==='skipAnim')return;const u=new URL(a.href,location.href);if(u.pathname!==location.pathname||!u.hash)return;const t=document.getElementById(decodeURIComponent(u.hash.slice(1)));if(!t||!el.seq.parentElement.contains(t))return;ev.preventDefault();history.pushState(null,'',u.hash);goTo(t);if(t.tabIndex<0&&!t.matches('a,button,input,select,textarea'))t.setAttribute('tabindex','-1');t.focus({preventScroll:true})});
- if(location.hash)addEventListener('load',()=>setTimeout(()=>goTo(document.getElementById(decodeURIComponent(location.hash.slice(1)))),50));
+ // arrivée avec une ancre (#seances…) : on y retourne une fois la scène dimensionnée
+ if(location.hash)addEventListener('load',()=>{const t=document.getElementById(decodeURIComponent(location.hash.slice(1)));if(t)t.scrollIntoView({behavior:'instant'})});
  addEventListener('pagehide',()=>{if(audience)audience.destroy()});
  layout();
 })();
