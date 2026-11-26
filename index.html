@@ -317,6 +317,8 @@ body.filmp .sequence,body.filmp .static-title,body.filmp .when,body.filmp .why,b
 :root[data-scene=static] .pinned{height:auto}
 :root[data-scene=static] .art{width:100%}
 :root[data-scene=static] .slogan{display:none}
+/* fondu vers le crème des dates, pour adoucir la séparation (assez court pour laisser le crédit lisible) */
+.pinned::after{content:"";position:absolute;left:0;right:0;bottom:0;height:clamp(28px,6%,64px);background:linear-gradient(to bottom,transparent,var(--cream));z-index:5;pointer-events:none}
 .skip-scene{position:absolute;z-index:6;left:50%;bottom:12px;transform:translate(-50%,200%);background:#fff;color:#1e3d83;font:700 15px Outfit,sans-serif;padding:10px 18px;border-radius:999px;border:2px solid #1e3d83;text-decoration:none}
 .skip-scene:focus{transform:translate(-50%,0)}
 :root[data-scene=static] .decor,:root[data-scene=static] .foreground,:root[data-scene=static] .curtain{filter:none}
