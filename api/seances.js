@@ -99,7 +99,8 @@ module.exports = async (req, res) => {
       if (typeof fiche === 'string') fiche = { url: fiche };
       c.url = (fiche && fiche.url) || null;
       if (fiche && fiche.lat != null) { c.lat = fiche.lat; c.lng = fiche.lng; }
-      c.seances.sort((a, b) => (a.jour + a.heure).localeCompare(b.jour + b.heure));
+      const ordre = s => (s.jour === 'sam' ? '0' : '1') + s.heure;
+      c.seances.sort((a, b) => ordre(a).localeCompare(ordre(b)));
       delete c.villeSource; delete c.codeRegion;
     }));
 
