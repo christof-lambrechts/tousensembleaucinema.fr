@@ -131,8 +131,9 @@ h1.sr,.vh{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0
 details{background:var(--surf);border-radius:var(--r);margin:0 0 10px;box-shadow:0 2px 0 var(--line)}
 summary{cursor:pointer;list-style:none;padding:18px 54px 18px 20px;font-weight:700;font-size:18px;color:var(--brand);position:relative}
 summary::-webkit-details-marker{display:none}
-summary::after{content:"+";position:absolute;right:20px;top:50%;transform:translateY(-50%);width:30px;height:30px;border-radius:50%;background:var(--yel);display:grid;place-items:center;font-size:22px}
-details[open] summary::after{content:"–"}
+/* + et − dessinés (deux barres), toujours centrés quelle que soit la police */
+summary::after{content:"";position:absolute;right:20px;top:50%;transform:translateY(-50%);width:30px;height:30px;border-radius:50%;background:linear-gradient(currentColor,currentColor) center/12px 3px no-repeat,linear-gradient(currentColor,currentColor) center/3px 12px no-repeat,var(--yel);transition:background-size .2s}
+details[open] summary::after{background-size:12px 3px,3px 0,auto}
 details p{margin:0;padding:0 20px 18px}
 .pro{margin-top:26px;background:var(--mag);color:#fff;border-radius:var(--r);padding:24px}
 .pro h3{margin:0 0 6px;font-size:24px}.pro p{margin:0 0 14px}
