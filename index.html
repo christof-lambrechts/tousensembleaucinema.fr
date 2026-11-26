@@ -294,8 +294,10 @@ body.filmp .sequence,body.filmp .static-title,body.filmp .when,body.filmp .why,b
 /* Ouverture du rideau au défilement (kit TEAC V2) : calques décor, logo, rideau, personnages, slogan */
 :root{--nav-h:65px;--scene-h:720px;--run:684px}
 .sequence{height:calc(var(--scene-h) + var(--run));position:relative;background:#fff}
-.pinned{position:sticky;top:var(--nav-h);height:var(--scene-h);overflow:hidden;display:flex;flex-direction:column;align-items:center;justify-content:center;background:var(--salle,#fefefe)}
-.art{position:relative;isolation:isolate;aspect-ratio:1659/948;width:min(100%,calc(var(--scene-h)*1.75));flex:none;container-type:inline-size}
+.pinned{position:sticky;top:var(--nav-h);height:var(--scene-h);overflow:hidden;display:flex;flex-direction:column;align-items:center;justify-content:center;background:#fefefe;isolation:isolate}
+/* fond de la scène : même papier et même filtre que le décor, pour que les marges se confondent avec le dessin */
+.pinned::before{content:"";position:absolute;inset:0;background:#fefefe;filter:var(--fx,none);z-index:-1}
+.art{position:relative;isolation:isolate;aspect-ratio:1659/948;width:var(--art-w,100%);flex:none;container-type:inline-size}
 .decor,.curtain,.foreground{position:absolute;inset:0;width:100%;height:100%;object-fit:fill;display:block;pointer-events:none}
 .decor{z-index:1;filter:brightness(.62) saturate(.88)}
 .logo-h1{position:absolute;z-index:2;left:33%;top:9%;width:34%;height:32%;margin:0}
@@ -307,8 +309,8 @@ body.filmp .sequence,body.filmp .static-title,body.filmp .when,body.filmp .why,b
 .static-title{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;margin:0}
 .when:focus{outline:none}
 :root[data-scene=static] .sequence{height:auto}
-:root[data-scene=static] .pinned{position:relative;top:auto;height:auto;--salle:#fefefe}
-:root[data-scene=static] .art{width:min(100%,1400px)}
+:root[data-scene=static] .pinned{position:relative;top:auto;height:auto}
+:root[data-scene=static] .art{width:100%}
 :root[data-scene=static] .slogan{display:none}
 .skip-scene{position:absolute;z-index:6;left:50%;bottom:12px;transform:translate(-50%,200%);background:#fff;color:#1e3d83;font:700 15px Outfit,sans-serif;padding:10px 18px;border-radius:999px;border:2px solid #1e3d83;text-decoration:none}
 .skip-scene:focus{transform:translate(-50%,0)}
@@ -665,11 +667,15 @@ update(false);
  function layout(){
   const nav=header.getBoundingClientRect().height;
   
-  // la scène occupe toute la fenêtre sous le menu : pas de zone blanche pendant l’ouverture
-  const scene=Math.max(180,innerHeight-nav);
+  // dessin élargi jusqu’à 16 % de plus que la page (on rogne au plus 6 % de chaque côté, sans toucher au public),
+  // et la scène prend la hauteur du dessin, dans la limite de la fenêtre
+  const W=el.seq.clientWidth, avail=Math.max(180,innerHeight-nav);
+  const artW=Math.max(Math.min(W/0.88,avail*1.75),Math.min(W,avail*1.75));
+  // grand écran : la scène reste plein écran (marges fondues dans le papier) ; mobile : hauteur du dessin, pas de long blocage
+  const scene=W>=700?avail:Math.min(avail,artW/1.75);
+  R0.style.setProperty('--art-w',artW+'px');
   // durée de l’ouverture calée sur la hauteur du dessin : courte sur mobile
-  const artH=Math.min(el.seq.clientWidth,scene*1.75)/1.75;
-  run=Math.max(280,artH*.95);
+  run=Math.max(280,scene*.95);
   R0.style.setProperty('--nav-h',nav+'px');R0.style.setProperty('--scene-h',scene+'px');R0.style.setProperty('--run',run+'px');
   render();
  }
@@ -686,7 +692,7 @@ update(false);
   el.logo.style.opacity=st||index>0?'1':'0';
   const growth=st?1:Math.floor(clamp((p-.64)/.24)*6)/6;
   el.logo.style.transform=`scale(${.72+.68*growth})`; // grandit jusqu’à déborder du cadre de l’écran, comme sur l’affiche
-  el.seq.style.setProperty('--salle',st?'#fefefe':`rgb(${Math.round(254*light[index])},${Math.round(254*light[index])},${Math.round(254*light[index])})`);
+  el.seq.style.setProperty('--fx',st?'none':`brightness(${light[index]}) saturate(${.88+.12*index/6})`);
   if(audience){audience.setEnabled(!st);audience.setSceneVisible(!st);audience.setReveal(st?1:index/6)}
  }
  const req=()=>{if(!queued){queued=true;requestAnimationFrame(render)}};
