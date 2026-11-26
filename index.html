@@ -13,7 +13,7 @@
    PICTURE: Marie Charlemagne's cinema hall illustration, then a hand-drawn map of France dotted with screenings
    COLOUR and TYPE: campaign blue, sun yellow, magenta, cream; Anton for lettering with yellow offset, Outfit for text
    LAYOUT: blue band, sticker headline, illustration, date box + ticket, finder (map + list), principle, films, FAQ, partners */
-:root{color-scheme:light;--soft:#e6edfb;--bg:#fff;--surf:#fff;--surf2:#fff9e8;--hdr:rgba(255,255,255,.96);--brand:#1e3d83;--magtx:#bf1a83;--field:#a39a80;--rg:#fdf0c8;--rgh:#fbe39a;--rgd:#f6efdc;--pin:#1b4797;--band:#1b4797;--blue:#1b4797;--navy:#1e3d83;--yel:#fece00;--mag:#bf1a83;--teal:#028bab;--cream:#fff5da;--cream2:#fee8af;--ink:#16244a;--mut:#4a5675;--line:#e6dcc0;--r:18px}
+:root{color-scheme:light;--soft:#e6edfb;--bg:#fff;--surf:#fff;--surf2:#fff9e8;--hdr:rgba(255,255,255,.96);--brand:#1e3d83;--magtx:#bf1a83;--field:#8790a6;--rg:#fdf0c8;--rgh:#fbe39a;--rgd:#f6efdc;--pin:#1b4797;--band:#1b4797;--blue:#1b4797;--navy:#1e3d83;--yel:#fece00;--mag:#bf1a83;--teal:#028bab;--cream:#fff5da;--cream2:#fee8af;--ink:#16244a;--mut:#4a5675;--line:#e6dcc0;--r:18px}
 *{box-sizing:border-box;min-width:0}
 html{scroll-behavior:smooth;scroll-padding-top:76px}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{animation:none!important;transition:none!important}}
@@ -222,6 +222,14 @@ body{max-width:var(--page-max);margin:0 auto;position:relative;isolation:isolate
 .when .sticker{margin:0 auto clamp(18px,3vw,34px);width:min(860px,calc(100% - 32px));max-width:none}
 .hd nav a.btn{padding:10px 26px}
 .affbtn{padding:8px 18px}
+
+/* Champs et listes déroulantes : flèche dessinée, même contour et même focus partout */
+.filters input,.filters select{border:2px solid var(--field);border-radius:14px;min-height:52px;font-weight:500}
+.filters select{-webkit-appearance:none;appearance:none;padding-right:48px;cursor:pointer;
+ background:var(--surf) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%231e3d83' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E") right 16px center/20px 20px no-repeat}
+:root[data-aff=sombre] .filters select{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23bcd0ff' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E")}
+.filters input:hover,.filters select:hover{border-color:var(--brand)}
+.filters input:focus,.filters select:focus{border-color:var(--brand);box-shadow:none;outline:3px solid var(--brand);outline-offset:2px}
 </style>
 </head>
 <body>
