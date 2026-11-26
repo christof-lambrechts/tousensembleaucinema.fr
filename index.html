@@ -230,6 +230,32 @@ body{max-width:var(--page-max);margin:0 auto;position:relative;isolation:isolate
 :root[data-aff=sombre] .filters select{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23bcd0ff' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E")}
 .filters input:hover,.filters select:hover{border-color:var(--brand)}
 .filters input:focus,.filters select:focus{border-color:var(--brand);box-shadow:none;outline:3px solid var(--brand);outline-offset:2px}
+
+/* Recherche : carte en haut (hauteur réduite), séances en 2 colonnes dessous */
+.split{display:block}
+.mapbox{position:relative;top:auto;margin-bottom:18px}
+.fig{aspect-ratio:auto;height:clamp(300px,38vw,440px);max-height:none;width:100%}
+.rhead{display:flex;justify-content:space-between;align-items:baseline;gap:8px 16px;flex-wrap:wrap;margin:0 4px 10px}.rhead .count{margin:0}
+.list{grid-template-columns:repeat(2,minmax(0,1fr));align-items:start}
+@media(max-width:760px){.list{grid-template-columns:minmax(0,1fr)}}
+.all-cta{text-align:center;margin:22px 0 0}
+.ss li{display:flex;gap:12px;align-items:center;flex-wrap:nowrap}.ss li>span{display:flex;flex-wrap:wrap;gap:2px 10px}
+.mini{width:38px;height:54px;object-fit:cover;border-radius:6px;flex:none;background:var(--cream2)}
+.fl .pst{aspect-ratio:2/3;padding:0}.fl .pst img{width:100%;height:100%;object-fit:cover;display:block}
+/* Page « Toutes les séances » : grandes cartes avec l'affiche */
+body.full .hero,body.full .when,body.full .why,body.full .films,body.full .faq{display:none}
+body.full .find{padding-top:28px}
+body.full .list{grid-template-columns:repeat(auto-fill,minmax(min(100%,420px),1fr));gap:16px}
+.bcard{display:grid;grid-template-columns:minmax(110px,150px) minmax(0,1fr);gap:18px;background:var(--surf);border-radius:var(--r);padding:16px;box-shadow:0 2px 0 var(--line);border:3px solid transparent}
+.bcard.sel{border-color:var(--magtx)}
+.aff{width:100%;aspect-ratio:2/3;object-fit:cover;border-radius:12px;background:var(--cream2);display:block}
+.bc h3{margin:2px 0 8px;font-size:22px;line-height:1.15;color:var(--brand)}
+.when2{margin:0;font-weight:800;color:var(--magtx)}
+.cine{margin:0 0 14px;font-weight:700}.cine button{all:unset;cursor:pointer;color:var(--ink)}.cine button:hover{text-decoration:underline}.cine .addr{font-weight:400}
+.bc .btn{min-height:44px;font-size:16px;padding:8px 18px}
+.lnk.sm{display:flex;font-size:15px;margin-top:6px}
+@media(max-width:480px){.bcard{grid-template-columns:96px minmax(0,1fr);gap:12px;padding:12px}.bc h3{font-size:19px}}
+:root[data-aff=contraste] .bcard{border:2px solid #000;box-shadow:none}
 </style>
 </head>
 <body>
@@ -237,7 +263,7 @@ body{max-width:var(--page-max);margin:0 auto;position:relative;isolation:isolate
 <header><div class="wrap hd">
   <a href="https://culture-relax.org" aria-label="Culture Relax, site de l'association"><img src="assets/logo-culture-relax.png" alt="Culture Relax" width="89" height="38"></a>
   <nav aria-label="Navigation principale">
-    <a href="#principe">Le principe</a><a href="#films">Les films</a><a href="#partenaires">Partenaires</a><a href="#faq">Questions</a>
+    <a href="/#principe">Le principe</a><a href="/#films">Les films</a><a href="/#partenaires">Partenaires</a><a href="/#faq">Questions</a>
     <div class="affw"><button type="button" class="affbtn" id="affBtn" aria-expanded="false" aria-controls="affP"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 3v18" /><path d="M12 3a9 9 0 0 1 0 18z" fill="currentColor"/></svg><span>Affichage et FALC</span></button>
     <div class="affp" id="affP" role="dialog" aria-labelledby="affT" hidden>
       <button type="button" class="affclose" id="affX" aria-label="Fermer le panneau Affichage">×</button>
@@ -253,7 +279,7 @@ body{max-width:var(--page-max);margin:0 auto;position:relative;isolation:isolate
         <label class="opt"><input type="radio" name="size" value="150"> 150 %</label></div></fieldset>
       <fieldset><legend>Animations</legend><button type="button" class="sw" id="motion" aria-pressed="false"><span>Réduire les animations<small>Carte et défilement sans mouvement</small></span><i aria-hidden="true"></i></button></fieldset>
     </div></div>
-    <a class="btn" href="#seances">Trouver ma séance</a>
+    <a class="btn" href="/seances">Trouver ma séance</a>
   </nav>
 </div></header>
 
@@ -281,7 +307,7 @@ body{max-width:var(--page-max);margin:0 auto;position:relative;isolation:isolate
 
 <section class="find" id="seances" aria-labelledby="t-seances">
   <div class="wrap">
-    <h2 id="t-seances">Trouvez votre séance<small data-falc="Cherchez votre ville. Choisissez un cinéma. Réservez sur le site du cinéma.">Cherchez par ville, code postal ou cinéma, ou cliquez sur une région de la carte. La réservation se fait directement sur le site du cinéma.</small></h2>
+    <h2 id="t-seances"><span id="findTitle">Trouvez votre séance</span><small data-falc="Cherchez votre ville. Choisissez un cinéma. Réservez sur le site du cinéma.">Cherchez par ville, code postal ou cinéma, ou cliquez sur une région de la carte. La réservation se fait directement sur le site du cinéma.</small></h2>
     <form class="filters" id="filters" role="search" onsubmit="return false">
       <div class="q"><label for="q">Ville, code postal ou cinéma</label><input id="q" type="search" autocomplete="off" placeholder="Ex. : Lyon, 34000, Pathé…"></div>
       <div><label for="film">Film</label><select id="film"><option value="">Tous les films</option></select></div>
@@ -300,10 +326,11 @@ body{max-width:var(--page-max);margin:0 auto;position:relative;isolation:isolate
         </div>
         <p class="maphint">Cliquez sur une région pour zoomer, puis sur un point pour voir le cinéma.</p>
       </div>
-      <div>
-        <p class="count" id="count" aria-live="polite"></p>
+      <div class="results">
+        <div class="rhead"><p class="count" id="count" aria-live="polite"></p><a class="lnk" id="allLink" href="/seances">Voir toutes les séances →</a></div>
         <div class="list" id="list"></div>
-        <button type="button" class="btn more" id="more" hidden>Voir plus de cinémas</button>
+        <button type="button" class="btn more" id="more" hidden>Voir plus de séances</button>
+        <p class="all-cta"><a class="btn mag" id="allBtn" href="/seances">Voir toutes les séances</a></p>
         <p class="sample" id="sampleNote">Toutes les séances sont en version accessible quand le film la propose (audiodescription, sous-titres SME). Liste mise à jour régulièrement jusqu'au 15 décembre.</p>
       </div>
     </div>
@@ -371,23 +398,33 @@ body{max-width:var(--page-max);margin:0 auto;position:relative;isolation:isolate
  "films": [
   {
    "id": "Le Chant des forêts",
-   "titre": "Le Chant des forêts"
+   "titre": "Le Chant des forêts",
+   "affiche": "https://fr.web.img4.acsta.net/img/f5/52/f5523e15c97af96169bdc93479553602.jpg",
+   "fiche": "https://culture-relax.org/movie/le-chant-des-forets-321789-2026-11-16"
   },
   {
    "id": "Toy Story 5",
-   "titre": "Toy Story 5"
+   "titre": "Toy Story 5",
+   "affiche": "https://fr.web.img6.acsta.net/img/67/de/67deb83751c63a4150d652f0c496f54a.jpg",
+   "fiche": "https://culture-relax.org/movie/toy-story-5-313256-2026-06-17"
   },
   {
    "id": "Tombé du ciel",
-   "titre": "Tombé du ciel"
+   "titre": "Tombé du ciel",
+   "affiche": "https://fr.web.img5.acsta.net/img/78/a7/78a70db88122966584f6dd674da06a6d.jpg",
+   "fiche": "https://culture-relax.org/movie/tombe-du-ciel-1000032856-2026-08-12"
   },
   {
    "id": "Le Corset",
-   "titre": "Le Corset"
+   "titre": "Le Corset",
+   "affiche": "https://fr.web.img3.acsta.net/img/a7/96/a796a67caa5bdab1508d9207abaf5284.jpg",
+   "fiche": "https://culture-relax.org/movie/le-corset-321790-2026-10-14"
   },
   {
    "id": "Astérix : le Royaume de Nubie",
-   "titre": "Astérix : le Royaume de Nubie"
+   "titre": "Astérix : le Royaume de Nubie",
+   "affiche": "https://fr.web.img5.acsta.net/img/5d/82/5d822abd6caebdff0b065a16e93b7f76.jpg",
+   "fiche": "https://culture-relax.org/movie/asterix-le-royaume-de-nubie-313265-2026-12-02"
   }
  ]
 }</script>
@@ -403,8 +440,8 @@ const C=Math.cos(M.LAT0*Math.PI/180);
 const proj=(lat,lng)=>[(lng-M.LON0)*C*M.K,-(lat-M.LAT0)*M.K];
 const DAY={sam:'Samedi 9',dim:'Dimanche 10'};
 const FILMS=D.films;let CIN=[];
-const filmById=Object.fromEntries(FILMS.map(f=>[f.id,f]));const ftitle=id=>filmById[id]?.titre||id;
-const st={q:'',film:'',region:'',day:'',sel:null,shown:12,load:'wait'};
+const filmById=Object.fromEntries(FILMS.map(f=>[norm(f.id),f]));const fobj=id=>filmById[norm(id)]||{titre:id};const ftitle=id=>fobj(id).titre;
+const st={q:'',film:'',region:'',day:'',sel:null,shown:6,load:'wait'};
 
 /* chiffres clés */
 const anim=(el,n)=>{let t0=null;const f=t=>{t0??=t;const p=Math.min(1,(t-t0)/900);el.textContent=Math.round(n*p*(2-p));if(p<1)requestAnimationFrame(f)};requestAnimationFrame(f)};
@@ -414,7 +451,7 @@ $('#film').insertAdjacentHTML('beforeend',FILMS.map(f=>`<option value="${esc(f.i
 
 /* films */
 const cols=['#bf1a83','#016b85','#1e3d83','#9c4500','#5b3aa0','#136b45'];
-$('#fl').innerHTML=FILMS.map((f,i)=>`<li><div class="pst" style="background:${cols[i%cols.length]}">${esc(f.titre)}</div><div class="t"><b>${esc(f.titre)}</b><button type="button" data-film="${esc(f.id)}">Voir les séances de ce film</button></div></li>`).join('');
+$('#fl').innerHTML=FILMS.map((f,i)=>`<li><div class="pst" style="background:${cols[i%cols.length]}">${f.affiche?`<img src="${esc(f.affiche)}" alt="Affiche du film ${esc(f.titre)}" loading="lazy">`:esc(f.titre)}</div><div class="t"><b>${esc(f.titre)}</b><button type="button" data-film="${esc(f.id)}">Voir les séances de ce film</button></div></li>`).join('');
 $('#fl').addEventListener('click',e=>{const b=e.target.closest('[data-film]');if(!b)return;st.film=b.dataset.film;$('#film').value=st.film;update();$('#seances').scrollIntoView()});
 
 /* carte */
@@ -436,9 +473,14 @@ let R=[];
 function drawPins(){const k=vb[2]/FULL[2],r=Math.max(2.2,9*k),ids=new Set(R.map(c=>c.id));
  $('#pins').innerHTML=R.filter(c=>c.lat!=null).map(c=>{const[x,y]=proj(c.lat,c.lng);return`<g class="pin${st.sel===c.id?' sel':''}" data-id="${esc(c.id)}" tabindex="0" role="button" aria-label="${esc(c.nom+', '+c.ville)}"><circle cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="${(st.sel===c.id?r*1.5:r).toFixed(2)}" stroke-width="${(r*.35).toFixed(2)}"/><title>${esc(c.nom+' – '+c.ville)}</title></g>`}).join('');
  const sel=$('#pins .sel');if(sel)$('#pins').appendChild(sel)}
-function card(c){const ss=sessionsOf(c);const q=encodeURIComponent(c.nom+' '+c.ville+' cinéma');return`<article class="card${st.sel===c.id?' sel':''}" id="c-${esc(c.id)}"><h3><button type="button" data-sel="${esc(c.id)}">${esc(c.nom)}</button></h3><p class="addr">${esc([c.cp,c.ville].filter(Boolean).join(' '))} · ${esc(c.region)}</p>
- <ul class="ss">${ss.map(s=>`<li><time>${esc(DAY[s.jour])} · ${esc(s.heure.replace(':','h'))}</time><span class="film">${esc(ftitle(s.film))}</span></li>`).join('')}</ul>
- ${c.url?`<a class="btn" href="${esc(c.url)}" target="_blank" rel="noopener">Réserver sur le site du cinéma<span aria-hidden="true"> ↗</span><span class="vh"> (nouvel onglet)</span></a>`:`<a class="btn ghost" href="https://www.google.com/search?q=${q}" target="_blank" rel="noopener">Trouver le site du cinéma<span aria-hidden="true"> ↗</span><span class="vh"> (recherche Google, nouvel onglet)</span></a>`}</article>`}
+const FULL_PAGE=location.pathname.replace(/\/$/,'').endsWith('/seances');
+const bookBtn=c=>{const q=encodeURIComponent(c.nom+' '+c.ville+' cinéma');return c.url?`<a class="btn" href="${esc(c.url)}" target="_blank" rel="noopener">Réserver sur le site du cinéma<span aria-hidden="true"> ↗</span><span class="vh"> (nouvel onglet)</span></a>`:`<a class="btn ghost" href="https://www.google.com/search?q=${q}" target="_blank" rel="noopener">Trouver le site du cinéma<span aria-hidden="true"> ↗</span><span class="vh"> (recherche Google, nouvel onglet)</span></a>`};
+const poster=(f,cls)=>f.affiche?`<img class="${cls}" src="${esc(f.affiche)}" alt="" loading="lazy">`:`<span class="${cls} noposter" aria-hidden="true"></span>`;
+function card(c){const ss=sessionsOf(c);return`<article class="card${st.sel===c.id?' sel':''}" id="c-${esc(c.id)}"><h3><button type="button" data-sel="${esc(c.id)}">${esc(c.nom)}</button></h3><p class="addr">${esc([c.cp,c.ville].filter(Boolean).join(' '))} · ${esc(c.region)}</p>
+ <ul class="ss">${ss.map(s=>`<li>${poster(fobj(s.film),'mini')}<span><time>${esc(DAY[s.jour])} · ${esc(s.heure.replace(':','h'))}</time><span class="film">${esc(ftitle(s.film))}</span></span></li>`).join('')}</ul>
+ ${bookBtn(c)}</article>`}
+/* grande carte : une séance, avec l'affiche */
+function bigcard(c,s,first){const f=fobj(s.film);return`<article class="bcard${st.sel===c.id?' sel':''}"${first?` id="c-${esc(c.id)}"`:''}>${poster(f,'aff')}<div class="bc"><p class="when2"><time>${esc(DAY[s.jour])} janvier · ${esc(s.heure.replace(':','h'))}</time></p><h3>${esc(f.titre)}</h3><p class="cine"><button type="button" data-sel="${esc(c.id)}">${esc(c.nom)}</button><br><span class="addr">${esc([c.cp,c.ville].filter(Boolean).join(' '))} · ${esc(c.region)}</span></p>${bookBtn(c)}${f.fiche?`<a class="lnk sm" href="${esc(f.fiche)}">Le film sur culture-relax.org</a>`:''}</div></article>`}
 function update(zoom){R=results();
  $$('.rg').forEach(p=>{p.classList.toggle('on',p.dataset.r===st.region);p.classList.toggle('dim',!!st.region&&p.dataset.r!==st.region)});
  if(zoom)zoomTo(st.region?bboxOf(st.region):FULL);
@@ -447,19 +489,21 @@ function update(zoom){R=results();
  const n=R.reduce((a,c)=>a+sessionsOf(c).length,0);
  $('#count').textContent=R.length?`${R.length} cinéma${R.length>1?'s':''}, ${n} séance${n>1?'s':''}`:'';
  const list=st.sel?[R.find(c=>c.id===st.sel),...R.filter(c=>c.id!==st.sel)]:R;
- $('#list').innerHTML=st.load==='wait'?'<div class="empty" role="status"><p>Chargement des séances…</p></div>':st.load==='err'?`<div class="empty" role="alert"><p><strong>La liste des séances n'a pas pu être chargée.</strong></p><p><a href="${esc(SRC)}">Voir la liste sur culture-relax.org</a></p></div>`:R.length?list.slice(0,st.shown).map(card).join(''):`<div class="empty"><p><strong>Aucune séance ne correspond à votre recherche.</strong></p><p>Essayez une autre ville ou effacez les filtres. De nouveaux cinémas rejoignent l'opération chaque semaine.</p><button type="button" class="btn" data-reset>Effacer les filtres</button></div>`;
- $('#more').hidden=R.length<=st.shown;drawPins()}
-function select(id,fromMap){st.sel=st.sel===id?null:id;st.shown=Math.max(st.shown,12);update(false);
+ const items=FULL_PAGE?list.flatMap(c=>sessionsOf(c).map((s,i)=>[c,s,i===0])).sort((a,b)=>a[0].id===st.sel?-1:b[0].id===st.sel?1:(a[1].jour+a[1].heure+a[0].ville).localeCompare(b[1].jour+b[1].heure+b[0].ville)):list;
+ const qs=new URLSearchParams(Object.entries({q:st.q,film:st.film,region:st.region,jour:st.day}).filter(([k,v])=>v)).toString();$('#allLink').href=$('#allBtn').href='/seances'+(qs?'?'+qs:'');
+ $('#list').innerHTML=st.load==='wait'?'<div class="empty" role="status"><p>Chargement des séances…</p></div>':st.load==='err'?`<div class="empty" role="alert"><p><strong>La liste des séances n'a pas pu être chargée.</strong></p><p><a href="${esc(SRC)}">Voir la liste sur culture-relax.org</a></p></div>`:R.length?(FULL_PAGE?items.map(([c,s,f])=>bigcard(c,s,f)).join(''):items.slice(0,st.shown).map(card).join('')):`<div class="empty"><p><strong>Aucune séance ne correspond à votre recherche.</strong></p><p>Essayez une autre ville ou effacez les filtres. De nouveaux cinémas rejoignent l'opération chaque semaine.</p><button type="button" class="btn" data-reset>Effacer les filtres</button></div>`;
+ $('#more').hidden=FULL_PAGE||R.length<=st.shown;$('#allBtn').parentNode.hidden=FULL_PAGE||!R.length;$('#allLink').hidden=FULL_PAGE;drawPins()}
+function select(id,fromMap){st.sel=st.sel===id?null:id;st.shown=Math.max(st.shown,6);update(false);
  if(st.sel&&fromMap){const el=document.getElementById('c-'+id);if(el&&innerWidth>900)el.scrollIntoView({block:'nearest',behavior:R0.dataset.motion==='reduce'?'auto':'smooth'});else if(el)el.scrollIntoView({block:'start'})}
  if(st.sel&&!fromMap){const c=CIN.find(x=>x.id===id);if(c.lat==null)return;const[x,y]=proj(c.lat,c.lng);const s=Math.min(vb[2],180);zoomTo([x-s/2,y-s/2,s,s])}}
 $('#list').addEventListener('click',e=>{const b=e.target.closest('[data-sel]');if(b)select(b.dataset.sel,false);if(e.target.closest('[data-reset]'))reset()});
-let tq;$('#q').addEventListener('input',e=>{clearTimeout(tq);tq=setTimeout(()=>{st.q=e.target.value;st.shown=12;update(false)},120)});
+let tq;$('#q').addEventListener('input',e=>{clearTimeout(tq);tq=setTimeout(()=>{st.q=e.target.value;st.shown=6;update(false)},120)});
 $('#film').addEventListener('change',e=>{st.film=e.target.value;update(false)});
-$('#region').addEventListener('change',e=>{st.region=e.target.value;st.shown=12;update(true)});
+$('#region').addEventListener('change',e=>{st.region=e.target.value;st.shown=6;update(true)});
 $$('[data-day]').forEach(b=>b.addEventListener('click',()=>{st.day=b.dataset.day;$$('[data-day]').forEach(x=>x.setAttribute('aria-pressed',x===b));update(false)}));
 $('#zoomout').addEventListener('click',()=>{st.region='';$('#region').value='';update(true)});
-$('#more').addEventListener('click',()=>{st.shown+=12;update(false)});
-function reset(){Object.assign(st,{q:'',film:'',region:'',day:'',sel:null,shown:12});$('#q').value='';$('#film').value='';$('#region').value='';$$('[data-day]').forEach(x=>x.setAttribute('aria-pressed',x.dataset.day===''));update(true)}
+$('#more').addEventListener('click',()=>{st.shown+=6;update(false)});
+function reset(){Object.assign(st,{q:'',film:'',region:'',day:'',sel:null,shown:6});$('#q').value='';$('#film').value='';$('#region').value='';$$('[data-day]').forEach(x=>x.setAttribute('aria-pressed',x.dataset.day===''));update(true)}
 $('#reset').addEventListener('click',reset);
 
 /* facile à lire et préférences d'affichage */
@@ -492,7 +536,9 @@ function boot(list){CIN=list;st.load='ok';
  $('#region').insertAdjacentHTML('beforeend',regions.map(r=>`<option>${esc(r)}</option>`).join(''));
  const n={};CIN.forEach(c=>c.seances.forEach(s=>{n[norm(s.film)]=(n[norm(s.film)]||0)+1}));
  $$('#fl [data-film]').forEach(b=>{const k=n[norm(b.dataset.film)]||0;b.textContent=k?`Voir les ${k} séance${k>1?'s':''} de ce film`:'Séances bientôt annoncées'});
- update(false)}
+ const P=new URLSearchParams(location.search);if(P.get('q')){st.q=P.get('q');$('#q').value=st.q}if(P.get('film')){st.film=P.get('film');$('#film').value=st.film}if(P.get('region')){st.region=P.get('region');$('#region').value=st.region}if(P.get('jour')){st.day=P.get('jour');$$('[data-day]').forEach(x=>x.setAttribute('aria-pressed',x.dataset.day===st.day))}
+ update(!!st.region)}
+if(FULL_PAGE){document.body.classList.add('full');document.title='Toutes les séances · Tous Ensemble au Cinéma';$('#findTitle').textContent='Toutes les séances';$('#t-seances small').dataset.falc='Choisissez un cinéma près de chez vous. Réservez sur le site du cinéma.';}
 fetch('/api/seances').then(r=>{if(!r.ok)throw 0;return r.json()}).then(j=>boot(j.cinemas||[])).catch(()=>{st.load='err';update(false)});
 update(false);
 }

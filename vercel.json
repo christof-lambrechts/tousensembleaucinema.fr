@@ -1,0 +1,3 @@
+{
+  "rewrites": [{ "source": "/seances", "destination": "/index.html" }]
+}
