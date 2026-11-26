@@ -767,7 +767,9 @@ update(false);
  // « Passer l’animation » : aller juste après l’ouverture, dates en haut de l’écran
  el.skip.addEventListener('click',ev=>{ev.preventDefault();const nav=header.getBoundingClientRect().height;const top=scrollY+el.seq.getBoundingClientRect().top-nav+run+el.seq.querySelector('.pinned').offsetHeight;scrollTo({top:isStatic()?scrollY+el.after.getBoundingClientRect().top-nav:top,behavior:'instant'});el.after.focus({preventScroll:true})});
  Promise.all(files.map(src=>{const i=new Image();i.src=src;return i.decode()})).then(()=>{ready=true;render()}).catch(()=>{failed=true;layout()});
- el.decor.decode().then(async()=>{
+ // le module des personnages est chargé en différé : on attend qu’il soit prêt
+ const moduleReady=()=>window.createTeacAudience?Promise.resolve():new Promise(r=>{if(document.readyState!=='loading')return r();document.addEventListener('DOMContentLoaded',r,{once:true})});
+ Promise.all([el.decor.decode(),moduleReady()]).then(async()=>{
   if(!window.createTeacAudience)return;
   try{audience=await createTeacAudience({canvas:el.fg,image:el.decor,onState:()=>{}});render()}catch(e){/* WebGL indisponible : décor fixe */}
  }).catch(()=>{failed=true;layout()});
