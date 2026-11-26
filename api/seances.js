@@ -23,7 +23,8 @@ async function geocode(ville, codeRegion) {
   const key = norm(ville) + '|' + codeRegion;
   if (geoCache.has(key)) return geoCache.get(key);
   const ask = async withRegion => {
-    const u = `https://geo.api.gouv.fr/communes?nom=${encodeURIComponent(ville.replace(/-/g, ' '))}&fields=nom,codesPostaux,centre&boost=population&limit=1${withRegion && codeRegion ? '&codeRegion=' + codeRegion : ''}`;
+    const nomCommune = ville.replace(/-/g, ' ').replace(/\bste\b\.?/i, 'Sainte').replace(/\bst\b\.?/i, 'Saint');
+    const u = `https://geo.api.gouv.fr/communes?nom=${encodeURIComponent(nomCommune)}&fields=nom,codesPostaux,centre&boost=population&limit=1${withRegion && codeRegion ? '&codeRegion=' + codeRegion : ''}`;
     const r = await fetch(u); const j = await r.json(); return j && j[0];
   };
   let c = null;
@@ -63,8 +64,11 @@ module.exports = async (req, res) => {
       const g = await geocode(c.villeSource, c.codeRegion);
       c.id = 'c' + i;
       Object.assign(c, g || { ville: pretty(c.villeSource), cp: '', lat: null, lng: null });
-      const lien = LIENS[norm(c.nom) + '|' + norm(c.ville)] || LIENS[norm(c.nom) + '|' + norm(c.villeSource)];
-      c.url = lien || null;
+      // Fiche complémentaire du cinéma (data/liens.json) : un lien, ou { url, lat, lng } pour le placer précisément
+      let fiche = LIENS[norm(c.nom) + '|' + norm(c.ville)] || LIENS[norm(c.nom) + '|' + norm(c.villeSource)] || null;
+      if (typeof fiche === 'string') fiche = { url: fiche };
+      c.url = (fiche && fiche.url) || null;
+      if (fiche && fiche.lat != null) { c.lat = fiche.lat; c.lng = fiche.lng; }
       c.seances.sort((a, b) => (a.jour + a.heure).localeCompare(b.jour + b.heure));
       delete c.villeSource; delete c.codeRegion;
     }));

@@ -1,3 +1,5 @@
 {
-  "_comment": "Liens de réservation par cinéma. Clé : nom du cinéma et ville comme dans l'article Culture Relax, en minuscules sans accents, séparés par |. Exemple : \"cinema arvor|rennes\": \"https://...\""
+  "_comment": "Fiche complémentaire par cinéma. Clé : nom du cinéma et ville comme dans l'article Culture Relax, en minuscules sans accents, séparés par |. Valeur : le lien de réservation, ou { \"url\": \"...\", \"lat\": .., \"lng\": .. } pour aussi placer le cinéma précisément sur la carte.",
+  "ugc bercy|paris": { "lat": 48.8336, "lng": 2.3863 },
+  "cgr paris lilas|paris": { "lat": 48.8771, "lng": 2.4068 }
 }
