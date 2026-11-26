@@ -85,9 +85,12 @@ module.exports = async (req, res) => {
 
     await Promise.all(cinemas.map(async (c, i) => {
       // Homonymes (deux communes du même nom) : on garde le résultat groupé seulement s'il est dans la bonne région
-      let g = geoCache.get(norm(c.villeSource));
-      if (g && !norm(g.ctx).includes(norm(c.region))) g = null;
+      // et seulement si la commune trouvée porte bien le nom demandé (« Le Pontet » ne doit pas donner « Lambesc »)
+      const brut = geoCache.get(norm(c.villeSource));
+      const nomOk = x => { const a = norm(x.ville).replace(/\bst\b/g, 'saint'), b = norm(c.villeSource).replace(/\bst\b/g, 'saint'); return a === b || a.startsWith(b + ' ') || b.startsWith(a + ' '); };
+      let g = brut && norm(brut.ctx).includes(norm(c.region)) && nomOk(brut) ? brut : null;
       if (!g) g = await geocode(c.villeSource, c.codeRegion);
+      if (!g && brut && nomOk(brut)) g = brut;
       if (g) { g = { ...g }; delete g.ctx; }
       c.id = 'c' + i;
       Object.assign(c, g || { ville: pretty(c.villeSource), cp: '', lat: null, lng: null });
