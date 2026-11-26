@@ -27,7 +27,10 @@ h2{font:400 clamp(34px,5vw,52px)/1.02 Anton,Impact,sans-serif;text-transform:upp
 .btn{display:inline-flex;align-items:center;gap:10px;min-height:48px;padding:10px 22px;border-radius:999px;border:0;background:var(--yel);color:var(--brand);font:700 17px Outfit,sans-serif;text-decoration:none;cursor:pointer;box-shadow:0 3px 0 var(--navy)}
 .btn:hover{transform:translateY(-1px)}.btn.mag{background:var(--mag);color:#fff;box-shadow:0 3px 0 #7d0f55}
 /* header */
-header{position:sticky;top:0;z-index:20;background:var(--hdr);backdrop-filter:blur(6px);border-bottom:1px solid var(--line)}
+header{position:sticky;top:0;z-index:20;background:var(--hdr);backdrop-filter:blur(6px);transition:box-shadow .25s ease}
+/* pas de liseré : une ombre douce apparaît dès que la page défile */
+header.ombre{box-shadow:0 6px 18px -10px rgba(14,30,70,.35)}
+:root[data-aff=contraste] header{border-bottom:2px solid var(--line)}
 .hd{display:flex;align-items:center;gap:16px;min-height:64px;flex-wrap:wrap}
 /* menu : logo calé à gauche, boutons à droite, sur toute la largeur de la page */
 header .wrap.hd{max-width:none;padding:0 clamp(16px,2.2vw,32px)}
@@ -319,6 +322,9 @@ body.filmp .sequence,body.filmp .static-title,body.filmp .when,body.filmp .why,b
 :root[data-scene=static] .slogan{display:none}
 /* fondu vers le crème des dates, pour adoucir la séparation (assez court pour laisser le crédit lisible) */
 .pinned::after{content:"";position:absolute;left:0;right:0;bottom:0;height:clamp(28px,6%,64px);background:linear-gradient(to bottom,transparent,var(--cream));z-index:5;pointer-events:none}
+/* fondu blanc en haut, sous le menu */
+.pin-all::before{content:"";position:absolute;left:0;right:0;top:0;height:clamp(24px,5%,56px);background:linear-gradient(to top,transparent,#fff);z-index:6;pointer-events:none}
+:root[data-scene=static] .pin-all::before{display:none}
 .skip-scene{position:absolute;z-index:6;left:50%;bottom:12px;transform:translate(-50%,200%);background:#fff;color:#1e3d83;font:700 15px Outfit,sans-serif;padding:10px 18px;border-radius:999px;border:2px solid #1e3d83;text-decoration:none}
 .skip-scene:focus{transform:translate(-50%,0)}
 :root[data-scene=static] .decor,:root[data-scene=static] .foreground,:root[data-scene=static] .curtain{filter:none}
@@ -693,6 +699,8 @@ update(false);
 }
 
 
+/* ombre du menu au défilement */
+(()=>{const hd=document.querySelector('header');const f=()=>hd.classList.toggle('ombre',scrollY>4);addEventListener('scroll',f,{passive:true});f()})();
 /* ===== Micro-interactions : apparition au défilement, compteurs ===== */
 (()=>{
  const R0=document.documentElement,calm=()=>R0.dataset.motion==='reduce'||matchMedia('(prefers-reduced-motion: reduce)').matches;
