@@ -12,7 +12,7 @@ const REGIONS = {
   'normandie': ['Normandie', '28'], 'nouvelle aquitaine': ['Nouvelle-Aquitaine', '75'], 'occitanie': ['Occitanie', '76'],
   'pays de la loire': ['Pays de la Loire', '52'], "provence alpes cote d'azur": ["Provence-Alpes-Côte d'Azur", '93'],
 };
-const geoCache = new Map();
+const geoCache = new Map(); // garde les villes déjà placées tant que la fonction reste active
 
 const norm = s => String(s || '').toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/[-’]/g, m => (m === '-' ? ' ' : "'")).replace(/\s+/g, ' ').trim();
 const decode = s => s.replace(/<[^>]*>/g, ' ').replace(/&nbsp;|&#160;/g, ' ').replace(/&amp;/g, '&').replace(/&#39;|&#x27;|&rsquo;|&apos;/g, "'").replace(/&quot;/g, '"').replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/\s+/g, ' ').trim();
@@ -60,8 +60,35 @@ module.exports = async (req, res) => {
       if (!c.seances.some(x => x.jour === s.jour && x.heure === s.heure && x.film === s.film)) c.seances.push(s);
     }
 
+    // Toutes les villes en une seule requête (géocodage groupé de la Base adresse nationale)
+    const villes = [...new Set(cinemas.map(c => c.villeSource))].filter(v => !geoCache.has(norm(v)));
+    if (villes.length) {
+      try {
+        const csv = 'ville\n' + villes.map(v => '"' + v.replace(/"/g, '') + '"').join('\n');
+        const fd = new FormData();
+        fd.append('data', new Blob([csv], { type: 'text/csv' }), 'villes.csv');
+        fd.append('columns', 'ville');
+        fd.append('result_type', 'municipality');
+        const out = await (await fetch('https://api-adresse.data.gouv.fr/search/csv/', { method: 'POST', body: fd })).text();
+        const lignes = out.trim().split(/\r?\n/);
+        const tete = lignes.shift().split(',');
+        const col = k => tete.indexOf(k);
+        for (const l of lignes) {
+          const cells = []; let cur = '', q = false;
+          for (const ch of l) { if (ch === '"') q = !q; else if (ch === ',' && !q) { cells.push(cur); cur = ''; } else cur += ch; }
+          cells.push(cur);
+          const score = parseFloat(cells[col('result_score')]);
+          if (score >= 0.5 && cells[col('latitude')]) geoCache.set(norm(cells[0]), { ville: cells[col('result_city')] || cells[0], cp: cells[col('result_postcode')] || '', lat: +cells[col('latitude')], lng: +cells[col('longitude')], ctx: cells[col('result_context')] || '' });
+        }
+      } catch (e) { /* repli ville par ville ci-dessous */ }
+    }
+
     await Promise.all(cinemas.map(async (c, i) => {
-      const g = await geocode(c.villeSource, c.codeRegion);
+      // Homonymes (deux communes du même nom) : on garde le résultat groupé seulement s'il est dans la bonne région
+      let g = geoCache.get(norm(c.villeSource));
+      if (g && !norm(g.ctx).includes(norm(c.region))) g = null;
+      if (!g) g = await geocode(c.villeSource, c.codeRegion);
+      if (g) { g = { ...g }; delete g.ctx; }
       c.id = 'c' + i;
       Object.assign(c, g || { ville: pretty(c.villeSource), cp: '', lat: null, lng: null });
       // Fiche complémentaire du cinéma (data/liens.json) : un lien, ou { url, lat, lng } pour le placer précisément
