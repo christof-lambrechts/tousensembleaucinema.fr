@@ -38,7 +38,7 @@ header{position:sticky;top:0;z-index:20;background:var(--hdr);backdrop-filter:bl
 @media(max-width:760px){.hd nav a{display:none}.hd nav a.btn{display:inline-flex;min-height:40px;padding:6px 14px;font-size:15px}}
 /* hero */
 .sticker{position:relative;max-width:820px;margin:0 auto;text-align:center;color:var(--brand);font-size:clamp(22px,3.3vw,42px);line-height:1.1;padding:.55em 1.3em .95em;text-wrap:balance}
-.sticker::before{content:"";position:absolute;inset:0;background:url(assets/pinceau-jaune.png) center/100% 100% no-repeat;z-index:-1}
+.sticker::before{content:"";position:absolute;inset:0;background:url(/assets/pinceau-jaune.png) center/100% 100% no-repeat;z-index:-1}
 .sticker{isolation:isolate}.sticker b{font-weight:800;display:block}
 .sticker span{font-weight:500}
 h1.sr,.vh{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
@@ -303,7 +303,7 @@ body.filmp .hero,body.filmp .when,body.filmp .why,body.filmp .films,body.filmp .
 <body>
 <a class="skip" href="#seances">Aller directement à la recherche de séances</a>
 <header><div class="wrap hd">
-  <a href="https://culture-relax.org" aria-label="Culture Relax, site de l'association"><img src="assets/logo-culture-relax.png" alt="Culture Relax" width="89" height="38"></a>
+  <a href="https://culture-relax.org" aria-label="Culture Relax, site de l'association"><img src="/assets/logo-culture-relax.png" alt="Culture Relax" width="89" height="38"></a>
   <nav aria-label="Navigation principale">
     <a href="/#principe">Le principe</a><a href="/#films">Les films</a><a href="/#partenaires">Partenaires</a><a href="/#faq">Questions</a>
     <div class="affw"><button type="button" class="affbtn" id="affBtn" aria-expanded="false" aria-controls="affP"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 3v18" /><path d="M12 3a9 9 0 0 1 0 18z" fill="currentColor"/></svg><span>Affichage et FALC</span></button>
@@ -328,8 +328,8 @@ body.filmp .hero,body.filmp .when,body.filmp .why,body.filmp .films,body.filmp .
 <main id="main">
 <div class="hero">
   <div class="stage">
-    <img class="salle" src="assets/salle.webp" srcset="assets/salle-900.webp 900w, assets/salle.webp 1536w" sizes="(max-width:1440px) 100vw, 1440px" alt="Illustration : une salle de cinéma pleine de spectateurs de tous âges, dont une personne en fauteuil roulant et un enfant avec un casque anti-bruit, devant un grand écran." width="1536" height="862">
-    <h1 class="titre"><img src="assets/titre-tous-ensemble.svg" alt="Tous Ensemble au Cinéma avec Culture Relax" width="507" height="392"></h1>
+    <img class="salle" src="/assets/salle.webp" srcset="/assets/salle-900.webp 900w, /assets/salle.webp 1536w" sizes="(max-width:1440px) 100vw, 1440px" alt="Illustration : une salle de cinéma pleine de spectateurs de tous âges, dont une personne en fauteuil roulant et un enfant avec un casque anti-bruit, devant un grand écran." width="1536" height="862">
+    <h1 class="titre"><img src="/assets/titre-tous-ensemble.svg" alt="Tous Ensemble au Cinéma avec Culture Relax" width="507" height="392"></h1>
     <p class="credit">Illustration © Marie Charlemagne</p>
   </div>
 </div>
@@ -438,15 +438,15 @@ body.filmp .hero,body.filmp .when,body.filmp .why,body.filmp .films,body.filmp .
 <section class="part" id="partenaires" aria-labelledby="t-part">
   <div class="wrap">
     <h2 id="t-part">Un événement national</h2>
-    <div class="org"><p>Organisé par</p><a href="https://culture-relax.org"><img src="assets/partenaires/culturerelax.webp" alt="Culture Relax"></a></div>
+    <div class="org"><p>Organisé par</p><a href="https://culture-relax.org"><img src="/assets/partenaires/culturerelax.webp" alt="Culture Relax"></a></div>
     <h3>Porté par les réseaux de cinémas</h3>
-    <ul class="logos"><li><img src="assets/partenaires/cgr.webp" alt="CGR Cinémas" loading="lazy"></li><li><img src="assets/partenaires/pathe.webp" alt="Cinémas Pathé" loading="lazy"></li><li class="txt">Ciné Relax</li><li><img src="assets/partenaires/cineville.webp" alt="Cinéville" loading="lazy"></li><li><img src="assets/partenaires/kinepolis.webp" alt="Kinepolis" loading="lazy"></li><li><img src="assets/partenaires/megarama.webp" alt="Mégarama" loading="lazy"></li><li><img src="assets/partenaires/ugc.webp" alt="UGC" loading="lazy"></li><li><img src="assets/partenaires/cineo.webp" alt="Cinéo" loading="lazy"></li><li class="txt">Cinewest</li><li class="txt">Grand Écran</li><li><img src="assets/partenaires/noe.webp" alt="Noé Cinémas" loading="lazy"></li></ul>
+    <ul class="logos"><li><img src="/assets/partenaires/cgr.webp" alt="CGR Cinémas" loading="lazy"></li><li><img src="/assets/partenaires/pathe.webp" alt="Cinémas Pathé" loading="lazy"></li><li class="txt">Ciné Relax</li><li><img src="/assets/partenaires/cineville.webp" alt="Cinéville" loading="lazy"></li><li><img src="/assets/partenaires/kinepolis.webp" alt="Kinepolis" loading="lazy"></li><li><img src="/assets/partenaires/megarama.webp" alt="Mégarama" loading="lazy"></li><li><img src="/assets/partenaires/ugc.webp" alt="UGC" loading="lazy"></li><li><img src="/assets/partenaires/cineo.webp" alt="Cinéo" loading="lazy"></li><li class="txt">Cinewest</li><li class="txt">Grand Écran</li><li><img src="/assets/partenaires/noe.webp" alt="Noé Cinémas" loading="lazy"></li></ul>
     <p class="also">… ainsi que des cinémas indépendants partout en France.</p>
     <h3>Avec le soutien de</h3>
-    <ul class="logos"><li><img src="assets/partenaires/cnc.webp" alt="CNC, Centre national du cinéma et de l'image animée" loading="lazy"></li><li><img src="assets/partenaires/canal.webp" alt="Fondation Canal+" loading="lazy"></li><li><img src="assets/partenaires/fsg.webp" alt="Fondation Sainte-Geneviève" loading="lazy"></li><li><img src="assets/partenaires/entraide.webp" alt="L'Entraide du Cinéma" loading="lazy"></li><li><img src="assets/partenaires/matmut.webp" alt="Matmut pour les Arts" loading="lazy"></li></ul>
-    <ul class="logos"><li><img src="assets/partenaires/allocine.webp" alt="AlloCiné" loading="lazy"></li><li><img src="assets/partenaires/cinegroup.webp" alt="Ciné Group" loading="lazy"></li><li><img src="assets/partenaires/confisud.webp" alt="Confisud" loading="lazy"></li><li><img src="assets/partenaires/fnef.webp" alt="FNEF, Fédération nationale des éditeurs de films" loading="lazy"></li><li><img src="assets/partenaires/globecast.webp" alt="Globecast" loading="lazy"></li><li><img src="assets/partenaires/yeuxdits.webp" alt="Les Yeux Dits" loading="lazy"></li><li><img src="assets/partenaires/bavarde.webp" alt="La Bavarde" loading="lazy"></li><li><img src="assets/partenaires/passculture.webp" alt="pass Culture" loading="lazy"></li><li class="txt">Premium Events</li><li><img src="assets/partenaires/retour.webp" alt="Retour d'image" loading="lazy"></li><li><img src="assets/partenaires/scare.webp" alt="SCARE, Syndicat des cinémas d'art, de répertoire et d'essai" loading="lazy"></li></ul>
+    <ul class="logos"><li><img src="/assets/partenaires/cnc.webp" alt="CNC, Centre national du cinéma et de l'image animée" loading="lazy"></li><li><img src="/assets/partenaires/canal.webp" alt="Fondation Canal+" loading="lazy"></li><li><img src="/assets/partenaires/fsg.webp" alt="Fondation Sainte-Geneviève" loading="lazy"></li><li><img src="/assets/partenaires/entraide.webp" alt="L'Entraide du Cinéma" loading="lazy"></li><li><img src="/assets/partenaires/matmut.webp" alt="Matmut pour les Arts" loading="lazy"></li></ul>
+    <ul class="logos"><li><img src="/assets/partenaires/allocine.webp" alt="AlloCiné" loading="lazy"></li><li><img src="/assets/partenaires/cinegroup.webp" alt="Ciné Group" loading="lazy"></li><li><img src="/assets/partenaires/confisud.webp" alt="Confisud" loading="lazy"></li><li><img src="/assets/partenaires/fnef.webp" alt="FNEF, Fédération nationale des éditeurs de films" loading="lazy"></li><li><img src="/assets/partenaires/globecast.webp" alt="Globecast" loading="lazy"></li><li><img src="/assets/partenaires/yeuxdits.webp" alt="Les Yeux Dits" loading="lazy"></li><li><img src="/assets/partenaires/bavarde.webp" alt="La Bavarde" loading="lazy"></li><li><img src="/assets/partenaires/passculture.webp" alt="pass Culture" loading="lazy"></li><li class="txt">Premium Events</li><li><img src="/assets/partenaires/retour.webp" alt="Retour d'image" loading="lazy"></li><li><img src="/assets/partenaires/scare.webp" alt="SCARE, Syndicat des cinémas d'art, de répertoire et d'essai" loading="lazy"></li></ul>
     <h3>Partenaires médias</h3>
-    <ul class="logos"><li><img src="assets/partenaires/boxoffice.webp" alt="Boxoffice Pro" loading="lazy"></li><li><img src="assets/partenaires/filmfr.webp" alt="Le Film Français" loading="lazy"></li><li class="txt">Satellifacts</li><li><img src="assets/partenaires/ecrantotal.webp" alt="Écran Total" loading="lazy"></li></ul>
+    <ul class="logos"><li><img src="/assets/partenaires/boxoffice.webp" alt="Boxoffice Pro" loading="lazy"></li><li><img src="/assets/partenaires/filmfr.webp" alt="Le Film Français" loading="lazy"></li><li class="txt">Satellifacts</li><li><img src="/assets/partenaires/ecrantotal.webp" alt="Écran Total" loading="lazy"></li></ul>
   </div>
 </section>
 </main>
@@ -615,7 +615,7 @@ if(FILM){st.film=FILM.id;$('#film').value=FILM.id;$('#fpage').hidden=false;docum
  document.title=FILM.titre+' · Tous Ensemble au Cinéma';$('#fTitre').textContent=FILM.titre;$('#fAff').src=FILM.affiche;$('#fAff').alt='Affiche du film '+FILM.titre;$('#fFiche').href=FILM.fiche;
  fetch('/api/film?slug='+encodeURIComponent(FILM.strapi)).then(r=>r.ok?r.json():null).then(f=>{if(!f)return;
   $('#fMeta').textContent=[f.genres,f.duree,f.realisateur&&('De '+f.realisateur)].filter(Boolean).join(' · ');$('#fResume').textContent=f.resume;
-  if(f.bandeAnnonce){const v=$('#fVideo');v.src=f.bandeAnnonce;v.poster=FILM.affiche;$('#fTrailer').hidden=false}}).catch(()=>{});}
+  if(f.bandeAnnonce){const v=$('#fVideo');v.src=f.bandeAnnonce;$('#fTrailer').hidden=false}}).catch(()=>{});}
 if(FULL_PAGE){document.body.classList.add('full');if(!FILM)document.title='Toutes les séances · Tous Ensemble au Cinéma';$('#findTitle').textContent=FILM?'Les cinémas qui le projettent':'Toutes les séances';$('#t-seances small').dataset.falc='Choisissez un cinéma près de chez vous. Réservez sur le site du cinéma.';}
 fetch('/api/seances').then(r=>{if(!r.ok)throw 0;return r.json()}).then(j=>boot(j.cinemas||[])).catch(()=>{st.load='err';update(false)});
 update(false);
