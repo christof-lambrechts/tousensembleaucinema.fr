@@ -324,6 +324,25 @@ body.filmp .sequence,body.filmp .static-title,body.filmp .when,body.filmp .why,b
  .static-title{position:static;width:auto;height:auto;overflow:visible;clip:auto;white-space:normal;text-align:center;color:#1e3d83;font-size:19px;line-height:1.2;margin:0;padding:14px 16px 10px;background:#fff;text-wrap:balance}
  .slogan{font-size:3cqw}
 }
+
+/* Micro-interactions : discrètes, coupées si l’on réduit les animations (réglage de l’appareil ou panneau Affichage) */
+.rv{opacity:0;translate:0 18px;transition:opacity .6s ease,translate .6s cubic-bezier(.2,.7,.2,1);transition-delay:calc(var(--i,0)*70ms)}
+.rv.in{opacity:1;translate:0 0}
+.btn{transition:transform .18s ease,box-shadow .18s ease,filter .18s}.btn:active{transform:translateY(1px) scale(.98)}
+.ticket{transition:scale .25s cubic-bezier(.3,1.6,.5,1)}.ticket:hover{scale:1.05}
+.ticket{animation:flotte 5s ease-in-out infinite}
+@keyframes flotte{0%,100%{translate:0 0}50%{translate:0 -6px}}
+.feat li{transition:translate .2s ease,box-shadow .2s ease}.feat li:hover{translate:0 -4px;box-shadow:0 10px 22px -14px #1e3d8366}
+.feat li:hover svg{animation:hop .5s cubic-bezier(.3,1.6,.5,1)}
+@keyframes hop{40%{translate:0 -6px;rotate:-6deg}100%{translate:0 0;rotate:0deg}}
+.fcard{transition:transform .15s,box-shadow .2s ease}.fcard:hover,.fcard:focus-within{box-shadow:0 16px 30px -18px #1e3d8380}
+.fcard .pst{overflow:hidden}.fcard .pst img{transition:scale .4s ease}.fcard:hover .pst img{scale:1.05}
+.logos li{transition:translate .2s ease,border-color .2s}.logos li:hover{translate:0 -3px;border-color:#1e3d83}
+.pin circle{transition:r .15s}.pin.sel circle{transform-box:fill-box;transform-origin:center;animation:pouls 1.4s ease-in-out 3}
+@keyframes pouls{50%{scale:1.35}}
+.kpi strong{font-variant-numeric:tabular-nums}
+@media(prefers-reduced-motion:reduce){.rv{opacity:1;translate:none}}
+:root[data-motion=reduce] .rv{opacity:1;translate:none}
 </style>
 </head>
 <body>
@@ -659,6 +678,21 @@ fetch('/api/seances').then(r=>{if(!r.ok)throw 0;return r.json()}).then(j=>boot(j
 update(false);
 }
 
+
+/* ===== Micro-interactions : apparition au défilement, compteurs ===== */
+(()=>{
+ const R0=document.documentElement,calm=()=>R0.dataset.motion==='reduce'||matchMedia('(prefers-reduced-motion: reduce)').matches;
+ if(!('IntersectionObserver' in window))return;
+ const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{rootMargin:'0px 0px -8% 0px'});
+ function arm(){if(calm())return;document.querySelectorAll('.why h2,.feat li,.natl,#fl>li,.films h2,.faq h2,.faq details,.part h2,.logos li').forEach(n=>{if(n.classList.contains('rv'))return;const sib=n.parentElement?[...n.parentElement.children].indexOf(n):0;n.style.setProperty('--i',Math.min(sib,6));n.classList.add('rv');io.observe(n)})}
+ arm();new MutationObserver(()=>arm()).observe(document.getElementById('fl')||document.body,{childList:true});
+ // compteurs cinémas / villes / régions : montent jusqu’au total la première fois qu’on les voit
+ const kpi=document.querySelector('.kpi');if(!kpi)return;
+ const kio=new IntersectionObserver(es=>{if(!es[0].isIntersecting)return;const nums=[...kpi.querySelectorAll('strong')];const fin=nums.map(n=>+n.textContent||0);if(calm()||!fin.some(Boolean))return;kio.disconnect();
+  kpi.setAttribute('aria-live','off');const t0=performance.now(),d=900;
+  (function step(t){const k=Math.min(1,(t-t0)/d),e=1-Math.pow(1-k,3);nums.forEach((n,i)=>n.textContent=Math.round(fin[i]*e));if(k<1)requestAnimationFrame(step);else{nums.forEach((n,i)=>n.textContent=fin[i]);kpi.setAttribute('aria-live','polite')}})(t0)},{threshold:.6});
+ kio.observe(kpi);
+})();
 /* ===== Ouverture du rideau au défilement ===== */
 (()=>{
  if(document.body.classList.contains('full'))return;
