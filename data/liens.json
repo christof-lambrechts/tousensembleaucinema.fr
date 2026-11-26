@@ -1,0 +1,3 @@
+{
+  "_comment": "Liens de réservation par cinéma. Clé : nom du cinéma et ville comme dans l'article Culture Relax, en minuscules sans accents, séparés par |. Exemple : \"cinema arvor|rennes\": \"https://...\""
+}

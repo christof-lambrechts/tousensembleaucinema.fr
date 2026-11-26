@@ -103,6 +103,7 @@ h1.sr,.vh{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0
 .bd{font-size:12px;font-weight:700;border-radius:6px;padding:2px 7px;background:var(--navy);color:#fff;white-space:nowrap}
 .bd.nat{background:var(--yel);color:var(--brand)}
 .card .btn{min-height:44px;font-size:16px;padding:8px 18px}
+.btn.ghost{background:var(--surf);border:2px solid var(--brand);box-shadow:none;color:var(--brand)}
 .empty{background:var(--surf);border-radius:var(--r);padding:24px;text-align:center}
 .more{display:block;margin:14px auto 0}
 .sample{font-size:13px;color:var(--mut);margin:14px 4px 0}
@@ -151,7 +152,7 @@ footer a{color:var(--yel)}
 footer .row{display:flex;flex-wrap:wrap;gap:12px 28px;align-items:center;margin-top:14px}
 [hidden]{display:none!important}
 
-.btn:not(.mag),.ticket,.bd.nat,.sticker,.zoomout{color:#1e3d83}
+.btn:not(.mag):not(.ghost),.ticket,.bd.nat,.sticker,.zoomout{color:#1e3d83}
 summary::after{color:#1e3d83}
 /* focus : double anneau, lisible sur clair et sombre */
 :focus-visible{outline:3px solid var(--brand);outline-offset:2px;box-shadow:0 0 0 6px var(--bg)}
@@ -264,9 +265,6 @@ body{max-width:var(--page-max);margin:0 auto;position:relative;isolation:isolate
         <button type="button" class="chip" data-day="" aria-pressed="true">Les 2 jours</button>
         <button type="button" class="chip" data-day="sam" aria-pressed="false">Samedi 9</button>
         <button type="button" class="chip" data-day="dim" aria-pressed="false">Dimanche 10</button>
-        <span class="sep" aria-hidden="true"></span>
-        <button type="button" class="chip" data-acc="ad" aria-pressed="false">Audiodescription</button>
-        <button type="button" class="chip" data-acc="sme" aria-pressed="false">Sous-titres SME</button>
         <button type="button" class="reset" id="reset">Effacer les filtres</button>
       </div>
     </form>
@@ -281,7 +279,7 @@ body{max-width:var(--page-max);margin:0 auto;position:relative;isolation:isolate
         <p class="count" id="count" aria-live="polite"></p>
         <div class="list" id="list"></div>
         <button type="button" class="btn more" id="more" hidden>Voir plus de cinémas</button>
-        <p class="sample" id="sampleNote">Programmation d'exemple pour la maquette : la liste définitive des cinémas sera publiée à partir du 15 décembre 2026.</p>
+        <p class="sample" id="sampleNote">Toutes les séances sont en version accessible quand le film la propose (audiodescription, sous-titres SME). Liste mise à jour régulièrement jusqu'au 15 décembre.</p>
       </div>
     </div>
   </div>
@@ -298,7 +296,7 @@ body{max-width:var(--page-max);margin:0 auto;position:relative;isolation:isolate
       <li><svg viewBox="0 0 48 48" aria-hidden="true"><circle cx="24" cy="24" r="22" fill="#fece00"/><rect x="10" y="17" width="28" height="15" rx="4" fill="#1e3d83"/><text x="24" y="28.5" font-family="Outfit,sans-serif" font-size="9" font-weight="800" fill="#fff" text-anchor="middle">AD · SME</text></svg><b>Films accessibles</b><span data-falc="Il y a parfois l'audiodescription et les sous-titres.">Audiodescription et sous-titres SME quand le film les propose.</span></li>
       <li><svg viewBox="0 0 48 48" aria-hidden="true"><circle cx="24" cy="24" r="22" fill="#fece00"/><path d="M24 35s-11-6.5-11-14a6 6 0 0 1 11-3.3A6 6 0 0 1 35 21c0 7.5-11 14-11 14z" fill="#bf1a83"/></svg><b>Accueil bienveillant</b><span data-falc="Vous pouvez rire, parler, bouger. Personne ne vous juge.">Rire, réagir, bouger : chacun vit ses émotions comme il est.</span></li>
     </ul>
-    <div class="natl"><strong>Samedi 16 h</strong><p data-falc="Le samedi à 16 heures, beaucoup de cinémas montrent un film en même temps, partout en France.">Une séance nationale et simultanée a lieu le samedi à 16 h dans les cinémas participants. Certains cinémas proposent aussi une séance le dimanche.</p></div>
+    <div class="natl"><strong>9 et 10 janvier</strong><p data-falc="Chaque cinéma choisit son jour et son heure : le samedi ou le dimanche.">Chaque cinéma participant propose sa séance le samedi 9 ou le dimanche 10 janvier, à l'horaire de son choix. Retrouvez le jour et l'heure dans la recherche ci-dessus.</p></div>
   </div>
 </section>
 
@@ -343,1043 +341,28 @@ body{max-width:var(--page-max);margin:0 auto;position:relative;isolation:isolate
   <div class="row"><span>Une opération organisée par <a href="https://culture-relax.org">Culture Relax</a></span><a href="https://culture-relax.org/post/tous-ensemble-au-cinema-revient-les-9-et-10-janvier-2027-pour-sa-deuxieme-edition">L'annonce de la 2ᵉ édition</a><span>#tousensembleaucinema</span><span>Illustration © Marie Charlemagne</span></div>
 </div></footer>
 
-<!-- DONNÉES : remplacer ce tableau par la liste définitive des cinémas (export du formulaire d'inscription) -->
+<!-- FILMS de la sélection. Les cinémas et séances sont lus en direct dans l'article Culture Relax via /api/seances -->
 <script type="application/json" id="data">{
- "exemple": true,
  "films": [
   {
-   "id": "zootopie2",
-   "titre": "Zootopie 2",
-   "info": "Animation · dès 6 ans"
+   "id": "Le Chant des forêts",
+   "titre": "Le Chant des forêts"
   },
   {
-   "id": "pagnol",
-   "titre": "Marcel et Monsieur Pagnol",
-   "info": "Animation · tout public"
+   "id": "Toy Story 5",
+   "titre": "Toy Story 5"
   },
   {
-   "id": "ptittruc",
-   "titre": "Un p'tit truc en plus",
-   "info": "Comédie · tout public"
+   "id": "Tombé du ciel",
+   "titre": "Tombé du ciel"
   },
   {
-   "id": "schtroumpfs",
-   "titre": "Les Schtroumpfs, le film",
-   "info": "Animation · dès 3 ans"
+   "id": "Le Corset",
+   "titre": "Le Corset"
   },
   {
-   "id": "elio",
-   "titre": "Elio",
-   "info": "Animation · dès 6 ans"
-  }
- ],
- "cinemas": [
-  {
-   "id": "c00",
-   "nom": "UGC Ciné Cité Bercy",
-   "ville": "Paris",
-   "cp": "75012",
-   "region": "Île-de-France",
-   "lat": 48.833,
-   "lng": 2.386,
-   "adresse": "2 cour Saint-Émilion",
-   "url": "https://www.ugc.fr",
-   "seances": [
-    {
-     "jour": "sam",
-     "heure": "16:00",
-     "film": "zootopie2",
-     "ad": true,
-     "sme": true
-    },
-    {
-     "jour": "dim",
-     "heure": "11:00",
-     "film": "ptittruc",
-     "ad": true,
-     "sme": true
-    }
-   ]
-  },
-  {
-   "id": "c01",
-   "nom": "Pathé Wepler",
-   "ville": "Paris",
-   "cp": "75018",
-   "region": "Île-de-France",
-   "lat": 48.884,
-   "lng": 2.327,
-   "adresse": "140 boulevard de Clichy",
-   "url": "https://www.pathe.fr",
-   "seances": [
-    {
-     "jour": "sam",
-     "heure": "16:00",
-     "film": "pagnol",
-     "ad": false,
-     "sme": false
-    }
-   ]
-  },
-  {
-   "id": "c02",
-   "nom": "Les 7 Parnassiens",
-   "ville": "Paris",
-   "cp": "75014",
-   "region": "Île-de-France",
-   "lat": 48.842,
-   "lng": 2.329,
-   "adresse": "98 boulevard du Montparnasse",
-   "url": "https://www.allocine.fr",
-   "seances": [
-    {
-     "jour": "sam",
-     "heure": "16:00",
-     "film": "ptittruc",
-     "ad": true,
-     "sme": true
-    },
-    {
-     "jour": "dim",
-     "heure": "16:30",
-     "film": "schtroumpfs",
-     "ad": true,
-     "sme": false
-    }
-   ]
-  },
-  {
-   "id": "c03",
-   "nom": "Pathé Boulogne",
-   "ville": "Boulogne-Billancourt",
-   "cp": "92100",
-   "region": "Île-de-France",
-   "lat": 48.835,
-   "lng": 2.24,
-   "adresse": "26 cours de l'Île Seguin",
-   "url": "https://www.pathe.fr",
-   "seances": [
-    {
-     "jour": "sam",
-     "heure": "16:00",
-     "film": "schtroumpfs",
-     "ad": true,
-     "sme": false
-    },
-    {
-     "jour": "dim",
-     "heure": "14:00",
-     "film": "zootopie2",
-     "ad": false,
-     "sme": true
-    }
-   ]
-  },
-  {
-   "id": "c04",
-   "nom": "Mégarama Villeneuve-la-Garenne",
-   "ville": "Villeneuve-la-Garenne",
-   "cp": "92390",
-   "region": "Île-de-France",
-   "lat": 48.935,
-   "lng": 2.326,
-   "adresse": "Centre commercial Qwartz",
-   "url": "https://www.megarama.fr",
-   "seances": [
-    {
-     "jour": "sam",
-     "heure": "16:00",
-     "film": "elio",
-     "ad": false,
-     "sme": true
-    }
-   ]
-  },
-  {
-   "id": "c05",
-   "nom": "UGC Ciné Cité Rosny",
-   "ville": "Rosny-sous-Bois",
-   "cp": "93110",
-   "region": "Île-de-France",
-   "lat": 48.881,
-   "lng": 2.48,
-   "adresse": "Centre commercial Rosny 2",
-   "url": "https://www.ugc.fr",
-   "seances": [
-    {
-     "jour": "sam",
-     "heure": "16:00",
-     "film": "zootopie2",
-     "ad": true,
-     "sme": false
-    }
-   ]
-  },
-  {
-   "id": "c06",
-   "nom": "UGC Ciné Cité Lille",
-   "ville": "Lille",
-   "cp": "59000",
-   "region": "Hauts-de-France",
-   "lat": 50.637,
-   "lng": 3.065,
-   "adresse": "40 rue de Béthune",
-   "url": "https://www.ugc.fr",
-   "seances": [
-    {
-     "jour": "sam",
-     "heure": "16:00",
-     "film": "pagnol",
-     "ad": true,
-     "sme": true
-    },
-    {
-     "jour": "dim",
-     "heure": "14:30",
-     "film": "schtroumpfs",
-     "ad": false,
-     "sme": true
-    }
-   ]
-  },
-  {
-   "id": "c07",
-   "nom": "Kinepolis Lomme",
-   "ville": "Lomme",
-   "cp": "59160",
-   "region": "Hauts-de-France",
-   "lat": 50.643,
-   "lng": 2.98,
-   "adresse": "Rue du Château d'Isenghien",
-   "url": "https://kinepolis.fr",
-   "seances": [
-    {
-     "jour": "sam",
-     "heure": "16:00",
-     "film": "ptittruc",
-     "ad": false,
-     "sme": false
-    }
-   ]
-  },
-  {
-   "id": "c08",
-   "nom": "Pathé Amiens",
-   "ville": "Amiens",
-   "cp": "80000",
-   "region": "Hauts-de-France",
-   "lat": 49.894,
-   "lng": 2.296,
-   "adresse": "Boulevard de Belfort",
-   "url": "https://www.pathe.fr",
-   "seances": [
-    {
-     "jour": "sam",
-     "heure": "16:00",
-     "film": "schtroumpfs",
-     "ad": true,
-     "sme": true
-    }
-   ]
-  },
-  {
-   "id": "c09",
-   "nom": "UGC Ciné Cité Strasbourg",
-   "ville": "Strasbourg",
-   "cp": "67000",
-   "region": "Grand Est",
-   "lat": 48.576,
-   "lng": 7.77,
-   "adresse": "25 route du Rhin",
-   "url": "https://www.ugc.fr",
-   "seances": [
-    {
-     "jour": "sam",
-     "heure": "16:00",
-     "film": "elio",
-     "ad": true,
-     "sme": false
-    },
-    {
-     "jour": "dim",
-     "heure": "11:00",
-     "film": "pagnol",
-     "ad": false,
-     "sme": true
-    },
-    {
-     "jour": "dim",
-     "heure": "16:30",
-     "film": "zootopie2",
-     "ad": true,
-     "sme": false
-    }
-   ]
-  },
-  {
-   "id": "c10",
-   "nom": "Kinepolis Metz",
-   "ville": "Saint-Julien-lès-Metz",
-   "cp": "57070",
-   "region": "Grand Est",
-   "lat": 49.13,
-   "lng": 6.2,
-   "adresse": "Rue du Saint-Julien",
-   "url": "https://kinepolis.fr",
-   "seances": [
-    {
-     "jour": "sam",
-     "heure": "16:00",
-     "film": "zootopie2",
-     "ad": false,
-     "sme": true
-    }
-   ]
-  },
-  {
-   "id": "c11",
-   "nom": "Kinepolis Nancy",
-   "ville": "Nancy",
-   "cp": "54000",
-   "region": "Grand Est",
-   "lat": 48.69,
-   "lng": 6.195,
-   "adresse": "Quai de la Bataille",
-   "url": "https://kinepolis.fr",
-   "seances": [
-    {
-     "jour": "sam",
-     "heure": "16:00",
-     "film": "pagnol",
-     "ad": true,
-     "sme": false
-    }
-   ]
-  },
-  {
-   "id": "c12",
-   "nom": "Pathé Caen",
-   "ville": "Caen",
-   "cp": "14000",
-   "region": "Normandie",
-   "lat": 49.18,
-   "lng": -0.37,
-   "adresse": "Avenue de la Libération",
-   "url": "https://www.pathe.fr",
-   "seances": [
-    {
-     "jour": "sam",
-     "heure": "16:00",
-     "film": "ptittruc",
-     "ad": true,
-     "sme": true
-    },
-    {
-     "jour": "dim",
-     "heure": "14:00",
-     "film": "elio",
-     "ad": true,
-     "sme": true
-    }
-   ]
-  },
-  {
-   "id": "c13",
-   "nom": "Cinéma Le Grand Mercure",
-   "ville": "Elbeuf",
-   "cp": "76500",
-   "region": "Normandie",
-   "lat": 49.288,
-   "lng": 1.008,
-   "adresse": "Rue Henry",
-   "url": "https://www.allocine.fr",
-   "seances": [
-    {
-     "jour": "sam",
-     "heure": "16:00",
-     "film": "schtroumpfs",
-     "ad": false,
-     "sme": false
-    }
-   ]
-  },
-  {
-   "id": "c14",
-   "nom": "Pathé Rennes",
-   "ville": "Rennes",
-   "cp": "35000",
-   "region": "Bretagne",
-   "lat": 48.108,
-   "lng": -1.68,
-   "adresse": "Esplanade Charles de Gaulle",
-   "url": "https://www.pathe.fr",
-   "seances": [
-    {
-     "jour": "sam",
-     "heure": "16:00",
-     "film": "elio",
-     "ad": true,
-     "sme": true
-    }
-   ]
-  },
-  {
-   "id": "c15",
-   "nom": "Cinéville Garenne",
-   "ville": "Vannes",
-   "cp": "56000",
-   "region": "Bretagne",
-   "lat": 47.656,
-   "lng": -2.759,
-   "adresse": "12 rue Alexandre Le Pontois",
-   "url": "https://www.cineville.fr",
-   "seances": [
-    {
-     "jour": "sam",
-     "heure": "16:00",
-     "film": "zootopie2",
-     "ad": true,
-     "sme": false
-    },
-    {
-     "jour": "dim",
-     "heure": "14:30",
-     "film": "ptittruc",
-     "ad": false,
-     "sme": true
-    }
-   ]
-  },
-  {
-   "id": "c16",
-   "nom": "Cinéville Saint-Brieuc",
-   "ville": "Saint-Brieuc",
-   "cp": "22000",
-   "region": "Bretagne",
-   "lat": 48.514,
-   "lng": -2.765,
-   "adresse": "Rue du Combat des Trente",
-   "url": "https://www.cineville.fr",
-   "seances": [
-    {
-     "jour": "sam",
-     "heure": "16:00",
-     "film": "pagnol",
-     "ad": false,
-     "sme": true
-    },
-    {
-     "jour": "dim",
-     "heure": "16:30",
-     "film": "ptittruc",
-     "ad": true,
-     "sme": false
-    }
-   ]
-  },
-  {
-   "id": "c17",
-   "nom": "Pathé Atlantis",
-   "ville": "Saint-Herblain",
-   "cp": "44800",
-   "region": "Pays de la Loire",
-   "lat": 47.224,
-   "lng": -1.63,
-   "adresse": "Centre commercial Atlantis",
-   "url": "https://www.pathe.fr",
-   "seances": [
-    {
-     "jour": "sam",
-     "heure": "16:00",
-     "film": "ptittruc",
-     "ad": true,
-     "sme": false
-    }
-   ]
-  },
-  {
-   "id": "c18",
-   "nom": "CGR Le Mans",
-   "ville": "Le Mans",
-   "cp": "72000",
-   "region": "Pays de la Loire",
-   "lat": 48.004,
-   "lng": 0.197,
-   "adresse": "Place des Jacobins",
-   "url": "https://www.cgrcinemas.fr",
-   "seances": [
-    {
-     "jour": "sam",
-     "heure": "16:00",
-     "film": "schtroumpfs",
-     "ad": true,
-     "sme": true
-    },
-    {
-     "jour": "dim",
-     "heure": "11:00",
-     "film": "zootopie2",
-     "ad": false,
-     "sme": true
-    }
-   ]
-  },
-  {
-   "id": "c19",
-   "nom": "Cinéville Laval",
-   "ville": "Laval",
-   "cp": "53000",
-   "region": "Pays de la Loire",
-   "lat": 48.071,
-   "lng": -0.77,
-   "adresse": "Place de la Commune",
-   "url": "https://www.cineville.fr",
-   "seances": [
-    {
-     "jour": "sam",
-     "heure": "16:00",
-     "film": "elio",
-     "ad": false,
-     "sme": false
-    }
-   ]
-  },
-  {
-   "id": "c20",
-   "nom": "CGR Tours Centre",
-   "ville": "Tours",
-   "cp": "37000",
-   "region": "Centre-Val de Loire",
-   "lat": 47.394,
-   "lng": 0.689,
-   "adresse": "Rue Michelet",
-   "url": "https://www.cgrcinemas.fr",
-   "seances": [
-    {
-     "jour": "sam",
-     "heure": "16:00",
-     "film": "zootopie2",
-     "ad": true,
-     "sme": true
-    }
-   ]
-  },
-  {
-   "id": "c21",
-   "nom": "Pathé Orléans",
-   "ville": "Orléans",
-   "cp": "45000",
-   "region": "Centre-Val de Loire",
-   "lat": 47.902,
-   "lng": 1.904,
-   "adresse": "Place de l'Étape",
-   "url": "https://www.pathe.fr",
-   "seances": [
-    {
-     "jour": "sam",
-     "heure": "16:00",
-     "film": "pagnol",
-     "ad": true,
-     "sme": false
-    },
-    {
-     "jour": "dim",
-     "heure": "14:00",
-     "film": "schtroumpfs",
-     "ad": false,
-     "sme": true
-    }
-   ]
-  },
-  {
-   "id": "c22",
-   "nom": "Mégarama Beaux-Arts",
-   "ville": "Besançon",
-   "cp": "25000",
-   "region": "Bourgogne-Franche-Comté",
-   "lat": 47.24,
-   "lng": 6.022,
-   "adresse": "Rue Gustave Courbet",
-   "url": "https://www.megarama.fr",
-   "seances": [
-    {
-     "jour": "sam",
-     "heure": "16:00",
-     "film": "ptittruc",
-     "ad": false,
-     "sme": true
-    }
-   ]
-  },
-  {
-   "id": "c23",
-   "nom": "Cinéma Olympia",
-   "ville": "Dijon",
-   "cp": "21000",
-   "region": "Bourgogne-Franche-Comté",
-   "lat": 47.32,
-   "lng": 5.04,
-   "adresse": "Avenue Foch",
-   "url": "https://www.allocine.fr",
-   "seances": [
-    {
-     "jour": "sam",
-     "heure": "16:00",
-     "film": "schtroumpfs",
-     "ad": true,
-     "sme": false
-    },
-    {
-     "jour": "dim",
-     "heure": "16:30",
-     "film": "elio",
-     "ad": true,
-     "sme": false
-    }
-   ]
-  },
-  {
-   "id": "c24",
-   "nom": "UGC Ciné Cité Bordeaux",
-   "ville": "Bordeaux",
-   "cp": "33000",
-   "region": "Nouvelle-Aquitaine",
-   "lat": 44.838,
-   "lng": -0.578,
-   "adresse": "13 rue Georges Bonnac",
-   "url": "https://www.ugc.fr",
-   "seances": [
-    {
-     "jour": "sam",
-     "heure": "16:00",
-     "film": "elio",
-     "ad": true,
-     "sme": true
-    },
-    {
-     "jour": "dim",
-     "heure": "14:30",
-     "film": "pagnol",
-     "ad": true,
-     "sme": true
-    }
-   ]
-  },
-  {
-   "id": "c25",
-   "nom": "Mégarama Bordeaux",
-   "ville": "Bordeaux",
-   "cp": "33100",
-   "region": "Nouvelle-Aquitaine",
-   "lat": 44.843,
-   "lng": -0.556,
-   "adresse": "Quai de Queyries",
-   "url": "https://www.megarama.fr",
-   "seances": [
-    {
-     "jour": "sam",
-     "heure": "16:00",
-     "film": "zootopie2",
-     "ad": false,
-     "sme": false
-    }
-   ]
-  },
-  {
-   "id": "c26",
-   "nom": "CGR La Rochelle",
-   "ville": "La Rochelle",
-   "cp": "17000",
-   "region": "Nouvelle-Aquitaine",
-   "lat": 46.16,
-   "lng": -1.152,
-   "adresse": "Rue Chef de Ville",
-   "url": "https://www.cgrcinemas.fr",
-   "seances": [
-    {
-     "jour": "sam",
-     "heure": "16:00",
-     "film": "pagnol",
-     "ad": true,
-     "sme": true
-    }
-   ]
-  },
-  {
-   "id": "c27",
-   "nom": "CGR Limoges",
-   "ville": "Limoges",
-   "cp": "87000",
-   "region": "Nouvelle-Aquitaine",
-   "lat": 45.833,
-   "lng": 1.261,
-   "adresse": "Place Denis Dussoubs",
-   "url": "https://www.cgrcinemas.fr",
-   "seances": [
-    {
-     "jour": "sam",
-     "heure": "16:00",
-     "film": "ptittruc",
-     "ad": true,
-     "sme": false
-    },
-    {
-     "jour": "dim",
-     "heure": "11:00",
-     "film": "elio",
-     "ad": false,
-     "sme": true
-    }
-   ]
-  },
-  {
-   "id": "c28",
-   "nom": "Cinéma Le Royal",
-   "ville": "Biarritz",
-   "cp": "64200",
-   "region": "Nouvelle-Aquitaine",
-   "lat": 43.481,
-   "lng": -1.558,
-   "adresse": "Avenue du Maréchal Foch",
-   "url": "https://www.allocine.fr",
-   "seances": [
-    {
-     "jour": "sam",
-     "heure": "16:00",
-     "film": "schtroumpfs",
-     "ad": false,
-     "sme": true
-    }
-   ]
-  },
-  {
-   "id": "c29",
-   "nom": "CGR Lido",
-   "ville": "Montpellier",
-   "cp": "34000",
-   "region": "Occitanie",
-   "lat": 43.608,
-   "lng": 3.88,
-   "adresse": "Rue du Pont de Lattes",
-   "url": "https://www.cgrcinemas.fr",
-   "seances": [
-    {
-     "jour": "sam",
-     "heure": "16:00",
-     "film": "elio",
-     "ad": true,
-     "sme": false
-    }
-   ]
-  },
-  {
-   "id": "c30",
-   "nom": "Pathé Wilson",
-   "ville": "Toulouse",
-   "cp": "31000",
-   "region": "Occitanie",
-   "lat": 43.605,
-   "lng": 1.447,
-   "adresse": "Place du Président Wilson",
-   "url": "https://www.pathe.fr",
-   "seances": [
-    {
-     "jour": "sam",
-     "heure": "16:00",
-     "film": "zootopie2",
-     "ad": true,
-     "sme": true
-    },
-    {
-     "jour": "dim",
-     "heure": "14:00",
-     "film": "ptittruc",
-     "ad": false,
-     "sme": true
-    },
-    {
-     "jour": "dim",
-     "heure": "16:30",
-     "film": "pagnol",
-     "ad": true,
-     "sme": false
-    }
-   ]
-  },
-  {
-   "id": "c31",
-   "nom": "CGR Nîmes",
-   "ville": "Nîmes",
-   "cp": "30000",
-   "region": "Occitanie",
-   "lat": 43.836,
-   "lng": 4.36,
-   "adresse": "Rue de la République",
-   "url": "https://www.cgrcinemas.fr",
-   "seances": [
-    {
-     "jour": "sam",
-     "heure": "16:00",
-     "film": "pagnol",
-     "ad": false,
-     "sme": false
-    }
-   ]
-  },
-  {
-   "id": "c32",
-   "nom": "Méga CGR Perpignan",
-   "ville": "Perpignan",
-   "cp": "66000",
-   "region": "Occitanie",
-   "lat": 42.699,
-   "lng": 2.895,
-   "adresse": "Avenue de Grande-Bretagne",
-   "url": "https://www.cgrcinemas.fr",
-   "seances": [
-    {
-     "jour": "sam",
-     "heure": "16:00",
-     "film": "ptittruc",
-     "ad": true,
-     "sme": true
-    }
-   ]
-  },
-  {
-   "id": "c33",
-   "nom": "Pathé Bellecour",
-   "ville": "Lyon",
-   "cp": "69002",
-   "region": "Auvergne-Rhône-Alpes",
-   "lat": 45.759,
-   "lng": 4.833,
-   "adresse": "79 rue de la République",
-   "url": "https://www.pathe.fr",
-   "seances": [
-    {
-     "jour": "sam",
-     "heure": "16:00",
-     "film": "schtroumpfs",
-     "ad": true,
-     "sme": false
-    },
-    {
-     "jour": "dim",
-     "heure": "14:30",
-     "film": "zootopie2",
-     "ad": false,
-     "sme": true
-    }
-   ]
-  },
-  {
-   "id": "c34",
-   "nom": "UGC Ciné Cité Confluence",
-   "ville": "Lyon",
-   "cp": "69002",
-   "region": "Auvergne-Rhône-Alpes",
-   "lat": 45.741,
-   "lng": 4.818,
-   "adresse": "112 cours Charlemagne",
-   "url": "https://www.ugc.fr",
-   "seances": [
-    {
-     "jour": "sam",
-     "heure": "16:00",
-     "film": "elio",
-     "ad": false,
-     "sme": true
-    }
-   ]
-  },
-  {
-   "id": "c35",
-   "nom": "Pathé Chavant",
-   "ville": "Grenoble",
-   "cp": "38000",
-   "region": "Auvergne-Rhône-Alpes",
-   "lat": 45.188,
-   "lng": 5.731,
-   "adresse": "Boulevard Gambetta",
-   "url": "https://www.pathe.fr",
-   "seances": [
-    {
-     "jour": "sam",
-     "heure": "16:00",
-     "film": "zootopie2",
-     "ad": true,
-     "sme": false
-    }
-   ]
-  },
-  {
-   "id": "c36",
-   "nom": "CGR Clermont Jaude",
-   "ville": "Clermont-Ferrand",
-   "cp": "63000",
-   "region": "Auvergne-Rhône-Alpes",
-   "lat": 45.776,
-   "lng": 3.082,
-   "adresse": "Place de Jaude",
-   "url": "https://www.cgrcinemas.fr",
-   "seances": [
-    {
-     "jour": "sam",
-     "heure": "16:00",
-     "film": "pagnol",
-     "ad": true,
-     "sme": true
-    },
-    {
-     "jour": "dim",
-     "heure": "11:00",
-     "film": "schtroumpfs",
-     "ad": true,
-     "sme": true
-    }
-   ]
-  },
-  {
-   "id": "c37",
-   "nom": "Cinéma Le Méliès",
-   "ville": "Saint-Étienne",
-   "cp": "42000",
-   "region": "Auvergne-Rhône-Alpes",
-   "lat": 45.44,
-   "lng": 4.387,
-   "adresse": "Place Jean Jaurès",
-   "url": "https://www.allocine.fr",
-   "seances": [
-    {
-     "jour": "sam",
-     "heure": "16:00",
-     "film": "ptittruc",
-     "ad": false,
-     "sme": false
-    },
-    {
-     "jour": "dim",
-     "heure": "16:30",
-     "film": "schtroumpfs",
-     "ad": true,
-     "sme": false
-    }
-   ]
-  },
-  {
-   "id": "c38",
-   "nom": "Mégarama Chambéry",
-   "ville": "Chambéry",
-   "cp": "73000",
-   "region": "Auvergne-Rhône-Alpes",
-   "lat": 45.566,
-   "lng": 5.92,
-   "adresse": "Avenue de Lyon",
-   "url": "https://www.megarama.fr",
-   "seances": [
-    {
-     "jour": "sam",
-     "heure": "16:00",
-     "film": "schtroumpfs",
-     "ad": true,
-     "sme": true
-    }
-   ]
-  },
-  {
-   "id": "c39",
-   "nom": "Pathé La Joliette",
-   "ville": "Marseille",
-   "cp": "13002",
-   "region": "Provence-Alpes-Côte d'Azur",
-   "lat": 43.307,
-   "lng": 5.366,
-   "adresse": "Place de la Joliette",
-   "url": "https://www.pathe.fr",
-   "seances": [
-    {
-     "jour": "sam",
-     "heure": "16:00",
-     "film": "elio",
-     "ad": true,
-     "sme": false
-    },
-    {
-     "jour": "dim",
-     "heure": "14:00",
-     "film": "pagnol",
-     "ad": false,
-     "sme": true
-    }
-   ]
-  },
-  {
-   "id": "c40",
-   "nom": "Pathé Gare du Sud",
-   "ville": "Nice",
-   "cp": "06000",
-   "region": "Provence-Alpes-Côte d'Azur",
-   "lat": 43.709,
-   "lng": 7.262,
-   "adresse": "Avenue Malausséna",
-   "url": "https://www.pathe.fr",
-   "seances": [
-    {
-     "jour": "sam",
-     "heure": "16:00",
-     "film": "zootopie2",
-     "ad": false,
-     "sme": true
-    }
-   ]
-  },
-  {
-   "id": "c41",
-   "nom": "Pathé Capitole",
-   "ville": "Avignon",
-   "cp": "84000",
-   "region": "Provence-Alpes-Côte d'Azur",
-   "lat": 43.949,
-   "lng": 4.806,
-   "adresse": "Rue Pourquery de Boisserin",
-   "url": "https://www.pathe.fr",
-   "seances": [
-    {
-     "jour": "sam",
-     "heure": "16:00",
-     "film": "pagnol",
-     "ad": true,
-     "sme": false
-    }
-   ]
-  },
-  {
-   "id": "c42",
-   "nom": "Ellipse Cinéma",
-   "ville": "Ajaccio",
-   "cp": "20000",
-   "region": "Corse",
-   "lat": 41.926,
-   "lng": 8.737,
-   "adresse": "Avenue du Général Leclerc",
-   "url": "https://www.cinema-ajaccio.fr/ellipse/films/",
-   "seances": [
-    {
-     "jour": "sam",
-     "heure": "16:00",
-     "film": "ptittruc",
-     "ad": true,
-     "sme": true
-    },
-    {
-     "jour": "dim",
-     "heure": "14:30",
-     "film": "elio",
-     "ad": false,
-     "sme": true
-    }
-   ]
+   "id": "Astérix : le Royaume de Nubie",
+   "titre": "Astérix : le Royaume de Nubie"
   }
  ]
 }</script>
@@ -1394,22 +377,19 @@ const norm=s=>String(s??'').toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,''
 const C=Math.cos(M.LAT0*Math.PI/180);
 const proj=(lat,lng)=>[(lng-M.LON0)*C*M.K,-(lat-M.LAT0)*M.K];
 const DAY={sam:'Samedi 9',dim:'Dimanche 10'};
-const FILMS=D.films, CIN=D.cinemas;
-const filmById=Object.fromEntries(FILMS.map(f=>[f.id,f]));
-const st={q:'',film:'',region:'',day:'',ad:false,sme:false,sel:null,shown:12};
+const FILMS=D.films;let CIN=[];
+const filmById=Object.fromEntries(FILMS.map(f=>[f.id,f]));const ftitle=id=>filmById[id]?.titre||id;
+const st={q:'',film:'',region:'',day:'',sel:null,shown:12,load:'wait'};
 
 /* chiffres clés */
 const anim=(el,n)=>{let t0=null;const f=t=>{t0??=t;const p=Math.min(1,(t-t0)/900);el.textContent=Math.round(n*p*(2-p));if(p<1)requestAnimationFrame(f)};requestAnimationFrame(f)};
-anim($('#kC'),CIN.length);anim($('#kV'),new Set(CIN.map(c=>c.ville)).size);anim($('#kR'),new Set(CIN.map(c=>c.region)).size);
 
 /* selects */
 $('#film').insertAdjacentHTML('beforeend',FILMS.map(f=>`<option value="${esc(f.id)}">${esc(f.titre)}</option>`).join(''));
-const regions=[...new Set(CIN.map(c=>c.region))].sort((a,b)=>a.localeCompare(b,'fr'));
-$('#region').insertAdjacentHTML('beforeend',regions.map(r=>`<option>${esc(r)}</option>`).join(''));
 
 /* films */
 const cols=['#bf1a83','#016b85','#1e3d83','#9c4500','#5b3aa0','#136b45'];
-$('#fl').innerHTML=FILMS.map((f,i)=>`<li><div class="pst" style="background:${cols[i%cols.length]}">${esc(f.titre)}</div><div class="t"><b>${esc(f.titre)}</b><span>${esc(f.info||'')}</span><br><button type="button" data-film="${esc(f.id)}">Voir les séances de ce film</button></div></li>`).join('');
+$('#fl').innerHTML=FILMS.map((f,i)=>`<li><div class="pst" style="background:${cols[i%cols.length]}">${esc(f.titre)}</div><div class="t"><b>${esc(f.titre)}</b><button type="button" data-film="${esc(f.id)}">Voir les séances de ce film</button></div></li>`).join('');
 $('#fl').addEventListener('click',e=>{const b=e.target.closest('[data-film]');if(!b)return;st.film=b.dataset.film;$('#film').value=st.film;update();$('#seances').scrollIntoView()});
 
 /* carte */
@@ -1425,15 +405,15 @@ svg.addEventListener('click',e=>{const pin=e.target.closest('.pin');if(pin){sele
 svg.addEventListener('keydown',e=>{const pin=e.target.closest('.pin');if(pin&&(e.key==='Enter'||e.key===' ')){e.preventDefault();select(pin.dataset.id,true)}});
 
 /* filtres */
-function sessionsOf(c){return c.seances.filter(s=>(!st.day||s.jour===st.day)&&(!st.film||s.film===st.film)&&(!st.ad||s.ad)&&(!st.sme||s.sme))}
-function results(){const q=norm(st.q).trim();return CIN.filter(c=>(!st.region||c.region===st.region)&&(!q||norm(`${c.nom} ${c.ville} ${c.cp} ${c.adresse}`).includes(q)||(/^\d{2,5}$/.test(q)&&c.cp.startsWith(q)))&&sessionsOf(c).length).sort((a,b)=>a.ville.localeCompare(b.ville,'fr'))}
+function sessionsOf(c){return c.seances.filter(s=>(!st.day||s.jour===st.day)&&(!st.film||norm(s.film)===norm(st.film)))}
+function results(){const q=norm(st.q).trim();return CIN.filter(c=>(!st.region||c.region===st.region)&&(!q||norm(`${c.nom} ${c.ville} ${c.cp} ${c.region}`).includes(q)||(/^\d{2,5}$/.test(q)&&c.cp.startsWith(q)))&&sessionsOf(c).length).sort((a,b)=>a.ville.localeCompare(b.ville,'fr'))}
 let R=[];
 function drawPins(){const k=vb[2]/FULL[2],r=Math.max(2.2,9*k),ids=new Set(R.map(c=>c.id));
- $('#pins').innerHTML=R.map(c=>{const[x,y]=proj(c.lat,c.lng);return`<g class="pin${st.sel===c.id?' sel':''}" data-id="${esc(c.id)}" tabindex="0" role="button" aria-label="${esc(c.nom+', '+c.ville)}"><circle cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="${(st.sel===c.id?r*1.5:r).toFixed(2)}" stroke-width="${(r*.35).toFixed(2)}"/><title>${esc(c.nom+' – '+c.ville)}</title></g>`}).join('');
+ $('#pins').innerHTML=R.filter(c=>c.lat!=null).map(c=>{const[x,y]=proj(c.lat,c.lng);return`<g class="pin${st.sel===c.id?' sel':''}" data-id="${esc(c.id)}" tabindex="0" role="button" aria-label="${esc(c.nom+', '+c.ville)}"><circle cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="${(st.sel===c.id?r*1.5:r).toFixed(2)}" stroke-width="${(r*.35).toFixed(2)}"/><title>${esc(c.nom+' – '+c.ville)}</title></g>`}).join('');
  const sel=$('#pins .sel');if(sel)$('#pins').appendChild(sel)}
-function card(c){const ss=sessionsOf(c);return`<article class="card${st.sel===c.id?' sel':''}" id="c-${esc(c.id)}"><h3><button type="button" data-sel="${esc(c.id)}">${esc(c.nom)}</button></h3><p class="addr">${esc(c.adresse)}, ${esc(c.cp)} ${esc(c.ville)}</p>
- <ul class="ss">${ss.map(s=>`<li><time>${esc(DAY[s.jour])} · ${esc(s.heure.replace(':','h'))}</time><span class="film">${esc(filmById[s.film]?.titre)}</span>${s.jour==='sam'&&s.heure==='16:00'?'<span class="bd nat">Séance nationale</span>':''}${s.ad?'<span class="bd" title="Audiodescription">AD</span>':''}${s.sme?'<span class="bd" title="Sous-titres pour sourds et malentendants">ST-SME</span>':''}</li>`).join('')}</ul>
- <a class="btn" href="${esc(c.url)}" target="_blank" rel="noopener">Réserver sur le site du cinéma<span aria-hidden="true"> ↗</span><span class="vh"> (nouvel onglet)</span></a></article>`}
+function card(c){const ss=sessionsOf(c);const q=encodeURIComponent(c.nom+' '+c.ville+' cinéma');return`<article class="card${st.sel===c.id?' sel':''}" id="c-${esc(c.id)}"><h3><button type="button" data-sel="${esc(c.id)}">${esc(c.nom)}</button></h3><p class="addr">${esc([c.cp,c.ville].filter(Boolean).join(' '))} · ${esc(c.region)}</p>
+ <ul class="ss">${ss.map(s=>`<li><time>${esc(DAY[s.jour])} · ${esc(s.heure.replace(':','h'))}</time><span class="film">${esc(ftitle(s.film))}</span></li>`).join('')}</ul>
+ ${c.url?`<a class="btn" href="${esc(c.url)}" target="_blank" rel="noopener">Réserver sur le site du cinéma<span aria-hidden="true"> ↗</span><span class="vh"> (nouvel onglet)</span></a>`:`<a class="btn ghost" href="https://www.google.com/search?q=${q}" target="_blank" rel="noopener">Trouver le site du cinéma<span aria-hidden="true"> ↗</span><span class="vh"> (recherche Google, nouvel onglet)</span></a>`}</article>`}
 function update(zoom){R=results();
  $$('.rg').forEach(p=>{p.classList.toggle('on',p.dataset.r===st.region);p.classList.toggle('dim',!!st.region&&p.dataset.r!==st.region)});
  if(zoom)zoomTo(st.region?bboxOf(st.region):FULL);
@@ -1442,22 +422,20 @@ function update(zoom){R=results();
  const n=R.reduce((a,c)=>a+sessionsOf(c).length,0);
  $('#count').textContent=R.length?`${R.length} cinéma${R.length>1?'s':''}, ${n} séance${n>1?'s':''}`:'';
  const list=st.sel?[R.find(c=>c.id===st.sel),...R.filter(c=>c.id!==st.sel)]:R;
- $('#list').innerHTML=R.length?list.slice(0,st.shown).map(card).join(''):`<div class="empty"><p><strong>Aucune séance ne correspond à votre recherche.</strong></p><p>Essayez une autre ville ou effacez les filtres. De nouveaux cinémas rejoignent l'opération chaque semaine.</p><button type="button" class="btn" data-reset>Effacer les filtres</button></div>`;
+ $('#list').innerHTML=st.load==='wait'?'<div class="empty" role="status"><p>Chargement des séances…</p></div>':st.load==='err'?`<div class="empty" role="alert"><p><strong>La liste des séances n'a pas pu être chargée.</strong></p><p><a href="${esc(SRC)}">Voir la liste sur culture-relax.org</a></p></div>`:R.length?list.slice(0,st.shown).map(card).join(''):`<div class="empty"><p><strong>Aucune séance ne correspond à votre recherche.</strong></p><p>Essayez une autre ville ou effacez les filtres. De nouveaux cinémas rejoignent l'opération chaque semaine.</p><button type="button" class="btn" data-reset>Effacer les filtres</button></div>`;
  $('#more').hidden=R.length<=st.shown;drawPins()}
 function select(id,fromMap){st.sel=st.sel===id?null:id;st.shown=Math.max(st.shown,12);update(false);
  if(st.sel&&fromMap){const el=document.getElementById('c-'+id);if(el&&innerWidth>900)el.scrollIntoView({block:'nearest',behavior:R0.dataset.motion==='reduce'?'auto':'smooth'});else if(el)el.scrollIntoView({block:'start'})}
- if(st.sel&&!fromMap){const c=CIN.find(x=>x.id===id);const[x,y]=proj(c.lat,c.lng);const s=Math.min(vb[2],180);zoomTo([x-s/2,y-s/2,s,s])}}
+ if(st.sel&&!fromMap){const c=CIN.find(x=>x.id===id);if(c.lat==null)return;const[x,y]=proj(c.lat,c.lng);const s=Math.min(vb[2],180);zoomTo([x-s/2,y-s/2,s,s])}}
 $('#list').addEventListener('click',e=>{const b=e.target.closest('[data-sel]');if(b)select(b.dataset.sel,false);if(e.target.closest('[data-reset]'))reset()});
 let tq;$('#q').addEventListener('input',e=>{clearTimeout(tq);tq=setTimeout(()=>{st.q=e.target.value;st.shown=12;update(false)},120)});
 $('#film').addEventListener('change',e=>{st.film=e.target.value;update(false)});
 $('#region').addEventListener('change',e=>{st.region=e.target.value;st.shown=12;update(true)});
 $$('[data-day]').forEach(b=>b.addEventListener('click',()=>{st.day=b.dataset.day;$$('[data-day]').forEach(x=>x.setAttribute('aria-pressed',x===b));update(false)}));
-$$('[data-acc]').forEach(b=>b.addEventListener('click',()=>{st[b.dataset.acc]=!st[b.dataset.acc];b.setAttribute('aria-pressed',st[b.dataset.acc]);update(false)}));
 $('#zoomout').addEventListener('click',()=>{st.region='';$('#region').value='';update(true)});
 $('#more').addEventListener('click',()=>{st.shown+=12;update(false)});
-function reset(){Object.assign(st,{q:'',film:'',region:'',day:'',ad:false,sme:false,sel:null,shown:12});$('#q').value='';$('#film').value='';$('#region').value='';$$('[data-day]').forEach(x=>x.setAttribute('aria-pressed',x.dataset.day===''));$$('[data-acc]').forEach(x=>x.setAttribute('aria-pressed','false'));update(true)}
+function reset(){Object.assign(st,{q:'',film:'',region:'',day:'',sel:null,shown:12});$('#q').value='';$('#film').value='';$('#region').value='';$$('[data-day]').forEach(x=>x.setAttribute('aria-pressed',x.dataset.day===''));update(true)}
 $('#reset').addEventListener('click',reset);
-$('#sampleNote').hidden=!D.exemple;
 
 /* facile à lire et préférences d'affichage */
 const R0=document.documentElement,store={get:k=>{try{return localStorage.getItem('teac-'+k)}catch(_){return null}},set:(k,v)=>{try{localStorage.setItem('teac-'+k,v)}catch(_){}}};
@@ -1480,6 +458,17 @@ const openP=o=>{affP.hidden=!o;affB.setAttribute('aria-expanded',o);if(o)affP.qu
 affB.addEventListener('click',()=>openP(affP.hidden));$('#affX').addEventListener('click',()=>openP(false));
 document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!affP.hidden)openP(false)});
 document.addEventListener('click',e=>{if(!affP.hidden&&!e.target.closest('.affw')){affP.hidden=true;affB.setAttribute('aria-expanded',false)}});
+
+/* chargement de la programmation (lue dans l'article Culture Relax) */
+const SRC='https://culture-relax.org/post/tous-ensemble-au-cinema-revient-les-9-et-10-janvier-2027-pour-sa-deuxieme-edition';
+function boot(list){CIN=list;st.load='ok';
+ anim($('#kC'),CIN.length);anim($('#kV'),new Set(CIN.map(c=>c.ville)).size);anim($('#kR'),new Set(CIN.map(c=>c.region)).size);
+ const regions=[...new Set(CIN.map(c=>c.region))].sort((a,b)=>a.localeCompare(b,'fr'));
+ $('#region').insertAdjacentHTML('beforeend',regions.map(r=>`<option>${esc(r)}</option>`).join(''));
+ const n={};CIN.forEach(c=>c.seances.forEach(s=>{n[norm(s.film)]=(n[norm(s.film)]||0)+1}));
+ $$('#fl [data-film]').forEach(b=>{const k=n[norm(b.dataset.film)]||0;b.textContent=k?`Voir les ${k} séance${k>1?'s':''} de ce film`:'Séances bientôt annoncées'});
+ update(false)}
+fetch('/api/seances').then(r=>{if(!r.ok)throw 0;return r.json()}).then(j=>boot(j.cinemas||[])).catch(()=>{st.load='err';update(false)});
 update(false);
 }
 </script>
