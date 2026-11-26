@@ -197,6 +197,14 @@ summary::after{color:#1e3d83}
 /* animations réduites */
 :root[data-motion=reduce]{scroll-behavior:auto}:root[data-motion=reduce] *{animation:none!important;transition:none!important}
 @media(forced-colors:active){.btn,.chip,.card,.affbtn,.sw{border:2px solid ButtonText}.rg{stroke:CanvasText}}
+
+/* Page : largeur maximale, posée sur un fond motif (même principe que culture-relax.org) */
+:root{--page-max:1440px;--backdrop:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160' viewBox='0 0 160 160'%3E%3Cg fill='none' stroke-width='4.5' stroke-linecap='round' opacity='.6'%3E%3Cpath d='M51.59 36.89L62.22 34.05' stroke='%23fece00'/%3E%3Cpath d='M43.11 28.41L45.95 17.78' stroke='%23ff7ac4'/%3E%3Cpath d='M31.51 31.51L23.74 23.74' stroke='%23ffffff'/%3E%3Cpath d='M28.41 43.11L17.78 45.95' stroke='%23fece00'/%3E%3Cpath d='M36.89 51.59L34.05 62.22' stroke='%23ff7ac4'/%3E%3Cpath d='M48.49 48.49L56.26 56.26' stroke='%23ffffff'/%3E%3Cpath d='M128.49 111.51L136.26 103.74' stroke='%23fece00'/%3E%3Cpath d='M116.89 108.41L114.05 97.78' stroke='%23ff7ac4'/%3E%3Cpath d='M108.41 116.89L97.78 114.05' stroke='%23ffffff'/%3E%3Cpath d='M111.51 128.49L103.74 136.26' stroke='%23fece00'/%3E%3Cpath d='M123.11 131.59L125.95 142.22' stroke='%23ff7ac4'/%3E%3Cpath d='M131.59 123.11L142.22 125.95' stroke='%23ffffff'/%3E%3C/g%3E%3C/svg%3E") center top/160px 160px repeat,#0c2152}
+:root[data-aff=sombre]{--backdrop:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160' viewBox='0 0 160 160'%3E%3Cg fill='none' stroke-width='4.5' stroke-linecap='round' opacity='.35'%3E%3Cpath d='M51.59 36.89L62.22 34.05' stroke='%23fece00'/%3E%3Cpath d='M43.11 28.41L45.95 17.78' stroke='%23ff7ac4'/%3E%3Cpath d='M31.51 31.51L23.74 23.74' stroke='%23bcd0ff'/%3E%3Cpath d='M28.41 43.11L17.78 45.95' stroke='%23fece00'/%3E%3Cpath d='M36.89 51.59L34.05 62.22' stroke='%23ff7ac4'/%3E%3Cpath d='M48.49 48.49L56.26 56.26' stroke='%23bcd0ff'/%3E%3Cpath d='M128.49 111.51L136.26 103.74' stroke='%23fece00'/%3E%3Cpath d='M116.89 108.41L114.05 97.78' stroke='%23ff7ac4'/%3E%3Cpath d='M108.41 116.89L97.78 114.05' stroke='%23bcd0ff'/%3E%3Cpath d='M111.51 128.49L103.74 136.26' stroke='%23fece00'/%3E%3Cpath d='M123.11 131.59L125.95 142.22' stroke='%23ff7ac4'/%3E%3Cpath d='M131.59 123.11L142.22 125.95' stroke='%23bcd0ff'/%3E%3C/g%3E%3C/svg%3E") center top/160px 160px repeat,#060b1a}
+:root[data-aff=contraste]{--backdrop:#fff}
+html{background:var(--backdrop)}
+body{max-width:var(--page-max);margin:0 auto;position:relative;isolation:isolate}
+@media(min-width:1441px){body{box-shadow:0 0 48px #0005}:root[data-aff=contraste] body{box-shadow:none;outline:2px solid #000}}
 </style>
 </head>
 <body>
@@ -1463,7 +1471,7 @@ const setMotion=on=>{R0.dataset.motion=on?'reduce':'';$('#motion').setAttribute(
 $$('input[name=aff]').forEach(i=>i.addEventListener('change',()=>{setAff(i.value);store.set('aff',i.value)}));
 $$('input[name=size]').forEach(i=>i.addEventListener('change',()=>{setSize(i.value);store.set('size',i.value)}));
 $('#motion').addEventListener('click',e=>{const on=e.currentTarget.getAttribute('aria-pressed')!=='true';setMotion(on);store.set('motion',on?'1':'0')});
-setAff(store.get('aff')||(mq('(prefers-contrast: more)')?'contraste':mq('(prefers-color-scheme: dark)')?'sombre':'standard'));
+setAff(store.get('aff')||(mq('(prefers-contrast: more)')?'contraste':'standard'));
 setSize(store.get('size')||'100');
 setMotion(store.get('motion')?store.get('motion')==='1':mq('(prefers-reduced-motion: reduce)'));
 if(store.get('falc'))setFalc(true);
