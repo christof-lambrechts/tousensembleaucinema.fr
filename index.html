@@ -269,6 +269,35 @@ body.full .list{grid-template-columns:repeat(auto-fill,minmax(min(100%,420px),1f
  .filters .chips{flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none}.filters .chips>*{flex:none}
  .card,.bcard{scroll-margin-top:230px}
 }
+
+/* Cartes films : la carte entière est le lien (un seul lien, étendu) */
+.fl{grid-template-columns:repeat(auto-fill,minmax(180px,1fr))}
+@media(min-width:1000px){.fl{grid-template-columns:repeat(5,minmax(0,1fr))}}
+.fcard{position:relative;transition:transform .15s}
+.fcard:hover{transform:translateY(-3px)}
+.fcard .t{padding:12px 14px 14px}
+.stretch{display:block;font-weight:700;font-size:18px;line-height:1.2;color:#1e3d83;text-decoration:none}
+.stretch::after{content:"";position:absolute;inset:0;border-radius:var(--r)}
+.fcard:hover .stretch{text-decoration:underline}
+.stretch:focus-visible{outline:none}.fcard:focus-within{outline:4px solid var(--yel);outline-offset:3px}
+.fn{display:block;margin-top:6px;font-size:14px;font-weight:600;color:#bf1a83}
+/* Page film */
+body.filmp .hero,body.filmp .when,body.filmp .why,body.filmp .films,body.filmp .faq{display:none}
+.fpage{background:var(--band);color:#fff;padding:clamp(24px,4vw,48px) 0}
+.fpage .back{margin:0 0 14px}.fpage .lnk{color:#fff}
+.fgrid{display:grid;grid-template-columns:minmax(160px,260px) minmax(0,1fr);gap:clamp(18px,3vw,40px);align-items:start}
+.faff{width:100%;aspect-ratio:2/3;object-fit:cover;border-radius:16px;box-shadow:0 14px 30px #0005;background:#ffffff22}
+.fpage h1{font:400 clamp(36px,5vw,60px)/1 Anton,sans-serif;text-transform:uppercase;margin:0 0 10px;text-shadow:3px 3px 0 var(--mag)}
+.fmeta{font-weight:700;color:#fece00;margin:0 0 14px}
+.fresume{max-width:68ch;margin:0 0 14px;font-size:17px}
+.fcount{font-weight:700;margin:0 0 18px}
+.fctas{display:flex;flex-wrap:wrap;gap:12px 20px;align-items:center;margin:0}
+.ftrailer{margin-top:clamp(24px,4vw,44px)}
+.ftrailer h2{color:#fff;text-shadow:3px 3px 0 var(--mag);font-size:clamp(28px,4vw,40px)}
+.vwrap{background:#000;border-radius:18px;overflow:hidden;aspect-ratio:16/9;max-width:960px}
+.vwrap video{width:100%;height:100%;display:block}
+.ftrailer .sample{color:#dfe6fb}
+@media(max-width:600px){.fgrid{grid-template-columns:120px minmax(0,1fr)}.fresume{grid-column:1/-1}}
 </style>
 </head>
 <body>
@@ -314,6 +343,27 @@ body.full .list{grid-template-columns:repeat(auto-fill,minmax(min(100%,420px),1f
       <p data-falc="Le 9 et le 10 janvier 2027, des cinémas de toute la France vous accueillent. La place coûte 5 euros. Tout le monde est bienvenu, avec ou sans handicap.">Pour sa 2ᵉ édition, <strong>Tous Ensemble au Cinéma</strong> revient dans des cinémas partout en France. Un week-end festif et inclusif pour partager la magie du grand écran, en famille ou entre amis, avec ou sans handicap.</p>
       <div class="kpi" aria-live="polite"><div><strong id="kC">0</strong>cinémas</div><div><strong id="kV">0</strong>villes</div><div><strong id="kR">0</strong>régions</div></div>
       <div class="ctas"><a class="btn mag" href="#seances">Trouvez votre séance près de chez vous →</a><a class="lnk" href="https://culture-relax.org/post/tous-ensemble-au-cinema-revient-les-9-et-10-janvier-2027-pour-sa-deuxieme-edition">Lire l'annonce sur culture-relax.org<span aria-hidden="true"> ↗</span></a></div>
+    </div>
+  </div>
+</section>
+
+<section class="fpage" id="fpage" hidden aria-labelledby="fTitre">
+  <div class="wrap">
+    <p class="back"><a class="lnk" href="/#films">← Tous les films</a></p>
+    <div class="fgrid">
+      <img class="faff" id="fAff" src="" alt="">
+      <div class="finfo">
+        <h1 id="fTitre"></h1>
+        <p class="fmeta" id="fMeta"></p>
+        <p class="fresume" id="fResume"></p>
+        <p class="fcount" id="fCount"></p>
+        <p class="fctas"><a class="btn mag" href="#seances">Voir les séances de ce film</a><a class="lnk" id="fFiche" href="">La fiche du film sur culture-relax.org</a></p>
+      </div>
+    </div>
+    <div class="ftrailer" id="fTrailer" hidden>
+      <h2 id="fBaT">La bande-annonce</h2>
+      <div class="vwrap"><video id="fVideo" controls preload="none" playsinline aria-labelledby="fBaT"></video></div>
+      <p class="sample">Bande-annonce fournie par AlloCiné. Le son démarre seulement si vous lancez la vidéo.</p>
     </div>
   </div>
 </section>
@@ -413,31 +463,41 @@ body.full .list{grid-template-columns:repeat(auto-fill,minmax(min(100%,420px),1f
    "id": "Le Chant des forêts",
    "titre": "Le Chant des forêts",
    "affiche": "https://fr.web.img4.acsta.net/img/f5/52/f5523e15c97af96169bdc93479553602.jpg",
-   "fiche": "https://culture-relax.org/movie/le-chant-des-forets-321789-2026-11-16"
+   "fiche": "https://culture-relax.org/movie/le-chant-des-forets-321789-2026-11-16",
+   "strapi": "le-chant-des-forets-321789-2026-11-16",
+   "page": "le-chant-des-forets"
   },
   {
    "id": "Toy Story 5",
    "titre": "Toy Story 5",
    "affiche": "https://fr.web.img6.acsta.net/img/67/de/67deb83751c63a4150d652f0c496f54a.jpg",
-   "fiche": "https://culture-relax.org/movie/toy-story-5-313256-2026-06-17"
+   "fiche": "https://culture-relax.org/movie/toy-story-5-313256-2026-06-17",
+   "strapi": "toy-story-5-313256-2026-06-17",
+   "page": "toy-story-5"
   },
   {
    "id": "Tombé du ciel",
    "titre": "Tombé du ciel",
    "affiche": "https://fr.web.img5.acsta.net/img/78/a7/78a70db88122966584f6dd674da06a6d.jpg",
-   "fiche": "https://culture-relax.org/movie/tombe-du-ciel-1000032856-2026-08-12"
+   "fiche": "https://culture-relax.org/movie/tombe-du-ciel-1000032856-2026-08-12",
+   "strapi": "tombe-du-ciel-1000032856-2026-08-12",
+   "page": "tombe-du-ciel"
   },
   {
    "id": "Le Corset",
    "titre": "Le Corset",
    "affiche": "https://fr.web.img3.acsta.net/img/a7/96/a796a67caa5bdab1508d9207abaf5284.jpg",
-   "fiche": "https://culture-relax.org/movie/le-corset-321790-2026-10-14"
+   "fiche": "https://culture-relax.org/movie/le-corset-321790-2026-10-14",
+   "strapi": "le-corset-321790-2026-10-14",
+   "page": "le-corset"
   },
   {
    "id": "Astérix : le Royaume de Nubie",
    "titre": "Astérix : le Royaume de Nubie",
    "affiche": "https://fr.web.img5.acsta.net/img/5d/82/5d822abd6caebdff0b065a16e93b7f76.jpg",
-   "fiche": "https://culture-relax.org/movie/asterix-le-royaume-de-nubie-313265-2026-12-02"
+   "fiche": "https://culture-relax.org/movie/asterix-le-royaume-de-nubie-313265-2026-12-02",
+   "strapi": "asterix-le-royaume-de-nubie-313265-2026-12-02",
+   "page": "asterix-le-royaume-de-nubie"
   }
  ]
 }</script>
@@ -464,8 +524,7 @@ $('#film').insertAdjacentHTML('beforeend',FILMS.map(f=>`<option value="${esc(f.i
 
 /* films */
 const cols=['#bf1a83','#016b85','#1e3d83','#9c4500','#5b3aa0','#136b45'];
-$('#fl').innerHTML=FILMS.map((f,i)=>`<li><div class="pst" style="background:${cols[i%cols.length]}">${f.affiche?`<img src="${esc(f.affiche)}" alt="Affiche du film ${esc(f.titre)}" loading="lazy">`:esc(f.titre)}</div><div class="t"><b>${esc(f.titre)}</b><button type="button" data-film="${esc(f.id)}">Voir les séances de ce film</button></div></li>`).join('');
-$('#fl').addEventListener('click',e=>{const b=e.target.closest('[data-film]');if(!b)return;st.film=b.dataset.film;$('#film').value=st.film;update();$('#seances').scrollIntoView()});
+$('#fl').innerHTML=FILMS.map((f,i)=>`<li class="fcard"><div class="pst" style="background:${cols[i%cols.length]}">${f.affiche?`<img src="${esc(f.affiche)}" alt="" loading="lazy">`:''}</div><div class="t"><a class="stretch" href="/film/${esc(f.page)}">${esc(f.titre)}</a><span class="fn" data-film="${esc(f.id)}">Bande-annonce et séances</span></div></li>`).join('');
 
 /* carte */
 const svg=$('#map');const [bx0,by0,bx1,by1]=M.box;const pad=18;
@@ -486,14 +545,15 @@ let R=[];
 function drawPins(){const k=vb[2]/FULL[2],r=Math.max(2.2,9*k),ids=new Set(R.map(c=>c.id));
  $('#pins').innerHTML=R.filter(c=>c.lat!=null).map(c=>{const[x,y]=proj(c.lat,c.lng);return`<g class="pin${st.sel===c.id?' sel':''}" data-id="${esc(c.id)}" tabindex="0" role="button" aria-label="${esc(c.nom+', '+c.ville)}"><circle cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="${(st.sel===c.id?r*1.5:r).toFixed(2)}" stroke-width="${(r*.35).toFixed(2)}"/><title>${esc(c.nom+' – '+c.ville)}</title></g>`}).join('');
  const sel=$('#pins .sel');if(sel)$('#pins').appendChild(sel)}
-const FULL_PAGE=location.pathname.replace(/\/$/,'').endsWith('/seances');
+const FILM=(()=>{const m=location.pathname.match(/\/film\/([a-z0-9-]+)/);return m?FILMS.find(f=>f.page===m[1])||null:null})();
+const FULL_PAGE=FILM!=null||location.pathname.replace(/\/$/,'').endsWith('/seances');
 const bookBtn=c=>{const q=encodeURIComponent(c.nom+' '+c.ville+' cinéma');return c.url?`<a class="btn" href="${esc(c.url)}" target="_blank" rel="noopener">Réserver sur le site du cinéma<span aria-hidden="true"> ↗</span><span class="vh"> (nouvel onglet)</span></a>`:`<a class="btn ghost" href="https://www.google.com/search?q=${q}" target="_blank" rel="noopener">Trouver le site du cinéma<span aria-hidden="true"> ↗</span><span class="vh"> (recherche Google, nouvel onglet)</span></a>`};
 const poster=(f,cls)=>f.affiche?`<img class="${cls}" src="${esc(f.affiche)}" alt="" loading="lazy">`:`<span class="${cls} noposter" aria-hidden="true"></span>`;
 function card(c){const ss=sessionsOf(c);return`<article class="card${st.sel===c.id?' sel':''}" id="c-${esc(c.id)}"><h3><button type="button" data-sel="${esc(c.id)}">${esc(c.nom)}</button></h3><p class="addr">${esc([c.cp,c.ville].filter(Boolean).join(' '))} · ${esc(c.region)}</p>
  <ul class="ss">${ss.map(s=>`<li>${poster(fobj(s.film),'mini')}<span><time>${esc(DAY[s.jour])} · ${esc(s.heure.replace(':','h'))}</time><span class="film">${esc(ftitle(s.film))}</span></span></li>`).join('')}</ul>
  ${bookBtn(c)}</article>`}
 /* grande carte : une séance, avec l'affiche */
-function bigcard(c,s,first){const f=fobj(s.film);return`<article class="bcard${st.sel===c.id?' sel':''}"${first?` id="c-${esc(c.id)}"`:''}>${poster(f,'aff')}<div class="bc"><p class="when2"><time>${esc(DAY[s.jour])} janvier · ${esc(s.heure.replace(':','h'))}</time></p><h3>${esc(f.titre)}</h3><p class="cine"><button type="button" data-sel="${esc(c.id)}">${esc(c.nom)}</button><br><span class="addr">${esc([c.cp,c.ville].filter(Boolean).join(' '))} · ${esc(c.region)}</span></p>${bookBtn(c)}${f.fiche?`<a class="lnk sm" href="${esc(f.fiche)}">Le film sur culture-relax.org</a>`:''}</div></article>`}
+function bigcard(c,s,first){const f=fobj(s.film);return`<article class="bcard${st.sel===c.id?' sel':''}"${first?` id="c-${esc(c.id)}"`:''}>${poster(f,'aff')}<div class="bc"><p class="when2"><time>${esc(DAY[s.jour])} janvier · ${esc(s.heure.replace(':','h'))}</time></p><h3>${esc(f.titre)}</h3><p class="cine"><button type="button" data-sel="${esc(c.id)}">${esc(c.nom)}</button><br><span class="addr">${esc([c.cp,c.ville].filter(Boolean).join(' '))} · ${esc(c.region)}</span></p>${bookBtn(c)}${f.page?`<a class="lnk sm" href="/film/${esc(f.page)}">Le film et sa bande-annonce</a>`:''}</div></article>`}
 function update(zoom){R=results();
  $$('.rg').forEach(p=>{p.classList.toggle('on',p.dataset.r===st.region);p.classList.toggle('dim',!!st.region&&p.dataset.r!==st.region)});
  if(zoom)zoomTo(st.region?bboxOf(st.region):FULL);
@@ -547,11 +607,16 @@ function boot(list){CIN=list;st.load='ok';
  anim($('#kC'),CIN.length);anim($('#kV'),new Set(CIN.map(c=>c.ville)).size);anim($('#kR'),new Set(CIN.map(c=>c.region)).size);
  const regions=[...new Set(CIN.map(c=>c.region))].sort((a,b)=>a.localeCompare(b,'fr'));
  $('#region').insertAdjacentHTML('beforeend',regions.map(r=>`<option>${esc(r)}</option>`).join(''));
- const n={};CIN.forEach(c=>c.seances.forEach(s=>{n[norm(s.film)]=(n[norm(s.film)]||0)+1}));
- $$('#fl [data-film]').forEach(b=>{const k=n[norm(b.dataset.film)]||0;b.textContent=k?`Voir les ${k} séance${k>1?'s':''} de ce film`:'Séances bientôt annoncées'});
+ if(FILM)$('#film').value=FILM.id;const n={};CIN.forEach(c=>c.seances.forEach(s=>{n[norm(s.film)]=(n[norm(s.film)]||0)+1}));
+ $$('#fl [data-film]').forEach(b=>{const k=n[norm(b.dataset.film)]||0;b.textContent=k?`${k} séance${k>1?'s':''} · bande-annonce`:'Séances bientôt annoncées'});if(FILM){const k=n[norm(FILM.id)]||0;$('#fCount').textContent=k?`${k} séance${k>1?'s':''} les 9 et 10 janvier 2027, à 5 € la place.`:'Les séances de ce film seront bientôt annoncées.'}
  const P=new URLSearchParams(location.search);if(P.get('q')){st.q=P.get('q');$('#q').value=st.q}if(P.get('film')){st.film=P.get('film');$('#film').value=st.film}if(P.get('region')){st.region=P.get('region');$('#region').value=st.region}if(P.get('jour')){st.day=P.get('jour');$$('[data-day]').forEach(x=>x.setAttribute('aria-pressed',x.dataset.day===st.day))}
  update(!!st.region)}
-if(FULL_PAGE){document.body.classList.add('full');document.title='Toutes les séances · Tous Ensemble au Cinéma';$('#findTitle').textContent='Toutes les séances';$('#t-seances small').dataset.falc='Choisissez un cinéma près de chez vous. Réservez sur le site du cinéma.';}
+if(FILM){st.film=FILM.id;$('#film').value=FILM.id;$('#fpage').hidden=false;document.body.classList.add('filmp');
+ document.title=FILM.titre+' · Tous Ensemble au Cinéma';$('#fTitre').textContent=FILM.titre;$('#fAff').src=FILM.affiche;$('#fAff').alt='Affiche du film '+FILM.titre;$('#fFiche').href=FILM.fiche;
+ fetch('/api/film?slug='+encodeURIComponent(FILM.strapi)).then(r=>r.ok?r.json():null).then(f=>{if(!f)return;
+  $('#fMeta').textContent=[f.genres,f.duree,f.realisateur&&('De '+f.realisateur)].filter(Boolean).join(' · ');$('#fResume').textContent=f.resume;
+  if(f.bandeAnnonce){const v=$('#fVideo');v.src=f.bandeAnnonce;v.poster=FILM.affiche;$('#fTrailer').hidden=false}}).catch(()=>{});}
+if(FULL_PAGE){document.body.classList.add('full');if(!FILM)document.title='Toutes les séances · Tous Ensemble au Cinéma';$('#findTitle').textContent=FILM?'Les cinémas qui le projettent':'Toutes les séances';$('#t-seances small').dataset.falc='Choisissez un cinéma près de chez vous. Réservez sur le site du cinéma.';}
 fetch('/api/seances').then(r=>{if(!r.ok)throw 0;return r.json()}).then(j=>boot(j.cinemas||[])).catch(()=>{st.load='err';update(false)});
 update(false);
 }

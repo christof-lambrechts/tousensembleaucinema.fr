@@ -1,3 +1,6 @@
 {
-  "rewrites": [{ "source": "/seances", "destination": "/index.html" }]
+  "rewrites": [
+    { "source": "/seances", "destination": "/index.html" },
+    { "source": "/film/:slug", "destination": "/index.html" }
+  ]
 }
